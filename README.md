@@ -1,5 +1,7 @@
 # PacMan
 
+![](logo.png)
+
 ## Project Plan
 
 Find the images.
