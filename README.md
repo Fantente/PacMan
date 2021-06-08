@@ -20,11 +20,9 @@ This looks like a more proper way and a reason not to use BlockLike...
 
 Asked Ron if he thinks it makes sense to add the sprit sheet support to blocklike.
 
+NEXT TIME
 
-
-
-
-
+Animate only the PacMan.
 
 Create and move the PacMan w/ the arrows.
 
