@@ -38,6 +38,29 @@
                 }, interval); //end of setInterval
             } //end of animateScript()
             
+
+            /* 
+             * 
+             * Keyboard
+             *
+             * 
+             *   Introduction to Keyboard Events in JavaScript
+             *  
+             *     https://www.section.io/engineering-education/keyboard-events-in-javascript/
+             *
+             */ 
+
+            // Add event listener on keydown
+            document.addEventListener('keydown', (event) => {
+            
+                var name = event.key;
+                var code = event.code;
+            
+                // Alert the key name and key code on keydown
+                alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+
+            }, false);
+
         </script>
         <style>
             #image {
@@ -46,9 +69,14 @@
 
                 background: url('pacman.png') 0px 0px;
             }
+
+            .colour {color: blue}
         </style>
     </head>
     <body>
+        <h1 class="colour">PacMan</h1>
+        <h2 class="colour">About</h2>
+        <h2 class="colour">About</h2>
         <div id="demo">
             <p id="image" onmouseover="animateScript()" onmouseout="stopAnimate()"></p>
         </div>
