@@ -35,3 +35,7 @@ Make the PacMan eat the dots.
 ## References
 
 https://www.w3schools.com
+
+
+Store Data:
+https://www.w3schools.com/jsref/jsref_obj_json.asp
