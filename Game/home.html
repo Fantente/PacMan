@@ -5,6 +5,8 @@
         </title>
 
         <script>
+            var script = document.currentScript
+            var fullUrl = script.src
             var AskTimePopUp = 0
             var pmst = " please make sure that pop-up-windows are allowed"
             var AskPopUp
@@ -20,7 +22,7 @@
     <body>
         <h1 class="Col-Headline">PacMan - the yellow ball!</h1>
 
-        <img src="logo.png" onclick="OpenOthers()" width="480" height="250"></img>
+        <img src="../logo.png" onclick="OpenOthers()" width="480" height="250"></img>
 
         <h2 class="Col-StartGame">Start the Game</h2>
         <button type="button" onclick="StartGame()">Start Game</button>
@@ -34,6 +36,7 @@
                 if (AskTimePopUp == 0) {
                     AskPopUp = "To start the game" + pmst
                     alert(AskPopUp)
+                    alert(CurrentDoc)
                     AskTimePopUp = 1
                 }
                 open("game.html")
@@ -41,7 +44,7 @@
             function Optios() {
                 if (AskTimePopUp == 0) {
                     AskPopUp = "To open the options" + pmst
-                    alert(AskPopUp)
+                    alert(fullUrl)
                     AskTimePopUp = 1
                 }
                 open("options.html")
@@ -52,7 +55,7 @@
                     alert(AskPopUp)
                     AskTimePopUp = 1
                 }
-                open("index.html")
+                open("../index.html")
             };
         </script>
     </body>
