@@ -36,7 +36,6 @@
                 if (AskTimePopUp == 0) {
                     AskPopUp = "To start the game" + pmst
                     alert(AskPopUp)
-                    alert(CurrentDoc)
                     AskTimePopUp = 1
                 }
                 open("game.html")
@@ -44,7 +43,7 @@
             function Optios() {
                 if (AskTimePopUp == 0) {
                     AskPopUp = "To open the options" + pmst
-                    alert(fullUrl)
+                    alert(AskPopUp)
                     AskTimePopUp = 1
                 }
                 open("options.html")
