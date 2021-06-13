@@ -73,6 +73,8 @@
             function loadImage() {
               alert("Imge-Loading Complete");
             }
+
+            alert("To open Links please make sure that pop-up-windows are allowed")
         </script>
 
         <style>
@@ -100,35 +102,41 @@
 
             <h2 class="colour-about">Links:</h2>
 
-                            <h4 class="colour-link">- (For folloing the links please allow pop-up-windows and click on the logo!)</h4>
-
-                <h3 class="colour-description">- GitHub.com/Dahoum/PacMan
+                <h3 class="colour-description" onclick="OpenGitHub()">- GitHub.com/Dahoum/PacMan
                     
-                    <img src="http://pngimg.com/uploads/github/github_PNG40.png" onclick="OpenGitHub()" width="20" height="20">
+                    <img src="http://pngimg.com/uploads/github/github_PNG40.png" width="20" height="20">
 
                     <script>
                         // https://www.w3schools.com/jsref/met_win_open.asp
 
                         function OpenGitHub() {
-                            window.open("https://www.github.com");
+                            open("https://www.github.com");
                         }
 
                     </script>
 
                 </h3>
 
-                <h3 class="colour-description">- W3Schools.com
+                <h3 class="colour-description" onclick="OpenW3Schools()">- W3Schools.com
                 
-                    <img src="https://s3.amazonaws.com/impressivewebs/2014-02/w3schools-logo.jpg" onclick="OpenW3Schools()" width="20" height="20">
+                    <img src="https://s3.amazonaws.com/impressivewebs/2014-02/w3schools-logo.jpg" width="20" height="20">
 
                     <script>
 
                         function OpenW3Schools() {
-                            window.open("https://www.w3schools.com/")
+                            open("https://www.w3schools.com/")
                         }
 
                     </script>
 
+                </h3>
+
+                <h3 class="colour-description" onclick="OpenHome()">Home
+                    <script>
+                        function OpenHome() {
+                            open("home.html")
+                        }
+                    </script>
                 </h3>
 
         <div id="demo">
