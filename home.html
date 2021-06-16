@@ -22,7 +22,7 @@
     <body>
         <h1 class="Col-Headline">PacMan - the yellow ball!</h1>
 
-        <img src="../logo.png" onclick="OpenOthers()" width="480" height="250"></img>
+        <img src="logo.png" onclick="OpenOthers()" width="480" height="250"></img>
 
         <h2 class="Col-StartGame">Start the Game</h2>
         <button type="button" onclick="StartGame()">Start Game</button>
@@ -38,7 +38,7 @@
                     alert(AskPopUp)
                     AskTimePopUp = 1
                 }
-                open("game.html")
+                open("Game/game.html")
             };
             function Optios() {
                 if (AskTimePopUp == 0) {
@@ -46,7 +46,7 @@
                     alert(AskPopUp)
                     AskTimePopUp = 1
                 }
-                open("options.html")
+                open("Game/options.html")
             };
             function OpenOthers() {
                 if (AskTimePopUp == 0) {
@@ -54,7 +54,7 @@
                     alert(AskPopUp)
                     AskTimePopUp = 1
                 }
-                open("../index.html")
+                open("Game/index.html")
             };
         </script>
     </body>
