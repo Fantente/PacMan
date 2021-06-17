@@ -1,0 +1,112 @@
+<html>
+    <head>
+        <title>
+            PacMan - the yellow ball
+        </title>
+        <script>
+
+            var tID; //we will use this variable to clear the setInterval()
+
+            function stopAnimate() {
+
+                alert(a);
+                clearInterval(tID);
+            
+            } //end of stopAnimate()
+
+            function animateScript() {
+
+                var position = 256; //start position for the image slicer
+                const interval = 100; //100 ms of interval for the setInterval()
+                const diff = 256; //diff as a variable for position offset
+                
+                tID = setInterval(() => {
+                
+                    document.getElementById("image").style.backgroundPosition =
+                    `-${position}px 0px`;
+                    //we use the ES6 template literal to insert the variable "position"
+                    
+                    if (position < 1536) {
+                    position = position + diff;
+                    }
+                    //we increment the position by 256 each time
+                    else {
+                    position = 256;
+                    }
+                    //reset the position to 256px, once position exceeds 1536px
+                    
+                }, interval); //end of setInterval
+            } //end of animateScript()
+            
+
+            /* 
+             * 
+             * Keyboard
+             *
+             * 
+             *   Introduction to Keyboard Events in JavaScript
+             *  
+             *     https://www.section.io/engineering-education/keyboard-events-in-javascript/
+             * 
+             *     https://www.w3schools.com/jsref/met_element_addeventlistener.asp 
+             *
+             */ 
+
+            // Add event listener on keydown
+            document.addEventListener('keydown', (event) => {
+            
+                var name = event.key;
+                var code = event.code;
+            
+                // Alert the key name and key code on keydown
+                alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+                
+            }, false);
+           
+        </script>
+            
+
+        <style>
+            #image {
+                height: 256px;
+                width: 256px;
+                background: url('spritesheets/1.png') 0px 0px;
+            }
+
+            /*
+             * https://wiki.selfhtml.org/wiki/CSS/Tutorials/Masken_und_Beschneidungen/clip-path
+             * https://www.mediaevent.de/css/clip-path-2.html 
+             */
+
+            .element {
+                position: absolute;
+                overflow: hidden;
+                
+                clip-path: polygon(10px 10px, 10px 10px, 10px 10px, 10px 10px);
+                
+                /*
+                 * Works!
+                 *
+                 * clip-path: polygon(10% 5%, 50% 5%, 90% 50%, 90% 90%, 50% 90%, 10% 50%);
+                 *
+                 */
+                
+                /* 
+                 * Works!
+                 *
+                 * clip-path: inset(100px 100px 100px 100px);
+                 *
+                 */
+            }
+}
+        </style>
+    </head>
+
+    <body> 
+        <div id="demo">
+
+            <p id="image" class="element" onmouseover="animateScript()" onmouseout="stopAnimate()"></p>
+            
+        </div>
+    </body>
+</html>
