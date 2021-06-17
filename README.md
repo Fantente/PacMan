@@ -39,3 +39,9 @@ https://www.w3schools.com
 
 Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
+
+## Diary
+
+### 17 June 2021
+
+Experimented w/ clip-path in order to discover ways to show only specific parts of the sprite sheet.
