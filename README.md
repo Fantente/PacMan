@@ -54,4 +54,6 @@ Great succes w/ moving the cutouts resulting in animation.
 
 Deployed to Netlify: https://pacman-dahoum.netlify.app/game/pacman.html
 
-Homework: Find more coordinates.
+Homework: Find all coordinates for all directions of pacman.
+
+Next: Move w/ arrows.
