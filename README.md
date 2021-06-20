@@ -45,3 +45,11 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 ### 17 June 2021
 
 Experimented w/ clip-path in order to discover ways to show only specific parts of the sprite sheet.
+
+### 20 June 2021
+
+Great success w/ cutting out the 1st two costumes of PacMan w/ the help of <div> height width and background image.
+
+Great succes w/ moving the cutouts resulting in animation.
+
+Homework: Find more coordinates.

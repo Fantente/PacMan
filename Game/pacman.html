@@ -16,16 +16,38 @@
 
             function animateScript() {
 
-                var position = 256; //start position for the image slicer
-                const interval = 100; //100 ms of interval for the setInterval()
-                const diff = 256; //diff as a variable for position offset
+                var costume = 1;
+                const interval = 75; //100 ms of interval for the setInterval()
                 
                 tID = setInterval(() => {
                 
-                    document.getElementById("image").style.backgroundPosition =
-                    `-${position}px 0px`;
+                    // document.getElementById("image").style.backgroundPosition =
+                    // `-${position}px 0px`;
                     //we use the ES6 template literal to insert the variable "position"
-                    
+                    // alert ("0");
+                    if(costume == 1)
+
+                    { // alert ("1");
+                        document.getElementById("packman").style =
+                    `height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`;
+
+                    costume = 2;
+
+                    }
+
+                    else
+
+                    {
+                        // alert ("2");
+
+                        document.getElementById("packman").style =
+                    `height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`;
+
+                    costume = 1;
+
+                    }
+
+
                     if (position < 1536) {
                     position = position + diff;
                     }
@@ -59,54 +81,38 @@
                 var code = event.code;
             
                 // Alert the key name and key code on keydown
-                alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+                // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
                 
             }, false);
            
         </script>
             
-
         <style>
-            #image {
-                height: 256px;
-                width: 256px;
-                background: url('spritesheets/1.png') 0px 0px;
-            }
-
             /*
-             * https://wiki.selfhtml.org/wiki/CSS/Tutorials/Masken_und_Beschneidungen/clip-path
-             * https://www.mediaevent.de/css/clip-path-2.html 
+             *
+             * Positioning of Elements in HTML
+             *
+             * https://www.mediaevent.de/javascript/window-browserfenster.html 
+             *
+             * https://www.w3schools.com/css/css_positioning.asp
              */
-
-            .element {
-                position: absolute;
-                overflow: hidden;
-                
-                clip-path: polygon(10px 10px, 10px 10px, 10px 10px, 10px 10px);
-                
-                /*
-                 * Works!
-                 *
-                 * clip-path: polygon(10% 5%, 50% 5%, 90% 50%, 90% 90%, 50% 90%, 10% 50%);
-                 *
-                 */
-                
-                /* 
-                 * Works!
-                 *
-                 * clip-path: inset(100px 100px 100px 100px);
-                 *
-                 */
-            }
-}
         </style>
     </head>
 
-    <body> 
-        <div id="demo">
+    <body onload="animateScript();"> 
 
-            <p id="image" class="element" onmouseover="animateScript()" onmouseout="stopAnimate()"></p>
-            
-        </div>
+        <!--
+        PacMan Right #1
+        -->
+        <div style="height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px; "></div>
+        <!--
+        PacMan Right #1
+        -->
+        <div style="height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px; "></div>
+
+        <hr>
+
+        <div id="packman"></div>
+
     </body>
 </html>
