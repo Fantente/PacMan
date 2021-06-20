@@ -52,4 +52,6 @@ Great success w/ cutting out the 1st two costumes of PacMan w/ the help of <div>
 
 Great succes w/ moving the cutouts resulting in animation.
 
+Deployed to Netlify.
+
 Homework: Find more coordinates.
