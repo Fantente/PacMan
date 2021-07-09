@@ -67,3 +67,9 @@ FCS Thursday ---> Wednesday.
 Sunday ---> Wednesday.
 
 We can do any day.
+
+Kian has mapped all the PacMan shapes.
+
+Now we do the keyboard move of the PacMan
+
+https://stackoverflow.com/questions/15792855/moving-div-box-using-javascript

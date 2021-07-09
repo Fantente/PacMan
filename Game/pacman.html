@@ -17,8 +17,10 @@
             function animateScript() {
 
                 var costume = 1;
-                const interval = 75; //100 ms of interval for the setInterval()
+                const interval = 750; //100 ms of interval for the setInterval()
                 
+                var PacManLeft = "300px";
+
                 tID = setInterval(() => {
                 
                     // document.getElementById("image").style.backgroundPosition =
@@ -29,20 +31,22 @@
                     if(costume == 1)
 
                     { // alert ("1");
+
                         document.getElementById("packman").style =
 
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`;     -Zu
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`;     -Auf_1-Gerade_Rechts
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`;     -Auf_2-Gerade_Rechts
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+                    
+                        `border: red solid 5px; margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Rechts
 
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`;   -Auf_1-Gerade_Links
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`;   -Auf_2-Gerade_Links
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
 
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`;   -Auf_1-Senkrecht_Oben
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`;   -Auf_2-Senkrecht_Oben
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
 
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`;   -Auf_1-Senkrecht_Unten
-                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`;   -Auf_2-Senkrecht_Unten
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
+                    //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
 
                     costume = 2;
 
@@ -53,12 +57,11 @@
                     {
                         // alert ("2");
 
-                        //document.getElementById("packman").style =
+                        document.getElementById("packman").style =
                     
-
+                            `border: red solid 5px; margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
                     
-
-                    costume = 2;
+                        costume = 1;
 
                     }
 
@@ -75,6 +78,7 @@
                 }, interval); //end of setInterval
             } //end of animateScript()
             
+
 
             /* 
              * 
@@ -94,9 +98,21 @@
             
                 var name = event.key;
                 var code = event.code;
-            
-                // Alert the key name and key code on keydown
-                // alert(`Key pressed ${name} \r\n Key code value: ${code}`);
+                       
+                // alert(PacManLeft);
+
+                if(name == "ArrowRight"){
+
+                    // Alert the key name and key code on keydown
+                    // alert(`Key pressed -${name}- \r\n Key code value: -${code}-`);
+
+                    // alert(PacMan);
+
+                    // alert(JSON.stringify(document.getElementById("packman").style));
+
+                    // document.getElementById("packman").style = `border: red solid 5px;`;
+                    
+                }
                 
             }, false);
            
