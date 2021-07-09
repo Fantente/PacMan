@@ -57,3 +57,13 @@ Deployed to Netlify: https://pacman-dahoum.netlify.app/game/pacman.html
 Homework: Find all coordinates for all directions of pacman.
 
 Next: Move w/ arrows.
+
+### 9 July 2021
+
+Kian goes on holiday for 2-3 weeks starting tomorrow.
+
+FCS Thursday ---> Wednesday.
+
+Sunday ---> Wednesday.
+
+We can do any day.
