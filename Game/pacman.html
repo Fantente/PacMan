@@ -16,10 +16,15 @@
 
             function animateScript() {
 
+                PacManStorage = window.localStorage;
+
+                PacManStorage.setItem("Left", "300px");
+
+                // alert(PacManStorage.getItem("Left"));
+
                 var costume = 1;
                 const interval = 750; //100 ms of interval for the setInterval()
                 
-                var PacManLeft = "300px";
 
                 tID = setInterval(() => {
                 
@@ -31,12 +36,14 @@
                     if(costume == 1)
 
                     { // alert ("1");
+                    // alert(PacManStorage.getItem("Left"));
+                        var PacManLeft = PacManStorage.getItem("Left");
 
                         document.getElementById("packman").style =
 
                     //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
                     
-                        `border: red solid 5px; margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+                        `margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
                     //`height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Rechts
 
                     //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
@@ -56,10 +63,12 @@
 
                     {
                         // alert ("2");
+                        
+                        var PacManLeft = PacManStorage.getItem("Left");
 
                         document.getElementById("packman").style =
                     
-                            `border: red solid 5px; margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
+                            `margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
                     
                         costume = 1;
 
@@ -111,6 +120,7 @@
                     // alert(JSON.stringify(document.getElementById("packman").style));
 
                     // document.getElementById("packman").style = `border: red solid 5px;`;
+                    PacManStorage.setItem("Left", "500px");
                     
                 }
                 

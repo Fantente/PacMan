@@ -73,3 +73,7 @@ Kian has mapped all the PacMan shapes.
 Now we do the keyboard move of the PacMan
 
 https://stackoverflow.com/questions/15792855/moving-div-box-using-javascript
+
+Used localStorage for the global coordinates:
+
+https://developer.mozilla.org/de/docs/Web/API/Window/localStorage
