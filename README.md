@@ -77,3 +77,7 @@ https://stackoverflow.com/questions/15792855/moving-div-box-using-javascript
 Used localStorage for the global coordinates:
 
 https://developer.mozilla.org/de/docs/Web/API/Window/localStorage
+
+![](Images/2021-07-09_214746.png)
+
+![](Images/2021-07-09_214825.png)
