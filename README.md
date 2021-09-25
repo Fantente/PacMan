@@ -40,44 +40,19 @@ https://www.w3schools.com
 Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
-## Diary
+# Diary
 
-### 17 June 2021
+## 25 September 2021
 
-Experimented w/ clip-path in order to discover ways to show only specific parts of the sprite sheet.
+11:00 call Kian, T. E.
 
-### 20 June 2021
+* Moved some from the Google Docs in git
+* Archived some git
 
-Great success w/ cutting out the 1st two costumes of PacMan w/ the help of <div> height width and background image.
+## Next
 
-Great succes w/ moving the cutouts resulting in animation.
+Focus
 
-Deployed to Netlify: https://pacman-dahoum.netlify.app/game/pacman.html
+`together`
 
-Homework: Find all coordinates for all directions of pacman.
-
-Next: Move w/ arrows.
-
-### 9 July 2021
-
-Kian goes on holiday for 2-3 weeks starting tomorrow.
-
-FCS Thursday ---> Wednesday.
-
-Sunday ---> Wednesday.
-
-We can do any day.
-
-Kian has mapped all the PacMan shapes.
-
-Now we do the keyboard move of the PacMan
-
-https://stackoverflow.com/questions/15792855/moving-div-box-using-javascript
-
-Used localStorage for the global coordinates:
-
-https://developer.mozilla.org/de/docs/Web/API/Window/localStorage
-
-![](Images/2021-07-09_214746.png)
-
-![](Images/2021-07-09_214825.png)
+* Continue to move the Google Docs in git: https://docs.google.com/document/d/1LUrJoPXNlQv849iD-L1eSOrUzqjsJptFLizNlU0gdyY/
