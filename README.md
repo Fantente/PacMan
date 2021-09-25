@@ -55,6 +55,11 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 * The importance of comments in code
   * Sometimes you forget why you have done something
 * Cleaned up game.html from alerts and legacy comments
+* Move left w/ left arrow
+
+## Homework
+
+* Move down w/ the down arrow
 
 ## Next
 
