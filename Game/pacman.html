@@ -109,6 +109,8 @@
                 var name = event.key;
                 var code = event.code;
 
+                var CalcArrowRight = 100
+
                 if(name == "ArrowRight"){
 
                     // Alert the key name and key code on keydown
@@ -117,6 +119,11 @@
                     // alert(JSON.stringify(document.getElementById("packman").style));
                     
                     PacManStorage.setItem("Left", "500px");
+
+                    // document.getElementById("packman").style = `border: red solid 5px;`;
+                    //    PacManStorage.setItem("Left", "CalcArrowRight");
+
+                    // alcArrowRight = "CalcArrowRight" + 1
                     
                 }else if(name == "ArrowLeft"){
 
