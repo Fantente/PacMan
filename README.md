@@ -2,6 +2,10 @@
 
 ![](logo.png)
 
+## Netelify
+
+https://pacman-dahoum.netlify.app/game/pacman.html
+
 ## Project Plan
 
 Find the images.
@@ -48,8 +52,16 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 
 * Moved some from the Google Docs in git
 * Archived some git
+* The importance of comments in code
+  * Sometimes you forget why you have done something
+* Cleaned up game.html from alerts and legacy comments
 
 ## Next
+
+Mantra
+
+* The importance of comments in code
+  * Sometimes you forget why you have done something
 
 Focus
 
