@@ -56,10 +56,12 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
   * Sometimes you forget why you have done something
 * Cleaned up game.html from alerts and legacy comments
 * Move left w/ left arrow
+* Practiced git merge and conflict resolution
 
 ## Homework
 
 * Move down w/ the down arrow
+* Continue to develop your idea with the +
 
 ## Next
 
