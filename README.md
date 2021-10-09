@@ -58,10 +58,30 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 * Move left w/ left arrow
 * Practiced git merge and conflict resolution
 
-## Homework
+### Homework
 
 * Move down w/ the down arrow
 * Continue to develop your idea with the +
+
+## 9 October
+
+Mantra
+
+* The importance of comments in code
+  * Sometimes you forget why you have done something
+
+11:30 call Kian, T. E.
+
+* Kian has homework up/down
+* Continue to develop your idea with the +
+* Learned
+  * parseFloat(PacManLeft) forces the variable to be a number (floating point)
+* Success
+  * Left and Right automomous motion is done (Kian's + idea)
+
+### Homework
+
+* Move up/down autonomously
 
 ## Next
 

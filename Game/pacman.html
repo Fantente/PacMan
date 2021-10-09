@@ -9,11 +9,16 @@
 
             function stopAnimate() {
 
-                alert(a);
+                // alert(a);
                 clearInterval(tID);
             
             } //end of stopAnimate()
 
+            /*
+             *
+             * This is our PacMan Engine
+             *
+             */
             function animateScript() {
 
                 /*
@@ -25,33 +30,75 @@
                  */
                 PacManStorage = window.localStorage;
 
-                PacManStorage.setItem("Left", "10px");
-
                 var   costume  = 1;
                 const interval = 100; // ms of interval for the setInterval()
                 
+                /*
+                 *
+                 * Initial Coordinates
+                 * 
+                 */
+                PacManStorage.setItem("Left", "10");
+                PacManStorage.setItem("Top",  "10");
+                PacManStorage.setItem("Step", "2");
+
                 tID = setInterval(() => {
-                
+
+                    var PacManLeft = PacManStorage.getItem("Left");
+                    var PacManTop  = PacManStorage.getItem("Top");
+
                     // document.getElementById("image").style.backgroundPosition =
                     // `-${position}px 0px`;
                     // We use the ES6 template literal to insert the variable "position".
-                    
-                    if(costume == 1)
 
-                    {
-                    
+                    /*
+                     *
+                     * Motion Calculator
+                     * 
+                     */
+                    if(PacManStorage.getItem("Direction") == "Right"){
+                        
                         var PacManLeft = PacManStorage.getItem("Left");
-
-                        document.getElementById("packman").style =
-
-                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+                        var PacManStep = PacManStorage.getItem("Step");
                     
-                        `margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+                        PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
                     
-                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Rechts
+                        PacManStorage.setItem("Left", PacManLeft);
 
-                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
-                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+                    }else if(PacManStorage.getItem("Direction") == "Left"){
+                        
+                        var PacManLeft = PacManStorage.getItem("Left");
+                        var PacManStep = PacManStorage.getItem("Step");
+                    
+                        PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
+                    
+                        PacManStorage.setItem("Left", PacManLeft);
+                    }
+
+                    /*
+                     *
+                     * Animation and Motion Display
+                     *
+                     */
+                    if(costume == 1){
+                 
+                        // var PacManLeft = PacManStorage.getItem("Left");
+
+                        if(PacManStorage.getItem("Direction") == "Right"){
+                            
+                            document.getElementById("packman").style =
+
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+
+                        }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                            document.getElementById("packman").style =
+
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
+
+                        }
+ 
+                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu           
 
                         //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
                         //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
@@ -61,31 +108,27 @@
 
                     costume = 2;
 
-                    }
+                    }else{
 
-                    else
+                        // var PacManLeft = PacManStorage.getItem("Left");
 
-                    {
-                        
-                        var PacManLeft = PacManStorage.getItem("Left");
+                        if(PacManStorage.getItem("Direction") == "Right"){
 
-                        document.getElementById("packman").style =
+                            document.getElementById("packman").style =
                     
-                            `margin-left: ` + PacManLeft + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
-                    
+                            `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
+
+                        }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                            document.getElementById("packman").style =
+
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+
+                        }
+
                         costume = 1;
 
                     }
-
-
-                    if (position < 1536) {
-                    position = position + diff;
-                    }
-                    // We increment the position by 256 each time.
-                    else {
-                    position = 256;
-                    }
-                    // Reset the position to 256px, once position exceeds 1536px
                     
                 }, interval); //end of setInterval
             } //end of animateScript()
@@ -105,38 +148,37 @@
 
             // Add event listener on keydown
             document.addEventListener('keydown', (event) => {
-            
-                var name = event.key;
-                var code = event.code;
+
+                // PacManStorage = window.localStorage;
+                var name      = event.key;
+                var code      = event.code;
 
                 var CalcArrowRight = 100
 
+                // alert(`Key pressed -${name}- \r\n Key code value: -${code}-`);
+                // alert(JSON.stringify(document.getElementById("packman").style));
+
+                /*
+                 *
+                 * Set Direction for the Remaining Logic
+                 *
+                 */
                 if(name == "ArrowRight"){
-
-                    // Alert the key name and key code on keydown
-                    //alert(`Key pressed -${name}- \r\n Key code value: -${code}-`);
-                    // alert(PacMan);
-                    // alert(JSON.stringify(document.getElementById("packman").style));
                     
-                    PacManStorage.setItem("Left", "500px");
-
-                    // document.getElementById("packman").style = `border: red solid 5px;`;
-                    //    PacManStorage.setItem("Left", "CalcArrowRight");
-                    
-                    // alcArrowRight = "CalcArrowRight" + 1
-                    
+                    PacManStorage.setItem("Direction", "Right");
+                   
                 }else if(name == "ArrowLeft"){
-
-                    PacManStorage.setItem("Left", "0px");
+                    
+                    PacManStorage.setItem("Direction", "Left");
 
                 }else if(name == "ArrowDown"){
 
-                    PacManStorage.setItem("Left", "100px");
-
+                    PacManStorage.setItem("Direction", "Down");
+                    
                 }else if(name == "ArrowUp"){
 
-                    PacManStorage.setItem("Left", "1000px");
-
+                    PacManStorage.setItem("Direction", "Up");
+                    
                 }
                 
             }, false);
