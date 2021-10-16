@@ -143,6 +143,7 @@ Mantra
 ### Homework
 
 * Show only the Labyrinth w/ the points
+* Stop the PacMan at the ends of the Screen or Labyrinth
 * Try to think why the PacMan begins under the Labyrinth
   * Read about div positioning
     * top
