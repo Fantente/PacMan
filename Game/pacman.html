@@ -73,6 +73,23 @@
                         PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
                     
                         PacManStorage.setItem("Left", PacManLeft);
+
+                    }else if(PacManStorage.getItem("Direction") == "Top"){
+                        
+                        var PacManTop = PacManStorage.getItem("Top");
+                        var PacManStep = PacManStorage.getItem("Step");
+                    
+                        PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
+                    
+                        PacManStorage.setItem("Top", PacManTop);
+                    }else if(PacManStorage.getItem("Direction") == "Down"){
+                        
+                        var PacManTop = PacManStorage.getItem("Top");
+                        var PacManStep = PacManStorage.getItem("Step");
+                    
+                        PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
+                    
+                        PacManStorage.setItem("Top", PacManTop);
                     }
 
                     /*
@@ -96,7 +113,17 @@
 
                                 `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
 
-                        }
+                        }else if(PacManStorage.getItem("Direction") == "Top"){
+
+                            document.getElementById("packman").style =
+
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
+
+                        }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                            document.getElementById("packman").style =
+
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) --473px -48px;`; // -Auf_1-Senkrecht_Unten
  
                         //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu           
 
@@ -124,14 +151,25 @@
 
                                 `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
 
+                        }else if(PacManStorage.getItem("Direction") == "Top"){
+
+                            document.getElementById("packman").style =
+
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Gerade_Links
+
+                        }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                            document.getElementById("packman").style =
+
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Gerade_Links
                         }
 
                         costume = 1;
 
                     }
                     
-                }, interval); //end of setInterval
-            } //end of animateScript()
+                } interval; //end of setInterval
+            }, //end of animateScript()
             
             /* 
              * 
@@ -198,8 +236,8 @@
         </style>
     </head>
 
-    <body onload="animateScript();"> 
-
+    <body onload="animateScript();">
+        
         <!--
         PacMan Right #1
         -->
@@ -212,4 +250,5 @@
         <div id="packman"></div>
 
     </body>
+  
 </html>
