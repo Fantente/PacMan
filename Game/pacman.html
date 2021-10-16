@@ -31,7 +31,7 @@
                 PacManStorage = window.localStorage;
 
                 var   costume  = 1;
-                const interval = 100; // ms of interval for the setInterval()
+                const interval = 100; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
                 
                 /*
                  *
@@ -123,17 +123,11 @@
 
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) --473px -48px;`; // -Auf_1-Senkrecht_Unten
- 
-                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu           
-
-                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
-                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
-
-                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
-                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
 
                         }
+
+                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
 
                         costume = 2;
 
@@ -157,13 +151,13 @@
 
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Gerade_Links
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
 
                         }else if(PacManStorage.getItem("Direction") == "Down"){
 
-                            document.getElementById("packman").style =
+                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Gerade_Links
+                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
                         }
 
                         costume = 1;
