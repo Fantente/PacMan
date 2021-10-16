@@ -21,6 +21,15 @@
              */
             function animateScript() {
 
+                /**
+                 * 
+                 * Activate the Labyrinth
+                 * 
+                 */
+                document.getElementById("labyrinth").style =
+
+                   `margin-left: 5; margin-top: 5; height: 250px; width: 250px; background: url(spritesheets/1.png) 0px 0px;`; // Labyrinth w/ Dots
+
                 /*
                  *
                  * Why in localStorage?
@@ -243,7 +252,19 @@
         -->
         <!-- div style="height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px; "></div -->
 
-        <div id="packman"></div>
+        <div style="position: relative; ">
+        
+            <div style="position: absolute; top: 0; left: 0; z-index: 10; " id="labyrinth"></div>
+            <div style="position: absolute; top: 0; left: 0; z-index: 11; " id="packman"></div>
+        
+        </div>
+
+        <div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
+        
+            <div style="position: absolute; top: 0; left: 0; z-index: 11; background-color: burlywood;"               >asdfafasdfasfas</div>
+            <div style="position: absolute;  top: 0; left: 0; z-index: 12; background-color: chartreuse;" >adsf<br>adfads</div>
+        
+        </div>
 
     </body>
   

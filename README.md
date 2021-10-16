@@ -95,3 +95,68 @@ Focus
 `together`
 
 * Continue to move the Google Docs in git: https://docs.google.com/document/d/1LUrJoPXNlQv849iD-L1eSOrUzqjsJptFLizNlU0gdyY/
+
+## 16 October
+
+Mantra
+
+* The importance of comments in code
+  * Sometimes you forget why you have done something
+* Do fix and cleanup in separate commits, else the fix is difficult to be seen among the cleanups
+* Errors are not always there, where they are shown
+* Not all errors are shown by the automatic check
+
+12:30 call Kian, T. E.
+
+* Kian did his homework up/down
+* Learned
+  * Errors are not always there, where they are shown
+  * Not all errors are shown by the automatic check
+  * Do fix and cleanup in separate commits, else the fix is difficult to be seen among the cleanups
+  * div are block level
+
+    +--------+
+    |        |
+    +--------+
+    +--------------+
+    |              |
+    +--------------+
+
+    container, position: relative
+    content,   position: absolute
+
+    +----+-------------------------------+
+    |    |       |                       |
+    +----+       |                       |
+    |            |                       |
+    +------------+                       |
+    |                                    |
+    +------------------------------------+
+
+* Success
+  * Up and Down works
+  * We showed the Labyrinth
+
+* Challenge
+  * The PacMan starts below the Labyrinth
+
+### Homework
+
+* Show only the Labyrinth w/ the points
+* Try to think why the PacMan begins under the Labyrinth
+  * Read about div positioning
+    * top
+    * margin-top
+    * usw.
+  * Paste there the URLs you have read
+    * ...
+    * ...
+    * ...
+
+## Next
+
+Focus
+
+`together`
+
+* Continue to move the Google Docs in git: https://docs.google.com/document/d/1LUrJoPXNlQv849iD-L1eSOrUzqjsJptFLizNlU0gdyY/
