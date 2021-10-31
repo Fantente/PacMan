@@ -28,7 +28,7 @@
                  */
                 document.getElementById("labyrinth").style =
 
-                   `margin-left: 5; margin-top: 5; height: 250px; width: 250px; background: url(spritesheets/1.png) 0px 0px;`; // Labyrinth w/ Dots
+                   `position: absolute; left: 5; top: 5; height: 250px; width: 250px; background: url(spritesheets/1.png) 0px 0px;`; // Labyrinth w/ Dots
 
                 /*
                  *
@@ -47,15 +47,16 @@
                  * Initial Coordinates
                  * 
                  */
-                PacManStorage.setItem("Left", "10");
-                PacManStorage.setItem("Top",  "10");
+                PacManStorage.setItem("PacManLeft", "10");
+                PacManStorage.setItem("PacManTop",  "10");
                 PacManStorage.setItem("Step", "2");
                 PacManStorage.setItem("Direction", "Right");
 
                 tID = setInterval(() => {
 
-                    var PacManLeft = PacManStorage.getItem("Left");
-                    var PacManTop  = PacManStorage.getItem("Top");
+                    // Are these the start coordinates?
+                    var PacManLeft = PacManStorage.getItem("PacManLeft");
+                    var PacManTop  = PacManStorage.getItem("PacManTop");
 
                     // document.getElementById("image").style.backgroundPosition =
                     // `-${position}px 0px`;
@@ -68,38 +69,38 @@
                      */
                     if(PacManStorage.getItem("Direction") == "Right"){
                         
-                        var PacManLeft = PacManStorage.getItem("Left");
+                        var PacManLeft = PacManStorage.getItem("PacManLeft");
                         var PacManStep = PacManStorage.getItem("Step");
                     
                         PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("Left", PacManLeft);
+                        PacManStorage.setItem("PacManLeft", PacManLeft);
 
                     }else if(PacManStorage.getItem("Direction") == "Left"){
                         
-                        var PacManLeft = PacManStorage.getItem("Left");
+                        var PacManLeft = PacManStorage.getItem("PacManLeft");
                         var PacManStep = PacManStorage.getItem("Step");
                     
                         PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("Left", PacManLeft);
+                        PacManStorage.setItem("PacManLeft", PacManLeft);
 
                     }else if(PacManStorage.getItem("Direction") == "Up"){
                         
-                        var PacManTop = PacManStorage.getItem("Top");
+                        var PacManTop = PacManStorage.getItem("PacManTop");
                         var PacManStep = PacManStorage.getItem("Step");
                     
                         PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("Top", PacManTop);
+                        PacManStorage.setItem("PacManTop", PacManTop);
                     }else if(PacManStorage.getItem("Direction") == "Down"){
                         
-                        var PacManTop = PacManStorage.getItem("Top");
+                        var PacManTop = PacManStorage.getItem("PacManTop");
                         var PacManStep = PacManStorage.getItem("Step");
                     
                         PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("Top", PacManTop);
+                        PacManStorage.setItem("PacManTop", PacManTop);
                     }
 
                     /*
@@ -115,25 +116,25 @@
                             
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
 
                         }else if(PacManStorage.getItem("Direction") == "Left"){
 
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
 
                         }else if(PacManStorage.getItem("Direction") == "Up"){
 
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
 
                         }else if(PacManStorage.getItem("Direction") == "Down"){
 
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
 
                         }
 
@@ -149,25 +150,25 @@
 
                             document.getElementById("packman").style =
                     
-                            `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
 
                         }else if(PacManStorage.getItem("Direction") == "Left"){
 
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
 
                         }else if(PacManStorage.getItem("Direction") == "Up"){
 
                             document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
 
                         }else if(PacManStorage.getItem("Direction") == "Down"){
 
                              document.getElementById("packman").style =
 
-                                `margin-left: ` + PacManLeft + `; margin-top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
                         }
 
                         costume = 1;
@@ -255,17 +256,17 @@
 
         <div style="position: relative; ">
         
-            <div style="position: absolute; top: 0; left: 0; z-index: 10; " id="labyrinth"></div>
+            <div style="position: absolute; top: 0; left: 0; z-index: 10; " id="labyrinth">
             <div style="position: absolute; top: 0; left: 0; z-index: 11; " id="packman"></div>
         
         </div>
 
-        <div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
+        <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
         
             <div style="position: absolute; top: 0; left: 0; z-index: 11; background-color: burlywood;"               >asdfafasdfasfas</div>
-            <div style="position: absolute;  top: 0; left: 0; z-index: 12; background-color: chartreuse;" >adsf<br>adfads</div>
+            <div style="position: absolute;  top: 0; left: 55; z-index: 12; background-color: chartreuse;" >adsf<br>adfads</div>
         
-        </div>
+        </div -->
 
     </body>
   
