@@ -154,6 +154,17 @@ Mantra
     * ...
     * ...
 
+### 31 October
+
+10:30 call km and te
+
+* Make the PacMan start on game start `done`
+* See that PacMan stars on top of the Labyrinth `done`
+
+### Homework
+
+* Stop PacMan at the end of the Labyrinth (or at least try)! I want to see work! :)
+
 ## Next
 
 Focus
