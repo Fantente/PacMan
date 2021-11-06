@@ -69,38 +69,71 @@
                      */
                     if(PacManStorage.getItem("Direction") == "Right"){
                         
-                        var PacManLeft = PacManStorage.getItem("PacManLeft");
-                        var PacManStep = PacManStorage.getItem("Step");
+                        if(PacManLeft < 205){
+
+                            var PacManLeft = PacManStorage.getItem("PacManLeft");
+                            var PacManStep = PacManStorage.getItem("Step");
                     
-                        PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
+                            PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("PacManLeft", PacManLeft);
+                            PacManStorage.setItem("PacManLeft", PacManLeft);
+
+                        }else {
+
+                            PacManStorage.setItem("Direction", "Left")
+
+                        }
 
                     }else if(PacManStorage.getItem("Direction") == "Left"){
                         
-                        var PacManLeft = PacManStorage.getItem("PacManLeft");
-                        var PacManStep = PacManStorage.getItem("Step");
+                        if(PacManLeft > 0){
+
+                            var PacManLeft = PacManStorage.getItem("PacManLeft");
+                            var PacManStep = PacManStorage.getItem("Step");
                     
-                        PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
+                            PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("PacManLeft", PacManLeft);
+                            PacManStorage.setItem("PacManLeft", PacManLeft);
+
+                        }else {
+
+                            PacManStorage.setItem("Direction", "Right")
+
+                        }
 
                     }else if(PacManStorage.getItem("Direction") == "Up"){
-                        
-                        var PacManTop = PacManStorage.getItem("PacManTop");
-                        var PacManStep = PacManStorage.getItem("Step");
+
+                        if(PacManTop > 0){
+
+                            var PacManTop = PacManStorage.getItem("PacManTop");
+                            var PacManStep = PacManStorage.getItem("Step");
                     
-                        PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
+                            PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("PacManTop", PacManTop);
+                            PacManStorage.setItem("PacManTop", PacManTop);
+
+                        }else {
+
+                            PacManStorage.setItem("Direction", "Down")
+
+                        }
+
                     }else if(PacManStorage.getItem("Direction") == "Down"){
                         
-                        var PacManTop = PacManStorage.getItem("PacManTop");
-                        var PacManStep = PacManStorage.getItem("Step");
+                        if(PacManTop < 230){
+
+                            var PacManTop = PacManStorage.getItem("PacManTop");
+                            var PacManStep = PacManStorage.getItem("Step");
                     
-                        PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
+                            PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
                     
-                        PacManStorage.setItem("PacManTop", PacManTop);
+                            PacManStorage.setItem("PacManTop", PacManTop);
+
+                        }else {
+
+                            PacManStorage.setItem("Direction", "Up")
+
+                        }
                     }
 
                     /*
