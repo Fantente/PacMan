@@ -86,7 +86,19 @@
 
                     }else if(PacManStorage.getItem("Direction") == "Left"){
                         
-                        if(PacManLeft > 0){
+                        if((PacManLeft == 4) ||
+                           ((PacManLeft == 40) && (PacManTop == 178))){
+
+                            PacManStorage.setItem("Direction", "Right")
+
+                            var PacManLeft = PacManStorage.getItem("PacManLeft");
+                            var PacManStep = PacManStorage.getItem("Step");
+                    
+                            PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
+                    
+                            PacManStorage.setItem("PacManLeft", PacManLeft);
+
+                        }else{
 
                             var PacManLeft = PacManStorage.getItem("PacManLeft");
                             var PacManStep = PacManStorage.getItem("Step");
@@ -94,11 +106,7 @@
                             PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
                     
                             PacManStorage.setItem("PacManLeft", PacManLeft);
-
-                        }else {
-
-                            PacManStorage.setItem("Direction", "Right")
-
+                   
                         }
 
                     }else if(PacManStorage.getItem("Direction") == "Up"){
@@ -208,6 +216,9 @@
 
                     }
                     
+                    document.getElementById("outputX").innerHTML = PacManLeft;
+                    document.getElementById("outputY").innerHTML = PacManTop;
+
                 }, interval); //end of setInterval
             } //end of animateScript()
             
@@ -291,8 +302,10 @@
         
             <div style="position: absolute; top: 0; left: 0; z-index: 10; " id="labyrinth">
             <div style="position: absolute; top: 0; left: 0; z-index: 11; " id="packman"></div>
-        
+            
         </div>
+        <div style="height: 275px;"></div>
+        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> </div>
 
         <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
         

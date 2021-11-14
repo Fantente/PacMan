@@ -165,7 +165,32 @@ Mantra
 
 * Stop PacMan at the end of the Labyrinth (or at least try)! I want to see work! :)
 
-## Next
+## 14 November
+
+11:00 call km and te
+
+* km has done his homework! great!
+  * PacMan turns at the end of the labyrinth! great!
+  * Today is a great day!
+* We showed our counters.
+* We introduced additional stop/turning points w/ if || &&.
+
+## Homework
+
+* Cut the unnecessary part of the Labyrinth on the right side.
+* Make PacMan stop when you press Interval.
+* We do double steps, there are no odd xes only even.
+
+## Backlog
+
+* Make PacMan follow the corridors.
+  * There are two options.
+    * Read the colours.
+      * This is useful if
+        * We want to do it like this, or
+        * There are different labyrinths
+    * w/ many IFs the same way you have done the ends of the labyrinth
+      * This means for every direction we have to create an array of limitations (or extend the array of limitations you have already started)
 
 Focus
 
