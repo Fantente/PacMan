@@ -175,11 +175,29 @@ Mantra
 * We showed our counters.
 * We introduced additional stop/turning points w/ if || &&.
 
-## Homework
+### Homework
 
-* Cut the unnecessary part of the Labyrinth on the right side.
-* Make PacMan stop when you press Interval.
-* We do double steps, there are no odd xes only even.
+* Cut the unnecessary part of the Labyrinth on the right side. `done`
+* Make PacMan stop when you press Interval. `done`
+* We do double steps, there are no odd xes only even. `done`
+
+## 12 December
+
+12:45 call km and te
+
+* Check Homework
+  * Cut the unnecessary part of the Labyrinth on the right side. `done`
+  * Make PacMan stop when you press Interval. `done`
+  * We do double steps, there are no odd xes only even. `done`
+* Reduced the speed of mouth and increased the speed of movement `almost done`
+
+### Homework
+
+* See to fix this place in the code as it sometimes works slowly and somtimest fast
+
+                    // HOMEWORK
+                    // Sometimes works, sometimes does not :)
+
 
 ## Backlog
 
