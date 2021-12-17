@@ -151,18 +151,14 @@
                      * Mouth Animation
                      *
                      */
-                    var PacManDirection = PacManStorage.getItem("Direction")
-                    var PacManLeft      = PacManStorage.getItem("PacManLeft");
-                    var PacManTop       = PacManStorage.getItem("PacManTop");
-                    
+
+                    var cosDelay = 100 //controls the time between switching the costumes
+
                     // HOMEWORK
-                    // Sometimes works, sometimes does not :)
-                    if((((PacManDirection = "Left")   ||
-                         (PacManDirection = "Right"))    &&
-                         (PacManLeft % 2 == 0))             ||
-                      (((PacManDirection = "Up")      ||
-                        (PacManDirection = "Down"))      &&
-                        (PacManTop % 2 == 0))){
+                    // Sometimes works, sometimes does not :)                                   -not really makes no difference
+                    /*if(((PacManDirection = "Right" || "Left") && (PacManLeft % 2 == 0)) ||
+                      ((PacManDirection = "Up" || "Down") && (PacManTop % 2 == 0)))
+                    */  
 
                         if(costume == 1){
                     
@@ -195,8 +191,14 @@
                             }
 
                             //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+                            
+                            setTimeout(costumeDelay, cosDelay)
 
-                            costume = 2;
+                            function costumeDelay() {
+
+                                costume = 2;
+                            
+                            }
 
                         }else{
 
@@ -227,10 +229,14 @@
                                     `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
                             }
 
-                            costume = 1;
+                            setTimeout(costumeDelay, cosDelay)
 
+                            function costumeDelay() {
+
+                                costume = 1;
+                            
+                            }
                         }
-                    }
                     
                     document.getElementById("outputX").innerHTML = PacManLeft;
                     document.getElementById("outputY").innerHTML = PacManTop;
