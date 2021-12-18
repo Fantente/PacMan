@@ -183,6 +183,10 @@ Mantra
 
 ## 18 December
 
+Mantra
+
+* Watch out for AstroPi 2022 `!!`
+
 13:00 live meeting km and te in Berlin `!! :)`
 
 * Check Homework
