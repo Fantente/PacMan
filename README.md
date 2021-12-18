@@ -181,34 +181,32 @@ Mantra
 * Make PacMan stop when you press Interval. `done`
 * We do double steps, there are no odd xes only even. `done`
 
-## 12 December
+## 18 December
 
-12:45 call km and te
+13:00 live meeting km and te in Berlin `!! :)`
 
 * Check Homework
-  * Cut the unnecessary part of the Labyrinth on the right side. `done`
-  * Make PacMan stop when you press Interval. `done`
-  * We do double steps, there are no odd xes only even. `done`
-* Reduced the speed of mouth and increased the speed of movement `almost done`
-
-### Homework
-
-* See to fix this place in the code as it sometimes works slowly and somtimest fast
+  * See to fix this place in the code as it sometimes works slowly and somtimest fast `different approach, but perfect result, bravo :)`
 
                     // HOMEWORK
                     // Sometimes works, sometimes does not :)
+* Today
+  * Make PacMan follow the corridors.
+    * There are two options.
+      * Read the colours `we will not do this`
+        * This is useful if
+          * We want to do it like this, or
+          * There are different labyrinths
+      * w/ many IFs the same way you have done the ends of the labyrinth
+        * This means for every direction we have to create an array of limitations (or extend the array of limitations you have already started) `we began working on this and have proof of concept`
 
+### Homework
+
+* Fix the start direction.
+* Fix the end of labirynth logic.
+* Try to add more/ all points where the direction can change.
 
 ## Backlog
-
-* Make PacMan follow the corridors.
-  * There are two options.
-    * Read the colours.
-      * This is useful if
-        * We want to do it like this, or
-        * There are different labyrinths
-    * w/ many IFs the same way you have done the ends of the labyrinth
-      * This means for every direction we have to create an array of limitations (or extend the array of limitations you have already started)
 
 Focus
 

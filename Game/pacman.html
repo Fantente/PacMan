@@ -63,6 +63,36 @@
                     // We use the ES6 template literal to insert the variable "position".
 
                     /*
+                    *
+                    * Set Direction for the Remaining Logic
+                    *
+                    */
+
+                    var keyname = PacManStorage.getItem("keyname");
+
+                    if(keyname == "ArrowRight"){
+                        
+                        PacManStorage.setItem("Direction", "Right");
+                    
+                    }else if(keyname == "ArrowLeft"){
+                        
+                        PacManStorage.setItem("Direction", "Left");
+
+                    }else if((keyname == "ArrowDown") && (PacManLeft == 45)){
+
+                        PacManStorage.setItem("Direction", "Down");
+                        
+                    }else if(keyname == "ArrowUp"){
+
+                        PacManStorage.setItem("Direction", "Up");
+                        
+                    }else if(keyname == " "){
+
+                        PacManStorage.setItem("Direction", "Break");
+
+                    }
+
+                    /*
                      *
                      * Motion Calculator
                      * 
@@ -120,7 +150,7 @@
                     
                             PacManStorage.setItem("PacManTop", PacManTop);
 
-                        }else {
+                        }else{
 
                             PacManStorage.setItem("Direction", "Down")
 
@@ -142,6 +172,7 @@
                             PacManStorage.setItem("Direction", "Up")
 
                         }
+                    
                     }else if(PacManStorage.getItem("Direction") == "Break"){
                         
                     }
@@ -240,6 +271,7 @@
                     
                     document.getElementById("outputX").innerHTML = PacManLeft;
                     document.getElementById("outputY").innerHTML = PacManTop;
+                    document.getElementById("keyname").innerHTML = PacManStorage.getItem("keyname");
 
                 }, interval); //end of setInterval
             } //end of animateScript()
@@ -261,40 +293,10 @@
             document.addEventListener('keydown', (event) => {
 
                 // PacManStorage = window.localStorage;
-                var name      = event.key;
-                var code      = event.code;
+                var keyname      = event.key;
+                PacManStorage.setItem("keyname", keyname)
 
-                var CalcArrowRight = 100
-
-                // alert(`Key pressed -${name}- \r\n Key code value: -${code}-`);
-                // alert(JSON.stringify(document.getElementById("packman").style));
-
-                /*
-                 *
-                 * Set Direction for the Remaining Logic
-                 *
-                 */
-                if(name == "ArrowRight"){
-                    
-                    PacManStorage.setItem("Direction", "Right");
-                   
-                }else if(name == "ArrowLeft"){
-                    
-                    PacManStorage.setItem("Direction", "Left");
-
-                }else if(name == "ArrowDown"){
-
-                    PacManStorage.setItem("Direction", "Down");
-                    
-                }else if(name == "ArrowUp"){
-
-                    PacManStorage.setItem("Direction", "Up");
-                    
-                }else if(name == " "){
-
-                    PacManStorage.setItem("Direction", "Break");
-
-                }
+                // var keycode      = event.code;
                 
             }, false);
            
@@ -331,7 +333,7 @@
             
         </div>
         <div style="height: 275px;"></div>
-        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> </div>
+        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> </div>
 
         <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
         
