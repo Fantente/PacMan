@@ -70,11 +70,11 @@
 
                     var keyname = PacManStorage.getItem("keyname");
 
-                    if((keyname == "ArrowRight") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) (PacManTop == 180) ||(PacManTop == 204) || (PacManTop == 228))){
+                    if((keyname == "ArrowRight") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) || (PacManTop == 180) || (PacManTop == 204) || (PacManTop == 228))){
                         
                         PacManStorage.setItem("Direction", "Right");
                     
-                    }else if((keyname == "ArrowLeft") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) (PacManTop == 180) ||(PacManTop == 204) || (PacManTop == 228))){
+                    }else if((keyname == "ArrowLeft") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) || (PacManTop == 180) ||(PacManTop == 204) || (PacManTop == 228))){
                         
                         PacManStorage.setItem("Direction", "Left");
 
@@ -263,7 +263,6 @@
                     
                     document.getElementById("outputX").innerHTML = PacManLeft;
                     document.getElementById("outputY").innerHTML = PacManTop;
-                    document.getElementById("keyname").innerHTML = PacManStorage.getItem("keyname");
 
                 }, interval); //end of setInterval
             } //end of animateScript()
@@ -285,10 +284,13 @@
             document.addEventListener('keydown', (event) => {
 
                 // PacManStorage = window.localStorage;
-                var keyname      = event.key;
+                var keyname = event.key;
+
                 PacManStorage.setItem("keyname", keyname)
 
-                // var keycode      = event.code;
+                document.getElementById("keyname").innerHTML = PacManStorage.getItem("keyname");
+
+                // var keycode = event.code;
                 
             }, false);
            
