@@ -47,8 +47,8 @@
                  * Initial Coordinates
                  * 
                  */
-                PacManStorage.setItem("PacManLeft", "10");
-                PacManStorage.setItem("PacManTop",  "10");
+                PacManStorage.setItem("PacManLeft", "5");
+                PacManStorage.setItem("PacManTop",  "4");
                 PacManStorage.setItem("Step", "1");
                 PacManStorage.setItem("Direction", "Right");
 
@@ -70,19 +70,19 @@
 
                     var keyname = PacManStorage.getItem("keyname");
 
-                    if(keyname == "ArrowRight"){
+                    if((keyname == "ArrowRight") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) (PacManTop == 180) ||(PacManTop == 204) || (PacManTop == 228))){
                         
                         PacManStorage.setItem("Direction", "Right");
                     
-                    }else if(keyname == "ArrowLeft"){
+                    }else if((keyname == "ArrowLeft") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) (PacManTop == 180) ||(PacManTop == 204) || (PacManTop == 228))){
                         
                         PacManStorage.setItem("Direction", "Left");
 
-                    }else if((keyname == "ArrowDown") && (PacManLeft == 45)){
+                    }else if((keyname == "ArrowDown") && ((PacManLeft == 5) || (PacManLeft == 21) || (PacManLeft == 45) || (PacManLeft == 70) || (PacManLeft == 93) || (PacManLeft == 117) || (PacManLeft == 142) || (PacManLeft == 150) || (PacManLeft == 165) || (PacManLeft == 189) || (PacManLeft == 205))){
 
                         PacManStorage.setItem("Direction", "Down");
                         
-                    }else if(keyname == "ArrowUp"){
+                    }else if((keyname == "ArrowUp") && ((PacManLeft == 5) || (PacManLeft == 21) || (PacManLeft == 45) || (PacManLeft == 70) || (PacManLeft == 93) || (PacManLeft == 117) || (PacManLeft == 142) || (PacManLeft == 150) || (PacManLeft == 165) || (PacManLeft == 189) || (PacManLeft == 205))){
 
                         PacManStorage.setItem("Direction", "Up");
                         
@@ -110,25 +110,13 @@
 
                         }else {
 
-                            PacManStorage.setItem("Direction", "Left")
+                            PacManStorage.setItem("keyname", "ArrowLeft")
 
                         }
 
                     }else if(PacManStorage.getItem("Direction") == "Left"){
                         
-                        if((PacManLeft == 4) ||
-                           ((PacManLeft == 40) && (PacManTop == 178))){
-
-                            PacManStorage.setItem("Direction", "Right")
-
-                            var PacManLeft = PacManStorage.getItem("PacManLeft");
-                            var PacManStep = PacManStorage.getItem("Step");
-                    
-                            PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
-                    
-                            PacManStorage.setItem("PacManLeft", PacManLeft);
-
-                        }else{
+                        if(PacManLeft > 5){
 
                             var PacManLeft = PacManStorage.getItem("PacManLeft");
                             var PacManStep = PacManStorage.getItem("Step");
@@ -136,12 +124,16 @@
                             PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
                     
                             PacManStorage.setItem("PacManLeft", PacManLeft);
+
+                        }else{
+
+                            PacManStorage.setItem("keyname", "ArrowRight");
                    
                         }
 
                     }else if(PacManStorage.getItem("Direction") == "Up"){
 
-                        if(PacManTop > 0){
+                        if(PacManTop > 4){
 
                             var PacManTop = PacManStorage.getItem("PacManTop");
                             var PacManStep = PacManStorage.getItem("Step");
@@ -152,13 +144,13 @@
 
                         }else{
 
-                            PacManStorage.setItem("Direction", "Down")
+                            PacManStorage.setItem("keyname", "ArrowDown")
 
                         }
 
                     }else if(PacManStorage.getItem("Direction") == "Down"){
                         
-                        if(PacManTop < 230){
+                        if(PacManTop < 228){
 
                             var PacManTop = PacManStorage.getItem("PacManTop");
                             var PacManStep = PacManStorage.getItem("Step");
@@ -169,7 +161,7 @@
 
                         }else {
 
-                            PacManStorage.setItem("Direction", "Up")
+                            PacManStorage.setItem("keyname", "ArrowUp")
 
                         }
                     
