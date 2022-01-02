@@ -67,6 +67,7 @@ Mantra
   * Move all comparison to one dimentsional arrays `km`
   * Think how best to cycle thorugh the multidimentional array `km` `te`
     * array.some `?`
+  * Make the teleport work :) `km`
 ## Backlog
 
 Focus
