@@ -69,8 +69,17 @@
                     */
 
                     var keyname = PacManStorage.getItem("keyname");
+                    
+                    // Configuration of the Directions
+                    const LeftAndRight = [4, 36, 60, 108, 156, 180, 204, 228];
 
-                    if((keyname == "ArrowRight") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) || (PacManTop == 180) || (PacManTop == 204) || (PacManTop == 228))){
+                    // change-of-direction [
+                    //    [[45,4],[l,d,r]],
+                    //    []
+                    // ]
+
+                    // parseFloat is needed else includes() does not work (apparently thingking PacManTop is a string)
+                    if((keyname == "ArrowRight") && LeftAndRight.includes(parseFloat(PacManTop))){
                         
                         PacManStorage.setItem("Direction", "Right");
                     

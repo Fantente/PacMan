@@ -55,26 +55,18 @@ Mantra
 14:30
 
 * Check Homework
-  * See to fix this place in the code as it sometimes works slowly and somtimest fast `different approach, but perfect result, bravo :)`
-
-                    // HOMEWORK
-                    // Sometimes works, sometimes does not :)
-* Today
-  * Make PacMan follow the corridors.
-    * There are two options.
-      * Read the colours `we will not do this`
-        * This is useful if
-          * We want to do it like this, or
-          * There are different labyrinths
-      * w/ many IFs the same way you have done the ends of the labyrinth
-        * This means for every direction we have to create an array of limitations (or extend the array of limitations you have already started) `we began working on this and have proof of concept`
-
-### Homework
-
-* Fix the start direction.
-* Fix the end of labirynth logic.
-* Try to add more/ all points where the direction can change.
-
+  * Fix the start direction `done`
+  * Fix the end of labirynth logic `done`
+  * Try to add more/ all points where the direction can change `done`
+* Learned Today
+  * How to shorten comparisons w/ array()
+  * How to check if a number is in the array()
+  * Introduction into Analysis :)
+    * Analysed how to combine an array w/ all crossings and all possible directions in each crossing and how to examine it.
+* Homework
+  * Move all comparison to one dimentsional arrays `km`
+  * Think how best to cycle thorugh the multidimentional array `km` `te`
+    * array.some `?`
 ## Backlog
 
 Focus
