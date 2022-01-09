@@ -72,10 +72,23 @@
                     
                     // Configuration of the Directions
                     const LeftAndRight = [4, 36, 60, 108, 156, 180, 204, 228];
+                    const UpAndDown = [5, 21, 45,70, 93, 117, 142, 165, 189, 205]
 
                     // change-of-direction [
+                    //    [[5,4],[d,r]],      
                     //    [[45,4],[l,d,r]],
-                    //    []
+                    //    [[93,4],[l,d]],
+                    //    [[117,4],[d,r]],
+                    //    [[165,4],[l,d,r]],
+                    //    [[205,4],[l,d]],
+                    //    [[5,36],[u,r,d]],
+                    //    [[45,36],[u,l,d,r]],
+                    //    [[70,36],[l,d,r]],
+                    //    [[93,36],[u,l,r]],
+                    //    [[117,36],[u,l,r]],
+                    //    [[142,36],[l,d,r]]
+                    //    [[165,36],[u,l,d,r]],
+                    //    [[205,36],[u,l,d]],
                     // ]
 
                     // parseFloat is needed else includes() does not work (apparently thingking PacManTop is a string)
@@ -83,15 +96,15 @@
                         
                         PacManStorage.setItem("Direction", "Right");
                     
-                    }else if((keyname == "ArrowLeft") && ((PacManTop == 4) || (PacManTop == 36) || (PacManTop == 60) || (PacManTop == 108) || (PacManTop == 156) || (PacManTop == 180) ||(PacManTop == 204) || (PacManTop == 228))){
+                    }else if((keyname == "ArrowLeft") && LeftAndRight.includes(parseFloat(PacManTop))){
                         
                         PacManStorage.setItem("Direction", "Left");
 
-                    }else if((keyname == "ArrowDown") && ((PacManLeft == 5) || (PacManLeft == 21) || (PacManLeft == 45) || (PacManLeft == 70) || (PacManLeft == 93) || (PacManLeft == 117) || (PacManLeft == 142) || (PacManLeft == 150) || (PacManLeft == 165) || (PacManLeft == 189) || (PacManLeft == 205))){
+                    }else if((keyname == "ArrowDown") && UpAndDown.includes(parseFloat(PacManLeft))){
 
                         PacManStorage.setItem("Direction", "Down");
                         
-                    }else if((keyname == "ArrowUp") && ((PacManLeft == 5) || (PacManLeft == 21) || (PacManLeft == 45) || (PacManLeft == 70) || (PacManLeft == 93) || (PacManLeft == 117) || (PacManLeft == 142) || (PacManLeft == 150) || (PacManLeft == 165) || (PacManLeft == 189) || (PacManLeft == 205))){
+                    }else if((keyname == "ArrowUp") && UpAndDown.includes(parseFloat(PacManLeft))){
 
                         PacManStorage.setItem("Direction", "Up");
                         
@@ -119,7 +132,16 @@
 
                         }else {
 
-                            PacManStorage.setItem("keyname", "ArrowLeft")
+                            if(PacManTop == 108){
+                            
+                                PacManStorage.setItem("PacManLeft", "5")
+                                PacManStorage.setItem("keyname", "ArrowRight")
+
+                            }else{
+
+                                PacManStorage.setItem("keyname", "ArrowLeft")
+
+                            }
 
                         }
 
@@ -136,7 +158,16 @@
 
                         }else{
 
-                            PacManStorage.setItem("keyname", "ArrowRight");
+                            if(PacManTop == 108){
+                            
+                                PacManStorage.setItem("PacManLeft", "205")
+                                PacManStorage.setItem("keyname", "ArrowLeft")
+
+                            }else{
+
+                                PacManStorage.setItem("keyname", "ArrowRight")
+
+                            }
                    
                         }
 
