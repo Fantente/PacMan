@@ -51,23 +51,51 @@ Mantra
 * Watch out for AstroPi 2022 `!!`
   * https://astro-pi.org
   * Nothing yet.
+  * Mission Zero
+    * https://www.linkedin.com/posts/dahoum_tim-peake-with-the-astro-pis-on-the-international-activity-6885558617144078336-QD8A `watch the video``
+    * https://projects.raspberrypi.org/en/projects/astro-pi-mission-zero/0 `read this`
+    * safe-drum
+    * https://trinket.io/mission-zero `check this` 
 
-14:30
+14:15
 
 * Check Homework
-  * Fix the start direction `done`
-  * Fix the end of labirynth logic `done`
-  * Try to add more/ all points where the direction can change `done`
+  * Move the comparison to one dimentsional arrays `done`
+  * Make the teleport work :) `done`
+  * Many coordinates in the multidimensional array have been prepared `done`
 * Learned Today
-  * How to shorten comparisons w/ array()
-  * How to check if a number is in the array()
-  * Introduction into Analysis :)
-    * Analysed how to combine an array w/ all crossings and all possible directions in each crossing and how to examine it.
+  * The Google PacMan has a gradual teleport.
+  * Security
+    * We found out that if you close the tab, the direction remains.
+    * This is a security problem.
+  * JavaScript Array Prototype
+    * https://www.w3schools.com/jsref/jsref_prototype_array.asp
+    * prototype allows you to add new properties and methods to arrays.
+    * prototype is a property available with all JavaScript objects.
+  * Programming
+    * Reference is not a Tutorial
+      * Referende is the shortest description possible, and can be frustrating when you do not understand it.
+      * In such cases look for a Tutorial, where there can be more explanation.
+  * English and Programming
+    * hunch
+      * A feeling or guess based on intuition rather than fact.
+  * Think how best to cycle thorugh the multidimentional array.
+    * The built-in fuctions are faster than writing the same in JavaScript.
+    * callback or anonyme function extends built-in functions in a more efficient way, than writing everything in JavaScript yourself
+      * array.some will work
 * Homework
-  * Move all comparison to one dimentsional arrays `km`
-  * Think how best to cycle thorugh the multidimentional array `km` `te`
-    * array.some `?`
-  * Make the teleport work :) `km`
+  * Mission Zero `above`
+  * PacMan
+    * Research DO `do this first`
+      * Read about array.some
+        * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
+    * Think how to make the teleport come from the dark, gradually.
+    * Remove the automatic turning at the end of the corridor.
+      * Consider to leave it on a specific place.
+      * For example paint a corner red and let it happen there.
+    * Security
+      * We must clear the global store on tab close `research`
+
 ## Backlog
 
 Focus

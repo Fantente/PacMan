@@ -91,6 +91,9 @@
                     //    [[205,36],[u,l,d]],
                     // ]
 
+                    // if ( ... && change-of-direction.some( function `r` ? ) )
+                    // read https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
+
                     // parseFloat is needed else includes() does not work (apparently thingking PacManTop is a string)
                     if((keyname == "ArrowRight") && LeftAndRight.includes(parseFloat(PacManTop))){
                         
