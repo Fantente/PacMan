@@ -44,7 +44,7 @@ https://www.w3schools.com
 Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
-## 2 Januar
+## 9 Januar
 
 Mantra
 
