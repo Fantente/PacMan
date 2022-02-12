@@ -71,8 +71,8 @@
                     var keyname = PacManStorage.getItem("keyname");
                     
                     // Configuration of the Directions
-                    const LeftAndRight = [4, 36, 60, 108, 156, 180, 204, 228];
-                    const UpAndDown = [5, 21, 45,70, 93, 117, 142, 165, 189, 205]
+                    const LeftAndRight = [4, 36, 60, 84, 108, 132, 156, 180, 204, 228];
+                    const UpAndDown = [5, 21, 45, 70, 93, 117, 142, 165, 189, 205];
 
                     // change-of-direction [
                     //    [[5,4],[d,r]],      
@@ -89,6 +89,14 @@
                     //    [[142,36],[l,d,r]]
                     //    [[165,36],[u,l,d,r]],
                     //    [[205,36],[u,l,d]],
+                    //    [[5,60],[u,r]]
+                    //    [[45,60],[u,l,d]]
+                    //    [[70,60],[u,r]]
+                    //    [[93,60],[l,d]]
+                    //    [[117,60],[d,r]]
+                    //    [[142,60],[u,l]]
+                    //    [[165,60],[u,d,r]]
+                    //    [[205,60],[u,l]]
                     // ]
 
                     // if ( ... && change-of-direction.some( function `r` ? ) )
@@ -118,6 +126,16 @@
                     }
 
                     /*
+                    var AutoReturn = 0
+
+                    function ToggleAutoReturn(button) {
+
+                        AutoReturn = 1
+
+                    };
+                    */
+
+                    /*
                      *
                      * Motion Calculator
                      * 
@@ -137,10 +155,10 @@
 
                             if(PacManTop == 108){
                             
-                                PacManStorage.setItem("PacManLeft", "5")
+                                PacManStorage.setItem("PacManLeft", "-25")
                                 PacManStorage.setItem("keyname", "ArrowRight")
 
-                            }else{
+                            }else if(AutoReturn == 1){
 
                                 PacManStorage.setItem("keyname", "ArrowLeft")
 
@@ -163,10 +181,10 @@
 
                             if(PacManTop == 108){
                             
-                                PacManStorage.setItem("PacManLeft", "205")
+                                PacManStorage.setItem("PacManLeft", "235")
                                 PacManStorage.setItem("keyname", "ArrowLeft")
 
-                            }else{
+                            }else if(AutoReturn == 1){
 
                                 PacManStorage.setItem("keyname", "ArrowRight")
 
@@ -185,7 +203,7 @@
                     
                             PacManStorage.setItem("PacManTop", PacManTop);
 
-                        }else{
+                        }else if(AutoReturn == 1){
 
                             PacManStorage.setItem("keyname", "ArrowDown")
 
@@ -202,7 +220,7 @@
                     
                             PacManStorage.setItem("PacManTop", PacManTop);
 
-                        }else {
+                        }else if(AutoReturn = 1){
 
                             PacManStorage.setItem("keyname", "ArrowUp")
 
@@ -371,7 +389,7 @@
         </div>
         <div style="height: 275px;"></div>
         <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> </div>
-
+        <!-- (button id="button_1" onclick=ToggleAutoReturn(this)>Auto Return</button> -->
         <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
         
             <div style="position: absolute; top: 0; left: 0; z-index: 11; background-color: burlywood;"               >asdfafasdfasfas</div>
