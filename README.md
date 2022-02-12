@@ -44,7 +44,7 @@ https://www.w3schools.com
 Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
-## 9 Januar
+## 12 February
 
 Mantra
 
@@ -56,6 +56,19 @@ Mantra
     * https://projects.raspberrypi.org/en/projects/astro-pi-mission-zero/0 `read this`
     * safe-drum
     * https://trinket.io/mission-zero `check this` 
+
+Today
+
+* Auto-Return
+  * ...
+  * Switch to TypeScript
+* Crossings
+
+Homework
+
+* See why AutoReturn does not toggle `te` and `km`
+
+### 9 Januar
 
 14:15
 
