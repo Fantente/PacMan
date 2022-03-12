@@ -94,30 +94,33 @@
                     const LeftAndRight = [4, 36, 60, 84, 108, 132, 156, 180, 204, 228];
                     const UpAndDown = [5, 21, 45, 70, 93, 117, 142, 165, 189, 205];
 
-                    // change-of-direction [
-                    //    [[5,4],[d,r]],      
-                    //    [[45,4],[l,d,r]],
-                    //    [[93,4],[l,d]],
-                    //    [[117,4],[d,r]],
-                    //    [[165,4],[l,d,r]],
-                    //    [[205,4],[l,d]],
-                    //    [[5,36],[u,r,d]],
-                    //    [[45,36],[u,l,d,r]],
-                    //    [[70,36],[l,d,r]],
-                    //    [[93,36],[u,l,r]],
-                    //    [[117,36],[u,l,r]],
-                    //    [[142,36],[l,d,r]]
-                    //    [[165,36],[u,l,d,r]],
-                    //    [[205,36],[u,l,d]],
-                    //    [[5,60],[u,r]]
-                    //    [[45,60],[u,l,d]]
-                    //    [[70,60],[u,r]]
-                    //    [[93,60],[l,d]]
-                    //    [[117,60],[d,r]]
-                    //    [[142,60],[u,l]]
-                    //    [[165,60],[u,d,r]]
-                    //    [[205,60],[u,l]]
-                    // ]
+                    const change_of_direction = [
+                       [[5,4],   [d,r]],      
+                       [[45,4],  [l,d,r]],
+                       [[93,4],  [l,d]],
+                       [[117,4], [d,r]],
+                       [[165,4], [l,d,r]],
+                       [[205,4], [l,d]],
+                       [[5,36],  [u,r,d]],
+                       [[45,36], [u,l,d,r]],
+                       [[70,36], [l,d,r]],
+                       [[93,36], [u,l,r]],
+                       [[117,36],[u,l,r]],
+                       [[142,36],[l,d,r]]
+                       [[165,36],[u,l,d,r]],
+                       [[205,36],[u,l,d]],
+                       [[5,60],  [u,r]]
+                       [[45,60], [u,l,d]]
+                       [[70,60], [u,r]]
+                       [[93,60], [l,d]]
+                       [[117,60],[d,r]]
+                       [[142,60],[u,l]]
+                       [[165,60],[u,d,r]]
+                       [[205,60],[u,l]]
+                    ];
+
+                    // const stop = change_of_direction.prototype.some() 
+                    // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
 
                     // if ( ... && change-of-direction.some( function `r` ? ) )
                     // read https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 

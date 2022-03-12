@@ -79,6 +79,12 @@ Done Today
   * The button works
   * Make the PacMan also follow the button
   * done!
+* Progressed w/ some
+
+Homework
+
+* Kian to try some on row 122, 123
+* We continue tomorrow
 
 Long Term Homework
 
@@ -115,6 +121,7 @@ Long Term Homework
   * Mission Zero `above`
   * PacMan
     * Research DO `do this first`
+      * Array, Feld https://de.wikipedia.org/wiki/Feld_(Datentyp) 
       * Read about array.some
         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
     * Think how to make the teleport come from the dark, gradually.
