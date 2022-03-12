@@ -70,7 +70,10 @@ Homework
 
 # 12 March
 
-14:15
+12:30
+
+* Moved pacman.html into index.html in the /
+
 
 * Check Homework
   * Move the comparison to one dimentsional arrays `done`

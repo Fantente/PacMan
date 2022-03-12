@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>
+            PacMan - Home
+        </title>
+
+        <script>
+            var script = document.currentScript
+            var fullUrl = script.src
+            var AskTimePopUp = 0
+            var pmst = " please make sure that pop-up-windows are allowed"
+            var AskPopUp
+        </script>
+
+        <style>
+            .Col-Headline {color: darkgoldenrod}
+            .Col-StartGame {color: orange}
+            .Col-Options {color: blue}
+            .Col-Others {color: blueviolet}
+        </style>
+    </head>
+    <body>
+        <h1 class="Col-Headline">PacMan - the yellow ball!</h1>
+
+        <img src="logo.png" onclick="OpenOthers()" width="480" height="250"></img>
+
+        <h2 class="Col-StartGame">Start the Game</h2>
+        <button type="button" onclick="StartGame()">Start Game</button>
+        <h2 class="Col-Options">Open the Options</h2>
+        <button type="button" onclick="Optios()">Options</button>
+        <h2 class="Col-Others">Open Others</h2>
+        <button type="button" onclick="OpenOthers()">Others</button>
+
+        <script>
+            function StartGame() {
+                if (AskTimePopUp == 0) {
+                    AskPopUp = "To start the game" + pmst
+                    alert(AskPopUp)
+                    AskTimePopUp = 1
+                }
+                open("Game/game.html")
+            };
+            function Optios() {
+                if (AskTimePopUp == 0) {
+                    AskPopUp = "To open the options" + pmst
+                    alert(AskPopUp)
+                    AskTimePopUp = 1
+                }
+                open("Game/options.html")
+            };
+            function OpenOthers() {
+                if (AskTimePopUp == 0) {
+                    AskPopUp = "To open others" + pmst
+                    alert(AskPopUp)
+                    AskTimePopUp = 1
+                }
+                open("Game/index.html")
+            };
+        </script>
+    </body>
+</html>
