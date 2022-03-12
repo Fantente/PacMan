@@ -57,10 +57,22 @@
                  * Initial AutoReturn
                  * 
                  */
-                var AutoReturn = new Boolean(false);
+                var AutoReturn = "ON";
                 PacManStorage.setItem("AutoReturn", AutoReturn);
 
+                /*
+                 *
+                 * This is the global cycle of the game
+                 *
+                 */
                 tID = setInterval(() => {
+
+                    /*
+                     *
+                     * Update the variables that might have changed below
+                     *
+                     */
+                    var AutoReturn = PacManStorage.getItem("AutoReturn");
 
                     // Are these the start coordinates?
                     var PacManLeft = PacManStorage.getItem("PacManLeft");
@@ -137,7 +149,10 @@
                      *
                      * Motion Calculator
                      * 
+                     * AutoReturn is implemented here.
+                     * 
                      */
+
                     if(PacManStorage.getItem("Direction") == "Right"){
                         
                         if(PacManLeft < 205){
@@ -156,7 +171,7 @@
                                 PacManStorage.setItem("PacManLeft", "-25")
                                 PacManStorage.setItem("keyname", "ArrowRight")
 
-                            }else if(AutoReturn == true){
+                            }else if(AutoReturn == "ON"){
 
                                 PacManStorage.setItem("keyname", "ArrowLeft")
 
@@ -182,7 +197,7 @@
                                 PacManStorage.setItem("PacManLeft", "235")
                                 PacManStorage.setItem("keyname", "ArrowLeft")
 
-                            }else if(AutoReturn == true){
+                            }else if(AutoReturn == "ON"){
 
                                 PacManStorage.setItem("keyname", "ArrowRight")
 
@@ -201,7 +216,7 @@
                     
                             PacManStorage.setItem("PacManTop", PacManTop);
 
-                        }else if(AutoReturn == true){
+                        }else if(AutoReturn == "ON"){
 
                             PacManStorage.setItem("keyname", "ArrowDown")
 
@@ -218,7 +233,7 @@
                     
                             PacManStorage.setItem("PacManTop", PacManTop);
 
-                        }else if(AutoReturn = true){
+                        }else if(AutoReturn == "ON"){
 
                             PacManStorage.setItem("keyname", "ArrowUp")
 
@@ -326,20 +341,25 @@
                 }, interval); //end of setInterval
             } //end of function animateScript()
             
+            /*
+             *
+             * Toggle Button Auto-Return
+             *
+             */
+
             function ToggleAutoReturn() {
 
                 AutoReturn = PacManStorage.getItem("AutoReturn");
-                alert(AutoReturn);
 
-                if (AutoReturn === true){
-alert("true");
-                    PacManStorage.setItem("AutoReturn", false);
+                if (AutoReturn == "ON"){
+
+                    PacManStorage.setItem("AutoReturn", "OFF");
 
                     document.getElementById("button_auto_return").innerHTML = "Auto Return OFF";
 
                 }else{
-                    alert("else");
-                    PacManStorage.setItem("AutoReturn", true);
+                
+                    PacManStorage.setItem("AutoReturn", "ON");
 
                     document.getElementById("button_auto_return").innerHTML = "Auto Return ON";
 
@@ -408,7 +428,7 @@ alert("true");
         </div>
         <div style="height: 275px;"></div>
         <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> </div>
-        <button id="button_auto_return" onclick=ToggleAutoReturn()>Auto Return OFF</button>
+        <button id="button_auto_return" onclick=ToggleAutoReturn()>Auto Return ON</button>
         <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
         
             <div style="position: absolute; top: 0; left: 0; z-index: 11; background-color: burlywood;"               >asdfafasdfasfas</div>

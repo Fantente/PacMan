@@ -72,8 +72,20 @@ Homework
 
 12:30
 
-* Moved pacman.html into index.html in the /
+Done Today
 
+* Moved pacman.html into index.html in the /
+* Complete the automatic turning
+  * The button works
+  * Make the PacMan also follow the button
+  * done!
+
+Long Term Homework
+
+* Learn to work w/ boolean in if ... else ... statements.
+  * TypeScript
+* Learn about the scope of variables and create examples.
+## 12 February
 
 * Check Homework
   * Move the comparison to one dimentsional arrays `done`
@@ -106,9 +118,6 @@ Homework
       * Read about array.some
         * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
     * Think how to make the teleport come from the dark, gradually.
-    * Remove the automatic turning at the end of the corridor.
-      * Consider to leave it on a specific place.
-      * For example paint a corner red and let it happen there.
     * Security
       * We must clear the global store on tab close `research`
 
