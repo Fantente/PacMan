@@ -4,7 +4,7 @@
 
 ## Netelify
 
-https://pacman-dahoum.netlify.app/game/pacman.html
+https://pacman-dahoum.netlify.app
 
 ## Project Plan
 
