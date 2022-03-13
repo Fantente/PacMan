@@ -44,31 +44,7 @@ https://www.w3schools.com
 Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
-## 12 February
-
-Mantra
-
-* Watch out for AstroPi 2022 `!!`
-  * https://astro-pi.org
-  * Nothing yet.
-  * Mission Zero
-    * https://www.linkedin.com/posts/dahoum_tim-peake-with-the-astro-pis-on-the-international-activity-6885558617144078336-QD8A `watch the video``
-    * https://projects.raspberrypi.org/en/projects/astro-pi-mission-zero/0 `read this`
-    * safe-drum
-    * https://trinket.io/mission-zero `check this` 
-
-Today
-
-* Auto-Return
-  * ...
-  * Switch to TypeScript
-* Crossings
-
-Homework
-
-* See why AutoReturn does not toggle `te` and `km`
-
-# 12 March
+# 13 March
 
 12:30
 
