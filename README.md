@@ -46,6 +46,21 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 
 # 13 March
 
+11:30
+
+Done Today
+
+* r is variable
+* "r" is value
+* We made it work w/ some() !!!
+
+Homework
+
+* Try to add more crossings
+* Try to add the logic to the other directions
+
+## 12 March
+
 12:30
 
 Done Today
