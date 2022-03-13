@@ -91,9 +91,14 @@
                     var keyname = PacManStorage.getItem("keyname");
                     
                     // Configuration of the Directions
-                    const LeftAndRight = [4, 36, 60, 84, 108, 132, 156, 180, 204, 228];
-                    const UpAndDown = [5, 21, 45, 70, 93, 117, 142, 165, 189, 205];
+                    // const LeftAndRight = [4, 36, 60, 84, 108, 132, 156, 180, 204, 228];
+                    // const UpAndDown = [5, 21, 45, 70, 93, 117, 142, 165, 189, 205];
 
+                    var d = "Down"
+                    var r = "Right"
+                    var l = "Left"
+                    var u = "Up"
+                    
                     const change_of_direction = [
                        [[5,4],   [d,r]],      
                        [[45,4],  [l,d,r]],
@@ -118,6 +123,12 @@
                        [[165,60],[u,d,r]]
                        [[205,60],[u,l]]
                     ];
+                    
+
+                   if((keyname == ArowRight) && ((change-of-direction[0][0] == PacManTop) && (change-of-direction[0][1] == r))) {
+
+                    PacManStorage.setItem("Direction", "Right")
+                   }
 
                     // const stop = change_of_direction.prototype.some() 
                     // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
@@ -126,6 +137,8 @@
                     // read https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
 
                     // parseFloat is needed else includes() does not work (apparently thingking PacManTop is a string)
+
+                    /*
                     if((keyname == "ArrowRight") && LeftAndRight.includes(parseFloat(PacManTop))){
                         
                         PacManStorage.setItem("Direction", "Right");
@@ -147,6 +160,8 @@
                         PacManStorage.setItem("Direction", "Break");
 
                     }
+
+                    */
 
                     /*
                      *
