@@ -132,35 +132,38 @@
                      *
                      */
                     const change_of_direction = [
-                       [[5,4],   ["ArrowDown","ArrowRight"]],      
-                       [[45,4],  ["ArrowDown","ArrowRight","ArrowLeft"]]
+
+                       [  [  5,  4] , ["ArrowDown","ArrowRight"                      ]  ],      
+                       [  [ 45,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                       [  [ 93,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                       [  [117,  4] , ["ArrowDown","ArrowRight"                      ]  ],
+                       [  [165,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                       [  [205,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                       [  [  5, 36] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                       [  [ 45, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                       [  [ 70, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                       [  [ 93, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                       [  [117, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                       [  [142, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ]
+                       [  [165, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                       [  [205, 36] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                       [  [  5, 60] , [            "ArrowRight",            "ArrowUp"]  ],
+                       [  [ 45, 60] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                       [  [ 70, 60] , [            "ArrowRight",            "ArrowUp"]  ],
+                       [  [ 93, 60] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                       [  [117, 60] , ["ArrowDown","ArrowRight"                      ]  ],
+                       [  [142, 60] , [                         "ArrowLeft","ArrowUp"]  ],
+                       [  [165, 60] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                       [  [205, 60] , [                         "ArrowLeft","ArrowUp"]  ]
+
                     ];
 
-                    //    [[93,4],  [l,d]],
-                    //    [[117,4], [d,r]],
-                    //    [[165,4], [l,d,r]],
-                    //    [[205,4], [l,d]],
-                    //    [[5,36],  [u,r,d]],
-                    //    [[45,36], [u,l,d,r]],
-                    //    [[70,36], [l,d,r]],
-                    //    [[93,36], [u,l,r]],
-                    //    [[117,36],[u,l,r]],
-                    //    [[142,36],[l,d,r]]
-                    //    [[165,36],[u,l,d,r]],
-                    //    [[205,36],[u,l,d]],
-                    //    [[5,60],  [u,r]],
-                    //    [[45,60], [u,l,d]],
-                    //    [[70,60], [u,r]],
-                    //    [[93,60], [l,d]],
-                    //    [[117,60],[d,r]],
-                    //    [[142,60],[u,l]],
-                    //    [[165,60],[u,d,r]],
-                    //    [[205,60],[u,l]]
-                    // ];
+
 
                    if((keyname == "ArowRight") && ((change_of_direction[0][0][1] == PacManTop) && (change_of_direction[0][1][1] == r))) {
 
                     PacManStorage.setItem("Direction", "Right")
+
                    }
 
                     // const stop = change_of_direction.prototype.some() 
