@@ -44,7 +44,8 @@ https://www.w3schools.com
 Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
-# 13 March
+## 10 April
+### 13 March
 
 11:30
 
@@ -59,7 +60,7 @@ Homework
 * Try to add more crossings
 * Try to add the logic to the other directions
 
-## 12 March
+### 12 March
 
 12:30
 
@@ -82,7 +83,7 @@ Long Term Homework
 * Learn to work w/ boolean in if ... else ... statements.
   * TypeScript
 * Learn about the scope of variables and create examples.
-## 12 February
+### 12 February
 
 * Check Homework
   * Move the comparison to one dimentsional arrays `done`
@@ -119,7 +120,7 @@ Long Term Homework
     * Security
       * We must clear the global store on tab close `research`
 
-## Backlog
+### Backlog
 
 Focus
 
