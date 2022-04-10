@@ -15,7 +15,7 @@
             } //end of stopAnimate()
 
             function change_of_direction_is_allowed(element){
-
+                // alert(element);
                 /*
                  *
                  * We have to check three things:
@@ -34,13 +34,22 @@
                 var PacManTop  = PacManStorage.getItem("PacManTop");
                 var keyname    = PacManStorage.getItem("keyname");
 
+                if (element){
+
+                // element[1] contains the allwed directions in which PacMan can turn on this crossing
                 var allowed_directions = element[1];
 
                 if ((element[0][0] == PacManLeft) &&
-                    (element[0][1] == PacManTop)  &&
-                    allowed_directions.includes(keyname)){
+                (element[0][1] == PacManTop)  &&
+                allowed_directions.includes(keyname)){
 
-                        return true;
+                    return true;
+
+                }
+
+                }else{
+
+                    alert("PROGRAM ERROR: Last time we got this error, the const change_of_direction was missing a , in the middle of the array.");
 
                 }
 
@@ -84,6 +93,36 @@
                 PacManStorage.setItem("Step", "1");
                 PacManStorage.setItem("Direction", "Right");
 
+                    /*
+                     *
+                     * change_of_direction [[x,y],[allowed_directions]]
+                     *
+                     */
+                    const change_of_direction = [
+                                                    [  [  5,  4] , ["ArrowDown","ArrowRight"                      ]  ],      
+                                                    [  [ 45,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [ 93,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117,  4] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [165,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [205,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [  5, 36] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 45, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [ 93, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [117, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [142, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [165, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [205, 36] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [  5, 60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 45, 60] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70, 60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 93, 60] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117, 60] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [142, 60] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                    [  [165, 60] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [205, 60] , [                         "ArrowLeft","ArrowUp"]  ]
+                                                ];
+
                 /*
                  *
                  * Initial AutoReturn
@@ -121,50 +160,12 @@
                      */
 
                     var keyname = PacManStorage.getItem("keyname");
-                    
-                    // Configuration of the Directions
-                    const LeftAndRight = [4, 36, 60, 84, 108, 132, 156, 180, 204, 228];
-                    const UpAndDown = [5, 21, 45, 70, 93, 117, 142, 165, 189, 205];
 
-                    /*
-                     *
-                     * change_of_direction [[x,y],[allowed_directions]]
-                     *
-                     */
-                    const change_of_direction = [
+                //    if((keyname == "ArowRight") && ((change_of_direction[0][0][1] == PacManTop) && (change_of_direction[0][1][1] == r))) {
 
-                       [  [  5,  4] , ["ArrowDown","ArrowRight"                      ]  ],      
-                       [  [ 45,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
-                       [  [ 93,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
-                       [  [117,  4] , ["ArrowDown","ArrowRight"                      ]  ],
-                       [  [165,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
-                       [  [205,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
-                       [  [  5, 36] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
-                       [  [ 45, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
-                       [  [ 70, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
-                       [  [ 93, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
-                       [  [117, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
-                       [  [142, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ]
-                       [  [165, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
-                       [  [205, 36] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
-                       [  [  5, 60] , [            "ArrowRight",            "ArrowUp"]  ],
-                       [  [ 45, 60] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
-                       [  [ 70, 60] , [            "ArrowRight",            "ArrowUp"]  ],
-                       [  [ 93, 60] , ["ArrowDown",             "ArrowLeft"          ]  ],
-                       [  [117, 60] , ["ArrowDown","ArrowRight"                      ]  ],
-                       [  [142, 60] , [                         "ArrowLeft","ArrowUp"]  ],
-                       [  [165, 60] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
-                       [  [205, 60] , [                         "ArrowLeft","ArrowUp"]  ]
+                //     PacManStorage.setItem("Direction", "Right")
 
-                    ];
-
-
-
-                   if((keyname == "ArowRight") && ((change_of_direction[0][0][1] == PacManTop) && (change_of_direction[0][1][1] == r))) {
-
-                    PacManStorage.setItem("Direction", "Right")
-
-                   }
+                //    }
 
                     // const stop = change_of_direction.prototype.some() 
                     // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
@@ -174,11 +175,11 @@
 
                     // parseFloat is needed else includes() does not work (apparently thingking PacManTop is a string)
 
-                    if((keyname == "ArrowRight") && LeftAndRight.includes(parseFloat(PacManTop))){
+                    if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
                         
                         PacManStorage.setItem("Direction", "Right");
                     
-                    }else if((keyname == "ArrowLeft") && LeftAndRight.includes(parseFloat(PacManTop))){
+                    }else if((keyname == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
                         
                         PacManStorage.setItem("Direction", "Left");
 
@@ -186,7 +187,7 @@
 
                         PacManStorage.setItem("Direction", "Down");
                         
-                    }else if((keyname == "ArrowUp") && UpAndDown.includes(parseFloat(PacManLeft))){
+                    }else if((keyname == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
 
                         PacManStorage.setItem("Direction", "Up");
                         

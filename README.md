@@ -45,6 +45,11 @@ Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
 ## 10 April
+
+* Kian has turned the r,l,d,u to ArrowRight,ArrowLeft,ArrowDown,ArrowUp `good`
+  * `problem` ArrowDown stops the motion, continues down on a consequent ArrowLeft
+    * The problem was that the above described array element was missing a , `solved`
+
 ### 13 March
 
 11:30
