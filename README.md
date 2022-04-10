@@ -49,6 +49,13 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 * Kian has turned the r,l,d,u to ArrowRight,ArrowLeft,ArrowDown,ArrowUp `good`
   * `problem` ArrowDown stops the motion, continues down on a consequent ArrowLeft
     * The problem was that the above described array element was missing a , `solved`
+* We discovered that our direction change model does not allow change of direction along a straing line.
+
+Homework
+
+* Define `all` the missing corrsings `km`
+* We need also line definition which allows up/down or left/right along the full length of a vertical or horizontal corridor `km`
+  * Another array or a 3rd element in the coordinates `km`
 
 ### 13 March
 

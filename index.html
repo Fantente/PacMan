@@ -36,16 +36,16 @@
 
                 if (element){
 
-                // element[1] contains the allwed directions in which PacMan can turn on this crossing
-                var allowed_directions = element[1];
+                    // element[1] contains the allwed directions in which PacMan can turn on this crossing
+                    var allowed_directions = element[1];
 
-                if ((element[0][0] == PacManLeft) &&
-                (element[0][1] == PacManTop)  &&
-                allowed_directions.includes(keyname)){
+                    if ((element[0][0] == PacManLeft) &&
+                    (element[0][1] == PacManTop)  &&
+                    allowed_directions.includes(keyname)){
 
-                    return true;
+                        return true;
 
-                }
+                    }
 
                 }else{
 
@@ -96,6 +96,12 @@
                     /*
                      *
                      * change_of_direction [[x,y],[allowed_directions]]
+                     * 
+                     * TODO
+                     * 
+                     *     These are point definitions.
+                     * 
+                     *     We need also line definition which allows up/down or left/right along the full length of a vertical or horizontal corridor.
                      *
                      */
                     const change_of_direction = [
