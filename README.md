@@ -47,7 +47,46 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 
 ## 17 April
 
+* Trying to define the corridor directions in the crossing directions array `in progress`
+  * We can derive the corridors from the corssings! `Kian Martin's Idea` `very good`
+    * We have to check if we are between two corssing, and the movement bretween these two crossings is allowed.
 
+```
+A       B    C   D     E     F
++-------+----+   +-----+-----+
+|       |    |   |     |     |
+
+A   d,r
+B l,d,r
+C l,d
+
+D  ,d,r
+
+CHANGE OF DIRECTION
+
+A-B ? if A and B are direct neighbours (there is no other crossing between them) if A is left from B and A has r and B has l then we can do l/r here
+
+How to find neghbours? Auto-Detect. Good when the labyrinths are complex or change https://stackoverflow.com/questions/652106/finding-neighbours-in-a-two-dimensional-array 
+
+In our case it is simple, so we might encode the neighbours in the array?
+
+Or we look for the closest number in both directions? `seems to be good`
+
+And we search only in the direction of the corridor. Eg. if we move to the right, we are in a l-r corridor.
+
+C-D It should not be possible to land there at all. We can do a check for this w/ a PROGRAM ERROR warning :)
+
+A-E This check should be excluded, we can only check between neighbours.
+
+AUTO-MOTION
+
+If I am on a crossing and the crossing does not allow me to continue in the same direction, I must stop.
+
+``` 
+
+
+
+* Fixing 
 ### 10 April
 
 * Kian has turned the r,l,d,u to ArrowRight,ArrowLeft,ArrowDown,ArrowUp `good`
@@ -58,6 +97,7 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 Homework
 
 * Define `all` the missing corrsings `km`
+  * If we are on a crossing, which does not allow certain direction, the automatic motion in this direction should also stop.
 * We need also line definition which allows up/down or left/right along the full length of a vertical or horizontal corridor `km`
   * Another array or a 3rd element in the coordinates `km`
 

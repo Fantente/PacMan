@@ -103,6 +103,7 @@
                      * 
                      *     We need also line definition which allows up/down or left/right along the full length of a vertical or horizontal corridor.
                      *
+                     * 
                      */
                     const change_of_direction = [
                                                     [  [  5,  4] , ["ArrowDown","ArrowRight"                      ]  ],      
@@ -299,6 +300,12 @@
                     
                     }else if(PacManStorage.getItem("Direction") == "Break"){
                         
+                        // TODO
+                        // Break must stop and restart in the same direction on second press.
+                        // Both do not work!
+                        // Perhaps because direction can only be changed on a corssing!
+                        // Or not?
+
                     }
 
                     /*
