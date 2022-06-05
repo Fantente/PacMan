@@ -15,7 +15,9 @@
             } //end of stopAnimate()
 
             function change_of_direction_is_allowed(element){
-                // alert(element);
+
+                // AT CROSSINGS
+
                 /*
                  *
                  * We have to check three things:
@@ -33,6 +35,7 @@
                 var PacManLeft = PacManStorage.getItem("PacManLeft");
                 var PacManTop  = PacManStorage.getItem("PacManTop");
                 var keyname    = PacManStorage.getItem("keyname");
+                var Direction  = PacManStorage.getItem("Direction");
 
                 if (element){
 
@@ -44,6 +47,26 @@
                     allowed_directions.includes(keyname)){
 
                         return true;
+
+                    }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
+
+                        if ((Direction == "Right") && (keyname == "ArrowLeft")){
+                            
+                            return true;
+                            
+                        }else if ((Direction == "Left") && (keyname == "ArrowRight")){
+                            
+                            return true;
+                            
+                        }else if ((Direction == "Up") && (keyname == "ArrowDown")){
+                            
+                            return true;
+                            
+                        }else if ((Direction == "Down") && (keyname == "ArrowUp")){
+                            
+                            return true;
+                            
+                        }
 
                     }
 
@@ -155,6 +178,7 @@
                     // Are these the start coordinates?
                     var PacManLeft = PacManStorage.getItem("PacManLeft");
                     var PacManTop  = PacManStorage.getItem("PacManTop");
+                    var Direction  = PacManStorage.getItem("Direction");
 
                     // document.getElementById("image").style.backgroundPosition =
                     // `-${position}px 0px`;
@@ -162,25 +186,11 @@
 
                     /*
                      *
-                     * Set Direction for the Remaining Logic
+                     * Set of Direction
                      *
                      */
 
                     var keyname = PacManStorage.getItem("keyname");
-
-                //    if((keyname == "ArowRight") && ((change_of_direction[0][0][1] == PacManTop) && (change_of_direction[0][1][1] == r))) {
-
-                //     PacManStorage.setItem("Direction", "Right")
-
-                //    }
-
-                    // const stop = change_of_direction.prototype.some() 
-                    // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
-
-                    // if ( ... && change-of-direction.some( function `r` ? ) )
-                    // read https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
-
-                    // parseFloat is needed else includes() does not work (apparently thingking PacManTop is a string)
 
                     if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
                         
@@ -200,9 +210,14 @@
                         
                     }else if(keyname == " "){
 
-                        PacManStorage.setItem("Direction", "Break");
+                        // PacManStorage.setItem("Previous_Direction", Direction);                        
+                        // PacManStorage.setItem("Direction", "Break");
 
                     }
+
+                    // Publish the current direction
+
+                    document.getElementById("Direction").innerHTML = PacManStorage.getItem("Direction");
 
                     /*
                      *
@@ -492,7 +507,7 @@
             
         </div>
         <div style="height: 275px;"></div>
-        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> </div>
+        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> Direction: <span id="Direction"></span> </div>
         <button id="button_auto_return" onclick=ToggleAutoReturn()>Auto Return ON</button>
         <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
         

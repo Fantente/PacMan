@@ -44,49 +44,58 @@ https://www.w3schools.com
 Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
+## 5 June
 
-## 17 April
+NEXT
 
-* Trying to define the corridor directions in the crossing directions array `in progress`
+* Begin w/ characters! :) Fun! 
+  * https://www.classicgaming.cc/classics/pac-man/characters 
+
+Done
+
+* We made it possible to change direction between the crossings `done`
+
+Continue with the simpification of the definition of the corridors and crossings
+
   * We can derive the corridors from the corssings! `Kian Martin's Idea` `very good`
-    * We have to check if we are between two corssing, and the movement bretween these two crossings is allowed.
+    * We have to check if we are between two corssings, and the movement bretween these two crossings is allowed.
 
 ```
 A       B    C   D     E     F
-+-------+----+   +-----+-----+
-|       |    |   |     |     |
++--(<----+----+   +-----+-----+
+|        |    |   |     |     |
 
-A   d,r
-B l,d,r
-C l,d
-
-D  ,d,r
-
-CHANGE OF DIRECTION
-
-A-B ? if A and B are direct neighbours (there is no other crossing between them) if A is left from B and A has r and B has l then we can do l/r here
-
-How to find neghbours? Auto-Detect. Good when the labyrinths are complex or change https://stackoverflow.com/questions/652106/finding-neighbours-in-a-two-dimensional-array 
-
-In our case it is simple, so we might encode the neighbours in the array?
-
-Or we look for the closest number in both directions? `seems to be good`
-
-And we search only in the direction of the corridor. Eg. if we move to the right, we are in a l-r corridor.
-
-C-D It should not be possible to land there at all. We can do a check for this w/ a PROGRAM ERROR warning :)
-
-A-E This check should be excluded, we can only check between neighbours.
-
-AUTO-MOTION
-
-If I am on a crossing and the crossing does not allow me to continue in the same direction, I must stop.
+A x,y   ,d,r
+B x,y  l,d,r
+C x,y  l,d
+D x,y   ,d,r
 
 ``` 
 
+* At every point, which directions are allowed?
+  * There are two type of points
+    * Between crossing
+      * There is no definition for these, it must be extracted from the nearby corssings.
+        * Between which two crossings are we?
+          * How to find neghbours? Auto-Detect. Good when the labyrinths are complex or change https://stackoverflow.com/questions/652106/finding-neighbours-in-a-two-dimensional-array 
+          * Or we look for the closest number in both directions? `seems to be good` 
+          * And we search only in the direction of the corridor. Eg. if we move to the right, we are in a l-r corridor.
+          * C-D It should not be possible to land there at all. We can do a check for this w/ a PROGRAM ERROR warning :)
+          * A-E This check should be excluded, we can only check between neighbours.
+        * Are we l/r or u/d.
+    * At crossings
+      * Simply read the definition
+      * AUTO-MOTION
+        * If I am on a crossing and the crossing does not allow me to continue in the same direction, I must stop.
 
+Homework
 
-* Fixing 
+* Define some more crossings 
+* Sounds
+  * http://soundfxcenter.com/sound_effect/search.php?sfx=Pacman `km to implement this in the beginning as homework`
+  * https://www.classicgaming.cc/classics/pac-man/sounds 
+  * https://www.findsounds.com/ISAPI/search.dll?keywords=pacman+pac+man
+
 ### 10 April
 
 * Kian has turned the r,l,d,u to ArrowRight,ArrowLeft,ArrowDown,ArrowUp `good`
