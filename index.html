@@ -5,8 +5,13 @@
         </title>
         <script>
 
-            OpeningSound = function () {
-                var OpeningSound = new Audio("Opening.mp3");
+            // OpeningSound = function () {
+            //     var OpeningSound = new Audio("Opening.mp3");
+            //     audio.play(); 
+            // }
+
+            function OpeningSound() {
+                var audio = new Audio("Opening.mp3");
                 audio.play(); 
             }
 
@@ -508,7 +513,7 @@
         </style>
     </head>
 
-    <body onload="animateScript();">
+    <body onload="OpeningSound(); animateScript(); ">
         
         <!--
         PacMan Right #1
