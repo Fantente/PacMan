@@ -5,6 +5,11 @@
         </title>
         <script>
 
+            OpeningSound = function () {
+                var OpeningSound = new Audio("Opening.mp3");
+                audio.play(); 
+            }
+
             var tID; //we will use this variable to clear the setInterval()
 
             function stopAnimate() {
@@ -129,28 +134,42 @@
                      * 
                      */
                     const change_of_direction = [
-                                                    [  [  5,  4] , ["ArrowDown","ArrowRight"                      ]  ],      
-                                                    [  [ 45,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
-                                                    [  [ 93,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
-                                                    [  [117,  4] , ["ArrowDown","ArrowRight"                      ]  ],
-                                                    [  [165,  4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
-                                                    [  [205,  4] , ["ArrowDown",             "ArrowLeft"          ]  ],
-                                                    [  [  5, 36] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
-                                                    [  [ 45, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
-                                                    [  [ 70, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
-                                                    [  [ 93, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
-                                                    [  [117, 36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
-                                                    [  [142, 36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
-                                                    [  [165, 36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
-                                                    [  [205, 36] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
-                                                    [  [  5, 60] , [            "ArrowRight",            "ArrowUp"]  ],
-                                                    [  [ 45, 60] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
-                                                    [  [ 70, 60] , [            "ArrowRight",            "ArrowUp"]  ],
-                                                    [  [ 93, 60] , ["ArrowDown",             "ArrowLeft"          ]  ],
-                                                    [  [117, 60] , ["ArrowDown","ArrowRight"                      ]  ],
-                                                    [  [142, 60] , [                         "ArrowLeft","ArrowUp"]  ],
-                                                    [  [165, 60] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
-                                                    [  [205, 60] , [                         "ArrowLeft","ArrowUp"]  ]
+                                                    [  [  5,   4] , ["ArrowDown","ArrowRight"                      ]  ],      
+                                                    [  [ 45,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [ 93,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117,   4] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [165,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [205,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [  5,  36] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 45,  36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70,  36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [ 93,  36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [117,  36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [142,  36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [165,  36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [205,  36] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [  5,  60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 45,  60] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70,  60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 93,  60] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117,  60] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [142,  60] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                    [  [165,  60] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [205,  60] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                    [  [  5, 157] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [ 45, 157] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 93, 157] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117, 157] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [165, 157] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [205, 157] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [  5, 180] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 21, 180] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [ 45, 180] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 93, 180] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [117, 180] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [165, 180] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [189, 180] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [205, 180] , [                         "ArrowLeft","ArrowUp"]  ],
                                                 ];
 
                 /*
