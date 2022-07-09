@@ -53,7 +53,24 @@ Homework From Last Time
   * http://soundfxcenter.com/sound_effect/search.php?sfx=Pacman `km to implement this in the beginning as homework`
   * https://www.classicgaming.cc/classics/pac-man/sounds 
   * https://www.findsounds.com/ISAPI/search.dll?keywords=pacman+pac+man
-  
+
+Learned Today
+
+* https://github.com/postgres
+  * a lot of comments
+  * less than 5 lines of code per block
+  * separation of control structure from functions
+
+Next Homework
+
+* Make PacMan begin on the empty place in the bottom of the scren `km`
+* Test and complete all crossings `km`
+* Try to think of a solution how not to continue through walls when the direction continues `km`
+
+Next Time
+
+* begin separating the logic from the functions
+
 ## 5 June
 
 NEXT

@@ -93,7 +93,7 @@
              * This is our PacMan Engine
              *
              */
-            function animateScript() {
+            function Game() {
 
                 /**
                  * 
@@ -187,263 +187,282 @@
 
                 /*
                  *
+                 * Initial Status
+                 * 
+                 */
+                var gameStatus = "start";
+
+                /*
+                 *
                  * This is the global cycle of the game
                  *
                  */
                 tID = setInterval(() => {
 
-                    /*
-                     *
-                     * Update the variables that might have changed below
-                     *
-                     */
-                    var AutoReturn = PacManStorage.getItem("AutoReturn");
+                    // TODO
+                    // This did not work for waiting, we need another way.
+                    if (gameStatus=="start"){
 
-                    // Are these the start coordinates?
-                    var PacManLeft = PacManStorage.getItem("PacManLeft");
-                    var PacManTop  = PacManStorage.getItem("PacManTop");
-                    var Direction  = PacManStorage.getItem("Direction");
+                        OpeningSound(); 
 
-                    // document.getElementById("image").style.backgroundPosition =
-                    // `-${position}px 0px`;
-                    // We use the ES6 template literal to insert the variable "position".
+                        gameStatus="game";
 
-                    /*
-                     *
-                     * Set of Direction
-                     *
-                     */
+                    }else if(gameStatus=="game"){
+ 
+                        /*
+                        *
+                        * Update the variables that might have changed below
+                        *
+                        */
+                        var AutoReturn = PacManStorage.getItem("AutoReturn");
 
-                    var keyname = PacManStorage.getItem("keyname");
+                        // Are these the start coordinates?
+                        var PacManLeft = PacManStorage.getItem("PacManLeft");
+                        var PacManTop  = PacManStorage.getItem("PacManTop");
+                        var Direction  = PacManStorage.getItem("Direction");
 
-                    if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
-                        
-                        PacManStorage.setItem("Direction", "Right");
-                    
-                    }else if((keyname == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
-                        
-                        PacManStorage.setItem("Direction", "Left");
+                        // document.getElementById("image").style.backgroundPosition =
+                        // `-${position}px 0px`;
+                        // We use the ES6 template literal to insert the variable "position".
 
-                    }else if((keyname == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
+                        /*
+                        *
+                        * Set of Direction
+                        *
+                        */
 
-                        PacManStorage.setItem("Direction", "Down");
-                        
-                    }else if((keyname == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
+                        var keyname = PacManStorage.getItem("keyname");
 
-                        PacManStorage.setItem("Direction", "Up");
-                        
-                    }else if(keyname == " "){
-
-                        // PacManStorage.setItem("Previous_Direction", Direction);                        
-                        // PacManStorage.setItem("Direction", "Break");
-
-                    }
-
-                    // Publish the current direction
-
-                    document.getElementById("Direction").innerHTML = PacManStorage.getItem("Direction");
-
-                    /*
-                     *
-                     * Motion Calculator
-                     * 
-                     * AutoReturn is implemented here.
-                     * 
-                     */
-
-                    if(PacManStorage.getItem("Direction") == "Right"){
-                        
-                        if(PacManLeft < 205){
-
-                            var PacManLeft = PacManStorage.getItem("PacManLeft");
-                            var PacManStep = PacManStorage.getItem("Step");
-                    
-                            PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
-                    
-                            PacManStorage.setItem("PacManLeft", PacManLeft);
-
-                        }else {
-
-                            if(PacManTop == 108){
+                        if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
                             
-                                PacManStorage.setItem("PacManLeft", "-25")
-                                PacManStorage.setItem("keyname", "ArrowRight")
-
-                            }else if(AutoReturn == "ON"){
-
-                                PacManStorage.setItem("keyname", "ArrowLeft")
-
-                            }
-
-                        }
-
-                    }else if(PacManStorage.getItem("Direction") == "Left"){
+                            PacManStorage.setItem("Direction", "Right");
                         
-                        if(PacManLeft > 5){
-
-                            var PacManLeft = PacManStorage.getItem("PacManLeft");
-                            var PacManStep = PacManStorage.getItem("Step");
-                    
-                            PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
-                    
-                            PacManStorage.setItem("PacManLeft", PacManLeft);
-
-                        }else{
-
-                            if(PacManTop == 108){
+                        }else if((keyname == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
                             
-                                PacManStorage.setItem("PacManLeft", "235")
-                                PacManStorage.setItem("keyname", "ArrowLeft")
+                            PacManStorage.setItem("Direction", "Left");
 
-                            }else if(AutoReturn == "ON"){
+                        }else if((keyname == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
 
-                                PacManStorage.setItem("keyname", "ArrowRight")
+                            PacManStorage.setItem("Direction", "Down");
+                            
+                        }else if((keyname == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
 
-                            }
-                   
-                        }
+                            PacManStorage.setItem("Direction", "Up");
+                            
+                        }else if(keyname == " "){
 
-                    }else if(PacManStorage.getItem("Direction") == "Up"){
-
-                        if(PacManTop > 4){
-
-                            var PacManTop = PacManStorage.getItem("PacManTop");
-                            var PacManStep = PacManStorage.getItem("Step");
-                    
-                            PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
-                    
-                            PacManStorage.setItem("PacManTop", PacManTop);
-
-                        }else if(AutoReturn == "ON"){
-
-                            PacManStorage.setItem("keyname", "ArrowDown")
+                            // PacManStorage.setItem("Previous_Direction", Direction);                        
+                            // PacManStorage.setItem("Direction", "Break");
 
                         }
 
-                    }else if(PacManStorage.getItem("Direction") == "Down"){
+                        // Publish the current direction
+
+                        document.getElementById("Direction").innerHTML = PacManStorage.getItem("Direction");
+
+                        /*
+                        *
+                        * Motion Calculator
+                        * 
+                        * AutoReturn is implemented here.
+                        * 
+                        */
+
+                        if(PacManStorage.getItem("Direction") == "Right"){
+                            
+                            if(PacManLeft < 205){
+
+                                var PacManLeft = PacManStorage.getItem("PacManLeft");
+                                var PacManStep = PacManStorage.getItem("Step");
                         
-                        if(PacManTop < 228){
-
-                            var PacManTop = PacManStorage.getItem("PacManTop");
-                            var PacManStep = PacManStorage.getItem("Step");
-                    
-                            PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
-                    
-                            PacManStorage.setItem("PacManTop", PacManTop);
-
-                        }else if(AutoReturn == "ON"){
-
-                            PacManStorage.setItem("keyname", "ArrowUp")
-
-                        }
-                    
-                    }else if(PacManStorage.getItem("Direction") == "Break"){
+                                PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
                         
-                        // TODO
-                        // Break must stop and restart in the same direction on second press.
-                        // Both do not work!
-                        // Perhaps because direction can only be changed on a corssing!
-                        // Or not?
+                                PacManStorage.setItem("PacManLeft", PacManLeft);
 
-                    }
+                            }else {
 
-                    /*
-                     *
-                     * Mouth Animation
-                     *
-                     */
-
-                    var cosDelay = 80 //controls the time between switching the costumes
-
-                    // HOMEWORK
-                    // Sometimes works, sometimes does not :)                                   -not really makes no difference
-                    /*if(((PacManDirection = "Right" || "Left") && (PacManLeft % 2 == 0)) ||
-                      ((PacManDirection = "Up" || "Down") && (PacManTop % 2 == 0)))
-                    */  
-
-                        if(costume == 1){
-                    
-                            // var PacManLeft = PacManStorage.getItem("Left");
-
-                            if(PacManStorage.getItem("Direction") == "Right"){
+                                if(PacManTop == 108){
                                 
-                                document.getElementById("packman").style =
+                                    PacManStorage.setItem("PacManLeft", "-25")
+                                    PacManStorage.setItem("keyname", "ArrowRight")
 
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+                                }else if(AutoReturn == "ON"){
 
-                            }else if(PacManStorage.getItem("Direction") == "Left"){
+                                    PacManStorage.setItem("keyname", "ArrowLeft")
 
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
-
-                            }else if(PacManStorage.getItem("Direction") == "Up"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
-
-                            }else if(PacManStorage.getItem("Direction") == "Down"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
+                                }
 
                             }
 
-                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+                        }else if(PacManStorage.getItem("Direction") == "Left"){
                             
-                            setTimeout(costumeDelay, cosDelay)
+                            if(PacManLeft > 5){
 
-                            function costumeDelay() {
-
-                                costume = 2;
-                            
-                            }
-
-                        }else{
-
-                            // var PacManLeft = PacManStorage.getItem("Left");
-
-                            if(PacManStorage.getItem("Direction") == "Right"){
-
-                                document.getElementById("packman").style =
+                                var PacManLeft = PacManStorage.getItem("PacManLeft");
+                                var PacManStep = PacManStorage.getItem("Step");
                         
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
+                                PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
+                        
+                                PacManStorage.setItem("PacManLeft", PacManLeft);
 
-                            }else if(PacManStorage.getItem("Direction") == "Left"){
+                            }else{
 
-                                document.getElementById("packman").style =
+                                if(PacManTop == 108){
+                                
+                                    PacManStorage.setItem("PacManLeft", "235")
+                                    PacManStorage.setItem("keyname", "ArrowLeft")
 
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+                                }else if(AutoReturn == "ON"){
 
-                            }else if(PacManStorage.getItem("Direction") == "Up"){
+                                    PacManStorage.setItem("keyname", "ArrowRight")
 
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
-
-                            }else if(PacManStorage.getItem("Direction") == "Down"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
-                            }
-
-                            setTimeout(costumeDelay, cosDelay)
-
-                            function costumeDelay() {
-
-                                costume = 1;
-                            
-                            }
-                        }
+                                }
                     
-                    document.getElementById("outputX").innerHTML = PacManLeft;
-                    document.getElementById("outputY").innerHTML = PacManTop;
+                            }
+
+                        }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                            if(PacManTop > 4){
+
+                                var PacManTop = PacManStorage.getItem("PacManTop");
+                                var PacManStep = PacManStorage.getItem("Step");
+                        
+                                PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
+                        
+                                PacManStorage.setItem("PacManTop", PacManTop);
+
+                            }else if(AutoReturn == "ON"){
+
+                                PacManStorage.setItem("keyname", "ArrowDown")
+
+                            }
+
+                        }else if(PacManStorage.getItem("Direction") == "Down"){
+                            
+                            if(PacManTop < 228){
+
+                                var PacManTop = PacManStorage.getItem("PacManTop");
+                                var PacManStep = PacManStorage.getItem("Step");
+                        
+                                PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
+                        
+                                PacManStorage.setItem("PacManTop", PacManTop);
+
+                            }else if(AutoReturn == "ON"){
+
+                                PacManStorage.setItem("keyname", "ArrowUp")
+
+                            }
+                        
+                        }else if(PacManStorage.getItem("Direction") == "Break"){
+                            
+                            // TODO
+                            // Break must stop and restart in the same direction on second press.
+                            // Both do not work!
+                            // Perhaps because direction can only be changed on a corssing!
+                            // Or not?
+
+                        }
+
+                        /*
+                        *
+                        * Mouth Animation
+                        *
+                        */
+
+                        var cosDelay = 80 //controls the time between switching the costumes
+
+                        // HOMEWORK
+                        // Sometimes works, sometimes does not :)                                   -not really makes no difference
+                        /*if(((PacManDirection = "Right" || "Left") && (PacManLeft % 2 == 0)) ||
+                        ((PacManDirection = "Up" || "Down") && (PacManTop % 2 == 0)))
+                        */  
+
+                            if(costume == 1){
+                        
+                                // var PacManLeft = PacManStorage.getItem("Left");
+
+                                if(PacManStorage.getItem("Direction") == "Right"){
+                                    
+                                    document.getElementById("packman").style =
+
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+
+                                }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                                    document.getElementById("packman").style =
+
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
+
+                                }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                                    document.getElementById("packman").style =
+
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
+
+                                }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                                    document.getElementById("packman").style =
+
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
+
+                                }
+
+                                //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+                                
+                                setTimeout(costumeDelay, cosDelay)
+
+                                function costumeDelay() {
+
+                                    costume = 2;
+                                
+                                }
+
+                            }else{
+
+                                // var PacManLeft = PacManStorage.getItem("Left");
+
+                                if(PacManStorage.getItem("Direction") == "Right"){
+
+                                    document.getElementById("packman").style =
+                            
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
+
+                                }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                                    document.getElementById("packman").style =
+
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+
+                                }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                                    document.getElementById("packman").style =
+
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
+
+                                }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                                    document.getElementById("packman").style =
+
+                                        `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
+                                }
+
+                                setTimeout(costumeDelay, cosDelay)
+
+                                function costumeDelay() {
+
+                                    costume = 1;
+                                
+                                }
+                            }
+                        
+                        document.getElementById("outputX").innerHTML = PacManLeft;
+                        document.getElementById("outputY").innerHTML = PacManTop;
+
+                    }
 
                 }, interval); //end of setInterval
-            } //end of function animateScript()
+            } //end of function Game()
             
             /*
              *
@@ -513,7 +532,7 @@
         </style>
     </head>
 
-    <body onload="OpeningSound(); animateScript(); ">
+    <body onload="Game(); ">
         
         <!--
         PacMan Right #1
