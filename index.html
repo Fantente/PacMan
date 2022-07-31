@@ -62,6 +62,7 @@
                         }else{
 
                             return false;
+                            alert(abc)
 
                         }
 
@@ -121,7 +122,7 @@
                 PacManStorage = window.localStorage;
 
                 var   costume  = 1;
-                const interval = 500; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
+                const interval = 50; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
 
                 /*
                  *
@@ -228,6 +229,8 @@
                 var AutoReturn = "ON";
                 PacManStorage.setItem("AutoReturn", AutoReturn);
 
+                var BreakCounter = 0
+
                 /*
                  *
                  * This is the global cycle of the game
@@ -276,9 +279,27 @@
                         PacManStorage.setItem("Direction", "Up");
 
                     }else if(keyname == " "){
-
+                        
                         // PacManStorage.setItem("Previous_Direction", Direction);
                         // PacManStorage.setItem("Direction", "Break");
+
+                        if(BreakCounter == 0){
+                            
+                            PacManStorage.setItem("keyname","Paused")
+
+                            PacManStorage.setItem("Direction","Break")
+
+                            BreakCounter = 1
+                        }
+
+                        else{
+
+                            PacManStorage.setItem("Direction",PreviousDirection)
+
+                            PacManStorage.setItem("keyname","Arrow" + "Direction")
+
+                            BreakCounter = 0
+                        }
 
                     }
 
@@ -294,6 +315,12 @@
                      *
                      */
 
+                    if(PacManStorage.getItem("Direction") != "Break"){
+                            
+                        PreviousDirection = PacManStorage.getItem("Direction")
+    
+                    }
+                        
                     if(PacManStorage.getItem("Direction") == "Right"){
 
                         if(PacManLeft < 205){
