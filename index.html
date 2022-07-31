@@ -7,12 +7,12 @@
 
             // OpeningSound = function () {
             //     var OpeningSound = new Audio("Opening.mp3");
-            //     audio.play(); 
+            //     audio.play();
             // }
 
             function OpeningSound() {
                 var audio = new Audio("Opening.mp3");
-                audio.play(); 
+                audio.play();
             }
 
             var tID; //we will use this variable to clear the setInterval()
@@ -21,7 +21,7 @@
 
                 // alert(a);
                 clearInterval(tID);
-            
+
             } //end of stopAnimate()
 
             function change_of_direction_is_allowed(element){
@@ -31,17 +31,17 @@
                 /*
                  *
                  * We have to check three things:
-                 * 
+                 *
                  * 1. Are we on the right x
-                 * 
+                 *
                  * 2. Are we on the right y
-                 * 
+                 *
                  * 3. Is the chosen direction allowed
-                 * 
+                 *
                  * If all these are OK, then we return true and allow the change of direction.
                  *
                  */
-                
+
                 var PacManLeft = PacManStorage.getItem("PacManLeft");
                 var PacManTop  = PacManStorage.getItem("PacManTop");
                 var keyname    = PacManStorage.getItem("keyname");
@@ -53,29 +53,36 @@
                     var allowed_directions = element[1];
 
                     if ((element[0][0] == PacManLeft) &&
-                    (element[0][1] == PacManTop)  &&
-                    allowed_directions.includes(keyname)){
+                        (element[0][1] == PacManTop)){
 
-                        return true;
+                        if (allowed_directions.includes(keyname)){
+
+                            return true;
+
+                        }else{
+
+                            return false;
+
+                        }
 
                     }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
 
                         if ((Direction == "Right") && (keyname == "ArrowLeft")){
-                            
+
                             return true;
-                            
+
                         }else if ((Direction == "Left") && (keyname == "ArrowRight")){
-                            
+
                             return true;
-                            
+
                         }else if ((Direction == "Up") && (keyname == "ArrowDown")){
-                            
+
                             return true;
-                            
+
                         }else if ((Direction == "Down") && (keyname == "ArrowUp")){
-                            
+
                             return true;
-                            
+
                         }
 
                     }
@@ -96,9 +103,9 @@
             function animateScript() {
 
                 /**
-                 * 
+                 *
                  * Activate the Labyrinth
-                 * 
+                 *
                  */
                 document.getElementById("labyrinth").style =
 
@@ -107,39 +114,40 @@
                 /*
                  *
                  * Why in localStorage?
-                 * 
+                 *
                  *     Perhaps because it was difficult to address the PacMan position via CSS.
-                 * 
+                 *
                  */
                 PacManStorage = window.localStorage;
 
                 var   costume  = 1;
-                const interval = 50; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
-                
+                const interval = 500; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
+
                 /*
                  *
                  * Initial Coordinates
-                 * 
+                 *
                  */
                 PacManStorage.setItem("PacManLeft", "105");
                 PacManStorage.setItem("PacManTop",  "180");
+                // If the step is not 1 some logic may stop working as control points may be skipped.
                 PacManStorage.setItem("Step", "1");
                 PacManStorage.setItem("Direction", "Right");
 
                     /*
                      *
                      * change_of_direction [[x,y],[allowed_directions]]
-                     * 
+                     *
                      * TODO
-                     * 
+                     *
                      *     These are point definitions.
-                     * 
+                     *
                      *     We need also line definition which allows up/down or left/right along the full length of a vertical or horizontal corridor.
                      *
-                     * 
+                     *
                      */
                     const change_of_direction = [
-                                                    [  [  5,   4] , ["ArrowDown","ArrowRight"                      ]  ],      
+                                                    [  [  5,   4] , ["ArrowDown","ArrowRight"                      ]  ],
                                                     [  [ 45,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
                                                     [  [ 93,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
                                                     [  [117,   4] , ["ArrowDown","ArrowRight"                      ]  ],
@@ -215,7 +223,7 @@
                 /*
                  *
                  * Initial AutoReturn
-                 * 
+                 *
                  */
                 var AutoReturn = "ON";
                 PacManStorage.setItem("AutoReturn", AutoReturn);
@@ -252,24 +260,24 @@
                     var keyname = PacManStorage.getItem("keyname");
 
                     if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
-                        
+
                         PacManStorage.setItem("Direction", "Right");
-                    
+
                     }else if((keyname == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
-                        
+
                         PacManStorage.setItem("Direction", "Left");
 
                     }else if((keyname == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
 
                         PacManStorage.setItem("Direction", "Down");
-                        
+
                     }else if((keyname == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
 
                         PacManStorage.setItem("Direction", "Up");
-                        
+
                     }else if(keyname == " "){
 
-                        // PacManStorage.setItem("Previous_Direction", Direction);                        
+                        // PacManStorage.setItem("Previous_Direction", Direction);
                         // PacManStorage.setItem("Direction", "Break");
 
                     }
@@ -281,26 +289,26 @@
                     /*
                      *
                      * Motion Calculator
-                     * 
+                     *
                      * AutoReturn is implemented here.
-                     * 
+                     *
                      */
 
                     if(PacManStorage.getItem("Direction") == "Right"){
-                        
+
                         if(PacManLeft < 205){
 
                             var PacManLeft = PacManStorage.getItem("PacManLeft");
                             var PacManStep = PacManStorage.getItem("Step");
-                    
+
                             PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
-                    
+
                             PacManStorage.setItem("PacManLeft", PacManLeft);
 
                         }else {
 
                             if(PacManTop == 108){
-                            
+
                                 PacManStorage.setItem("PacManLeft", "-25")
                                 PacManStorage.setItem("keyname", "ArrowRight")
 
@@ -313,20 +321,20 @@
                         }
 
                     }else if(PacManStorage.getItem("Direction") == "Left"){
-                        
+
                         if(PacManLeft > 5){
 
                             var PacManLeft = PacManStorage.getItem("PacManLeft");
                             var PacManStep = PacManStorage.getItem("Step");
-                    
+
                             PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
-                    
+
                             PacManStorage.setItem("PacManLeft", PacManLeft);
 
                         }else{
 
                             if(PacManTop == 108){
-                            
+
                                 PacManStorage.setItem("PacManLeft", "235")
                                 PacManStorage.setItem("keyname", "ArrowLeft")
 
@@ -335,7 +343,7 @@
                                 PacManStorage.setItem("keyname", "ArrowRight")
 
                             }
-                   
+
                         }
 
                     }else if(PacManStorage.getItem("Direction") == "Up"){
@@ -344,9 +352,9 @@
 
                             var PacManTop = PacManStorage.getItem("PacManTop");
                             var PacManStep = PacManStorage.getItem("Step");
-                    
+
                             PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
-                    
+
                             PacManStorage.setItem("PacManTop", PacManTop);
 
                         }else if(AutoReturn == "ON"){
@@ -356,14 +364,14 @@
                         }
 
                     }else if(PacManStorage.getItem("Direction") == "Down"){
-                        
+
                         if(PacManTop < 228){
 
                             var PacManTop = PacManStorage.getItem("PacManTop");
                             var PacManStep = PacManStorage.getItem("Step");
-                    
+
                             PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
-                    
+
                             PacManStorage.setItem("PacManTop", PacManTop);
 
                         }else if(AutoReturn == "ON"){
@@ -371,9 +379,9 @@
                             PacManStorage.setItem("keyname", "ArrowUp")
 
                         }
-                    
+
                     }else if(PacManStorage.getItem("Direction") == "Break"){
-                        
+
                         // TODO
                         // Break must stop and restart in the same direction on second press.
                         // Both do not work!
@@ -394,14 +402,14 @@
                     // Sometimes works, sometimes does not :)                                   -not really makes no difference
                     /*if(((PacManDirection = "Right" || "Left") && (PacManLeft % 2 == 0)) ||
                       ((PacManDirection = "Up" || "Down") && (PacManTop % 2 == 0)))
-                    */  
+                    */
 
                         if(costume == 1){
-                    
+
                             // var PacManLeft = PacManStorage.getItem("Left");
 
                             if(PacManStorage.getItem("Direction") == "Right"){
-                                
+
                                 document.getElementById("packman").style =
 
                                     `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
@@ -427,13 +435,13 @@
                             }
 
                             //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
-                            
+
                             setTimeout(costumeDelay, cosDelay)
 
                             function costumeDelay() {
 
                                 costume = 2;
-                            
+
                             }
 
                         }else{
@@ -443,7 +451,7 @@
                             if(PacManStorage.getItem("Direction") == "Right"){
 
                                 document.getElementById("packman").style =
-                        
+
                                     `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
 
                             }else if(PacManStorage.getItem("Direction") == "Left"){
@@ -470,16 +478,16 @@
                             function costumeDelay() {
 
                                 costume = 1;
-                            
+
                             }
                         }
-                    
+
                     document.getElementById("outputX").innerHTML = PacManLeft;
                     document.getElementById("outputY").innerHTML = PacManTop;
 
                 }, interval); //end of setInterval
             } //end of function animateScript()
-            
+
             /*
              *
              * Toggle Button Auto-Return
@@ -497,7 +505,7 @@
                     document.getElementById("button_auto_return").innerHTML = "Auto Return OFF";
 
                 }else{
-                
+
                     PacManStorage.setItem("AutoReturn", "ON");
 
                     document.getElementById("button_auto_return").innerHTML = "Auto Return ON";
@@ -506,18 +514,18 @@
 
             };
 
-            /* 
-             * 
+            /*
+             *
              * Keyboard
              *
-             * 
-             *   Introduction to Keyboard Events in JavaScript
-             *  
-             *     https://www.section.io/engineering-education/keyboard-events-in-javascript/
-             * 
-             *     https://www.w3schools.com/jsref/met_element_addeventlistener.asp 
              *
-             */ 
+             *   Introduction to Keyboard Events in JavaScript
+             *
+             *     https://www.section.io/engineering-education/keyboard-events-in-javascript/
+             *
+             *     https://www.w3schools.com/jsref/met_element_addeventlistener.asp
+             *
+             */
 
             // Add event listener on keydown
             document.addEventListener('keydown', (event) => {
@@ -530,18 +538,18 @@
                 document.getElementById("keyname").innerHTML = PacManStorage.getItem("keyname");
 
                 // var keycode = event.code;
-                
+
             }, false);
-           
+
         </script>
-            
+
         <style>
             body {background-color: black;}
             /*
              *
              * Positioning of Elements in HTML
              *
-             * https://www.mediaevent.de/javascript/window-browserfenster.html 
+             * https://www.mediaevent.de/javascript/window-browserfenster.html
              *
              * https://www.w3schools.com/css/css_positioning.asp
              */
@@ -549,7 +557,7 @@
     </head>
 
     <body onload="OpeningSound(); animateScript(); ">
-        
+
         <!--
         PacMan Right #1
         -->
@@ -560,21 +568,21 @@
         <!-- div style="height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px; "></div -->
 
         <div style="position: relative; ">
-        
+
             <div style="position: absolute; top: 0; left: 0; z-index: 10; " id="labyrinth">
             <div style="position: absolute; top: 0; left: 0; z-index: 11; " id="packman"></div>
-            
+
         </div>
         <div style="height: 275px;"></div>
-        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> Direction: <span id="Direction"></span> </div>
+        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> Direction: <span id="Direction"></span> Direction Logic: <span id="Direction_Logic"></span></div>
         <button id="button_auto_return" onclick=ToggleAutoReturn()>Auto Return ON</button>
         <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
-        
+
             <div style="position: absolute; top: 0; left: 0; z-index: 11; background-color: burlywood;"               >asdfafasdfasfas</div>
             <div style="position: absolute;  top: 0; left: 55; z-index: 12; background-color: chartreuse;" >adsf<br>adfads</div>
-        
+
         </div -->
 
     </body>
-  
+
 </html>

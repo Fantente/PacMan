@@ -46,14 +46,26 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
 
 ## 31 July
 
+### Homework From Last Time
+
+* Make PacMan begin on the empty place in the bottom of the scren `done`
+* Test and complete all crossings `done`
+### Ask someone
+
+* How do we avoid overwriting each others changes?
+
+### Today
+
+* Try to think of a solution how not to continue through walls when the direction continues.
+  * We have 1/3 of the solution. We split the logic on the crossing to see if the direction is allowed or not.
+  * Now we have to add logic on two-three more places `homework for km`
+
 ## 9 July
 
-Homework From Last Time
 
-* Define some more crossings `done`
 * Sounds `done`
   * http://soundfxcenter.com/sound_effect/search.php?sfx=Pacman `km to implement this in the beginning as homework`
-  * https://www.classicgaming.cc/classics/pac-man/sounds 
+  * https://www.classicgaming.cc/classics/pac-man/sounds
   * https://www.findsounds.com/ISAPI/search.dll?keywords=pacman+pac+man
 
 Learned Today
@@ -63,12 +75,6 @@ Learned Today
   * less than 5 lines of code per block
   * separation of control structure from functions
 
-Next Homework
-
-* Make PacMan begin on the empty place in the bottom of the scren `km`
-* Test and complete all crossings `km`
-* Try to think of a solution how not to continue through walls when the direction continues `km`
-
 Next Time
 
 * begin separating the logic from the functions
@@ -77,8 +83,8 @@ Next Time
 
 NEXT
 
-* Begin w/ characters! :) Fun! 
-  * https://www.classicgaming.cc/classics/pac-man/characters 
+* Begin w/ characters! :) Fun!
+  * https://www.classicgaming.cc/classics/pac-man/characters
 
 Done
 
@@ -99,15 +105,15 @@ B x,y  l,d,r
 C x,y  l,d
 D x,y   ,d,r
 
-``` 
+```
 
 * At every point, which directions are allowed?
   * There are two type of points
     * Between crossing
       * There is no definition for these, it must be extracted from the nearby corssings.
         * Between which two crossings are we?
-          * How to find neghbours? Auto-Detect. Good when the labyrinths are complex or change https://stackoverflow.com/questions/652106/finding-neighbours-in-a-two-dimensional-array 
-          * Or we look for the closest number in both directions? `seems to be good` 
+          * How to find neghbours? Auto-Detect. Good when the labyrinths are complex or change https://stackoverflow.com/questions/652106/finding-neighbours-in-a-two-dimensional-array
+          * Or we look for the closest number in both directions? `seems to be good`
           * And we search only in the direction of the corridor. Eg. if we move to the right, we are in a l-r corridor.
           * C-D It should not be possible to land there at all. We can do a check for this w/ a PROGRAM ERROR warning :)
           * A-E This check should be excluded, we can only check between neighbours.
@@ -199,9 +205,9 @@ Long Term Homework
   * Mission Zero `above`
   * PacMan
     * Research DO `do this first`
-      * Array, Feld https://de.wikipedia.org/wiki/Feld_(Datentyp) 
+      * Array, Feld https://de.wikipedia.org/wiki/Feld_(Datentyp)
       * Read about array.some
-        * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some 
+        * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/some
     * Think how to make the teleport come from the dark, gradually.
     * Security
       * We must clear the global store on tab close `research`
