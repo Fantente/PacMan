@@ -62,7 +62,10 @@
                         }else{
 
                             return false;
-                            alert(abc)
+
+                            // TODO
+                            // Comment by km
+                            alert(abc);
 
                         }
 
@@ -229,6 +232,8 @@
                 var AutoReturn = "ON";
                 PacManStorage.setItem("AutoReturn", AutoReturn);
 
+                // TODO
+                // Comment by km
                 var BreakCounter = 0
 
                 /*
@@ -279,26 +284,28 @@
                         PacManStorage.setItem("Direction", "Up");
 
                     }else if(keyname == " "){
-                        
+
                         // PacManStorage.setItem("Previous_Direction", Direction);
                         // PacManStorage.setItem("Direction", "Break");
 
+                        // TODO
+                        // Comment by km
                         if(BreakCounter == 0){
-                            
-                            PacManStorage.setItem("keyname","Paused")
 
-                            PacManStorage.setItem("Direction","Break")
+                            PacManStorage.setItem("keyname","Paused");
 
-                            BreakCounter = 1
+                            PacManStorage.setItem("Direction","Break");
+
+                            BreakCounter = 1;
                         }
 
                         else{
 
-                            PacManStorage.setItem("Direction",PreviousDirection)
+                            PacManStorage.setItem("Direction",PreviousDirection);
 
-                            PacManStorage.setItem("keyname","Arrow" + "Direction")
+                            PacManStorage.setItem("keyname","Arrow" + "Direction");
 
-                            BreakCounter = 0
+                            BreakCounter = 0;
                         }
 
                     }
@@ -315,12 +322,14 @@
                      *
                      */
 
+                    // TODO
+                    // Comment by km
                     if(PacManStorage.getItem("Direction") != "Break"){
-                            
+
                         PreviousDirection = PacManStorage.getItem("Direction")
-    
+
                     }
-                        
+
                     if(PacManStorage.getItem("Direction") == "Right"){
 
                         if(PacManLeft < 205){

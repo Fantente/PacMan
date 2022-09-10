@@ -63,6 +63,11 @@ https://www.w3schools.com/jsref/jsref_obj_json.asp
     * We have 1/3 of the solution. We split the logic on the crossing to see if the direction is allowed or not.
     * Now we have to add logic on two-three more places `homework for km`
 
+### Homework
+
+* Solve all TODOs `km`
+* Try to create "stop at a wall" logic `km`
+
 ### 9 July
 
 Learned Today
