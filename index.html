@@ -59,13 +59,13 @@
 
                             return true;
 
-                        }else{
+                        //}else if(AutoReturn == 1 ){
 
-                            return false;
+                        //    return false;
 
-                            // TODO
-                            // Comment by km
-                            alert(abc);
+                        }else {
+
+                            PacManStorage.setItem("Direction","Break");
 
                         }
 
@@ -233,7 +233,7 @@
                 PacManStorage.setItem("AutoReturn", AutoReturn);
 
                 // TODO
-                // Comment by km
+                // Count if PacMan should resume(0) or stop(1) moving
                 var BreakCounter = 0
 
                 /*
@@ -289,7 +289,7 @@
                         // PacManStorage.setItem("Direction", "Break");
 
                         // TODO
-                        // Comment by km
+                        // start and stop PacMan
                         if(BreakCounter == 0){
 
                             PacManStorage.setItem("keyname","Paused");
@@ -323,7 +323,7 @@
                      */
 
                     // TODO
-                    // Comment by km
+                    // saves PacMan´s current diretion
                     if(PacManStorage.getItem("Direction") != "Break"){
 
                         PreviousDirection = PacManStorage.getItem("Direction")
