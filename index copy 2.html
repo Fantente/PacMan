@@ -1,0 +1,890 @@
+<html>
+    <head>
+        <title>
+            PacMan - the yellow ball
+        </title>
+        <script>
+
+            // OpeningSound = function () {
+            //     var OpeningSound = new Audio("Opening.mp3");
+            //     audio.play();
+            // }
+
+            function OpeningSound() {
+                var audio = new Audio("Opening.mp3");
+                audio.play();
+            }
+
+            var tID; //we will use this variable to clear the setInterval()
+
+            function stopAnimate() {
+
+                // alert(a);
+                clearInterval(tID);
+
+            } //end of stopAnimate()
+
+            function change_of_direction_is_allowed(element){
+
+                // AT CROSSINGS
+
+                /*
+                 *
+                 * We have to check three things:
+                 *
+                 * 1. Are we on the right x
+                 *
+                 * 2. Are we on the right y
+                 *
+                 * 3. Is the chosen direction allowed
+                 *
+                 * If all these are OK, then we return true and allow the change of direction.
+                 *
+                 */
+
+                var PacManLeft = PacManStorage.getItem("PacManLeft");
+                var PacManTop  = PacManStorage.getItem("PacManTop");
+                var keyname    = PacManStorage.getItem("keyname");
+                var Direction  = PacManStorage.getItem("Direction");
+
+                if (element){
+
+                    // element[1] contains the allwed directions in which PacMan can turn on this crossing
+                    var allowed_directions = element[1];
+
+                    if ((element[0][0] == PacManLeft) &&
+                        (element[0][1] == PacManTop)){
+
+                        if (allowed_directions.includes(keyname)){
+
+                            return true;
+
+                        //}else if(AutoReturn == 1 ){
+
+                        //    return false;
+
+                        }else {
+
+                            PacManStorage.setItem("Direction","Break");
+
+                        }
+
+                    }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
+
+                        if ((Direction == "Right") && (keyname == "ArrowLeft")){
+
+                            return true;
+
+                        }else if ((Direction == "Left") && (keyname == "ArrowRight")){
+
+                            return true;
+
+                        }else if ((Direction == "Up") && (keyname == "ArrowDown")){
+
+                            return true;
+
+                        }else if ((Direction == "Down") && (keyname == "ArrowUp")){
+
+                            return true;
+
+                        }
+
+                    }
+
+                }else{
+
+                    alert("PROGRAM ERROR: Last time we got this error, the const change_of_direction was missing a , in the middle of the array.");
+
+                }
+
+            }
+
+
+            // Ghost1
+
+            function change_of_direction_is_allowed_G1(element){
+
+                var Ghost1Left  = Ghost1Storage.getItem("Ghost1Left");
+                var Ghost1Top   = Ghost1Storage.getItem("Ghost1Top");
+                var keynameG1   = Ghost1Storage.getItem("keynameG1");
+                var DirectionG1 = Ghost1Storage.getItem("DirectionG1");
+
+                var PacManTop   = PacManStorage.getItem("PacManTop");
+
+                if (element){
+
+                    var allowed_directions = element[1];
+
+                    if ((element[0][0] == Ghost1Left) &&
+                        (element[0][1] == Ghost1Top)){
+
+                        if (allowed_directions.includes(keynameG1)){
+
+                            return true;
+
+                        }else if(Ghost1Top < PacManTop) {
+
+                            Ghost1Storage.setItem("DirectionG1","Top");
+
+                        }else {
+
+                            Ghost1Storage.setItem("DirectionG1","Down");
+
+                        }
+
+                    }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
+
+                        if ((DirectionG1 == "Right") && (keynameG1 == "ArrowLeft")){
+
+                            return true;
+
+                        }else if ((DirectionG1 == "Left") && (keynameG1 == "ArrowRight")){
+
+                            return true;
+
+                        }else if ((DirectionG1 == "Up") && (keynameG1 == "ArrowDown")){
+
+                            return true;
+
+                        }else if ((DirectionG1 == "Down") && (keynameG1 == "ArrowUp")){
+
+                            return true;
+
+                        }
+
+                    }
+
+                }else{
+
+                    alert("PROGRAM ERROR: Last time we got this error, the const change_of_direction was missing a , in the middle of the array.");
+
+                }
+
+            }
+
+            /*
+             *
+             * This is our PacMan Engine
+             *
+             */
+            function animateScript() {
+
+                /**
+                 *
+                 * Activate the Labyrinth
+                 *
+                 */
+                document.getElementById("labyrinth").style =
+
+                   `position: absolute; left: 5; top: 5; height: 248px; width: 225px; background: url(spritesheets/1.png) 0px 0px;`; // Labyrinth w/ Dots
+
+                /*
+                 *
+                 * Why in localStorage?
+                 *
+                 *     Perhaps because it was difficult to address the PacMan position via CSS.
+                 *
+                 */
+                PacManStorage = window.localStorage;
+                Ghost1Storage = window.localStorage;
+
+                var   costume  = 1;
+                const interval = 50; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
+
+                var costumeG1 =1;
+
+                /*
+                 *
+                 * Initial Coordinates
+                 *
+                 */
+                PacManStorage.setItem("PacManLeft", "105");
+                PacManStorage.setItem("PacManTop",  "180");
+                // If the step is not 1 some logic may stop working as control points may be skipped.
+                PacManStorage.setItem("Step", "1");
+                PacManStorage.setItem("Direction", "Right");
+
+                    // Ghost1
+                Ghost1Storage.setItem("Ghost1Left","10");
+                Ghost1Storage.setItem("Ghost1Top","4");
+                Ghost1Storage.setItem("DirectionG1","Right");
+
+                    /*
+                     *
+                     * change_of_direction [[x,y],[allowed_directions]]
+                     *
+                     * TODO
+                     *
+                     *     These are point definitions.
+                     *
+                     *     We need also line definition which allows up/down or left/right along the full length of a vertical or horizontal corridor.
+                     *
+                     *
+                     */
+                    const change_of_direction = [
+                                                    [  [  5,   4] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [ 45,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [ 93,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117,   4] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [165,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [205,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+
+                                                    [  [  5,  36] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 45,  36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70,  36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [ 93,  36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [117,  36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [142,  36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [165,  36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [205,  36] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+
+                                                    [  [  5,  60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 45,  60] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70,  60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 93,  60] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117,  60] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [142,  60] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                    [  [165,  60] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [205,  60] , [                         "ArrowLeft","ArrowUp"]  ],
+
+                                                    [  [ 70,  84] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [142,  84] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+
+                                                    [  [ 45, 108] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70, 108] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [142, 108] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [165, 108] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+
+                                                    [  [ 70, 132] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [142, 132] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+
+                                                    [  [  5, 156] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [ 45, 156] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 70, 156] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 93, 156] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117, 156] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [142, 156] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [165, 156] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [205, 156] , ["ArrowDown",             "ArrowLeft"          ]  ],
+
+                                                    [  [  5, 180] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 21, 180] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [ 45, 180] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 69, 180] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [ 93, 180] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [117, 180] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [141, 180] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                    [  [165, 180] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                    [  [189, 180] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [205, 180] , [                         "ArrowLeft","ArrowUp"]  ],
+
+                                                    [  [  5, 204] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [ 21, 204] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 45, 204] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                    [  [ 69, 204] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 93, 204] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                    [  [117, 204] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                    [  [141, 204] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                    [  [165, 204] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [189, 204] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [205, 204] , ["ArrowDown",             "ArrowLeft"          ]  ],
+
+                                                    [  [  5, 228] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                    [  [ 93, 228] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [117, 228] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [205, 228] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                ];
+
+                /*
+                 *
+                 * Initial AutoReturn
+                 *
+                 */
+                var AutoReturn = "ON";
+                PacManStorage.setItem("AutoReturn", AutoReturn);
+
+                // TODO
+                // Count if PacMan should resume(0) or stop(1) moving
+                var BreakCounter = 0
+
+                /*
+                 *
+                 * This is the global cycle of the game
+                 *
+                 */
+                tID = setInterval(() => {
+
+                    /*
+                     *
+                     * Update the variables that might have changed below
+                     *
+                     */
+                    var AutoReturn = PacManStorage.getItem("AutoReturn");
+
+                    // Are these the start coordinates?
+                    var PacManLeft = PacManStorage.getItem("PacManLeft");
+                    var PacManTop  = PacManStorage.getItem("PacManTop");
+                    var Direction  = PacManStorage.getItem("Direction");
+
+                    // document.getElementById("image").style.backgroundPosition =
+                    // `-${position}px 0px`;
+                    // We use the ES6 template literal to insert the variable "position".
+
+                    /*
+                     *
+                     * Set of Direction
+                     *
+                     */
+
+                    var keyname = PacManStorage.getItem("keyname");
+
+                    if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                        PacManStorage.setItem("Direction", "Right");
+
+                    }else if((keyname == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                        PacManStorage.setItem("Direction", "Left");
+
+                    }else if((keyname == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                        PacManStorage.setItem("Direction", "Down");
+
+                    }else if((keyname == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                        PacManStorage.setItem("Direction", "Up");
+
+                    }else if(keyname == " "){
+
+                        // PacManStorage.setItem("Previous_Direction", Direction);
+                        // PacManStorage.setItem("Direction", "Break");
+
+                        // TODO
+                        // start and stop PacMan
+                        if(BreakCounter == 0){
+
+                            PacManStorage.setItem("keyname","Paused");
+
+                            PacManStorage.setItem("Direction","Break");
+
+                            BreakCounter = 1;
+                        }
+
+                        else{
+
+                            PacManStorage.setItem("Direction",PreviousDirection);
+
+                            PacManStorage.setItem("keyname","Arrow" + "Direction");
+
+                            BreakCounter = 0;
+                        }
+
+                    }
+
+                    // Publish the current direction
+
+                    document.getElementById("Direction").innerHTML = PacManStorage.getItem("Direction");
+
+                    /*
+                     *
+                     * Motion Calculator
+                     *
+                     * AutoReturn is implemented here.
+                     *
+                     */
+
+                    // TODO
+                    // saves PacMan´s current diretion
+                    if(PacManStorage.getItem("Direction") != "Break"){
+
+                        PreviousDirection = PacManStorage.getItem("Direction")
+
+                    }
+
+                    if(PacManStorage.getItem("Direction") == "Right"){
+
+                        if(PacManLeft < 205){
+
+                            var PacManLeft = PacManStorage.getItem("PacManLeft");
+                            var PacManStep = PacManStorage.getItem("Step");
+
+                            PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
+
+                            PacManStorage.setItem("PacManLeft", PacManLeft);
+
+                        }else {
+
+                            if(PacManTop == 108){
+
+                                PacManStorage.setItem("PacManLeft", "-25")
+                                PacManStorage.setItem("keyname", "ArrowRight")
+
+                            }else if(AutoReturn == "ON"){
+
+                                PacManStorage.setItem("keyname", "ArrowLeft")
+
+                            }
+
+                        }
+
+                    }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                        if(PacManLeft > 5){
+
+                            var PacManLeft = PacManStorage.getItem("PacManLeft");
+                            var PacManStep = PacManStorage.getItem("Step");
+
+                            PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
+
+                            PacManStorage.setItem("PacManLeft", PacManLeft);
+
+                        }else{
+
+                            if(PacManTop == 108){
+
+                                PacManStorage.setItem("PacManLeft", "235")
+                                PacManStorage.setItem("keyname", "ArrowLeft")
+
+                            }else if(AutoReturn == "ON"){
+
+                                PacManStorage.setItem("keyname", "ArrowRight")
+
+                            }
+
+                        }
+
+                    }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                        if(PacManTop > 4){
+
+                            var PacManTop = PacManStorage.getItem("PacManTop");
+                            var PacManStep = PacManStorage.getItem("Step");
+
+                            PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
+
+                            PacManStorage.setItem("PacManTop", PacManTop);
+
+                        }else if(AutoReturn == "ON"){
+
+                            PacManStorage.setItem("keyname", "ArrowDown")
+
+                        }
+
+                    }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                        if(PacManTop < 228){
+
+                            var PacManTop = PacManStorage.getItem("PacManTop");
+                            var PacManStep = PacManStorage.getItem("Step");
+
+                            PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
+
+                            PacManStorage.setItem("PacManTop", PacManTop);
+
+                        }else if(AutoReturn == "ON"){
+
+                            PacManStorage.setItem("keyname", "ArrowUp")
+
+                        }
+
+                    }else if(PacManStorage.getItem("Direction") == "Break"){
+
+                        // TODO
+                        // Break must stop and restart in the same direction on second press.
+                        // Both do not work!
+                        // Perhaps because direction can only be changed on a corssing!
+                        // Or not?
+
+                    }
+
+                    /*
+                     *
+                     * Mouth Animation
+                     *
+                     */
+
+                    var cosDelay = 80 //controls the time between switching the costumes
+
+                    // HOMEWORK
+                    // Sometimes works, sometimes does not :)                                   -not really makes no difference
+                    /*if(((PacManDirection = "Right" || "Left") && (PacManLeft % 2 == 0)) ||
+                      ((PacManDirection = "Up" || "Down") && (PacManTop % 2 == 0)))
+                    */
+
+                        if(costume == 1){
+
+                            // var PacManLeft = PacManStorage.getItem("Left");
+
+                            if(PacManStorage.getItem("Direction") == "Right"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
+
+                            }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
+
+                            }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
+
+                            }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
+
+                            }
+
+                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+
+                            setTimeout(costumeDelay, cosDelay)
+
+                            function costumeDelay() {
+
+                                costume = 2;
+
+                            }
+
+                        }else{
+
+                            // var PacManLeft = PacManStorage.getItem("Left");
+
+                            if(PacManStorage.getItem("Direction") == "Right"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
+
+                            }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+
+                            }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
+
+                            }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                                document.getElementById("packman").style =
+
+                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
+                            }
+
+                            setTimeout(costumeDelay, cosDelay)
+
+                            function costumeDelay() {
+
+                                costume = 1;
+
+                            }
+                        }
+
+                    document.getElementById("outputX").innerHTML = PacManLeft;
+                    document.getElementById("outputY").innerHTML = PacManTop;
+
+
+
+
+
+
+
+
+
+
+
+
+                    // Ghost1
+
+                var Ghost1Left  = Ghost1Storage.getItem("Ghost1Left");
+                var Ghost1Top   = Ghost1Storage.getItem("Ghost1Top");
+                var DirectionG1 = Ghost1Storage.getItem("DirectionG1");
+
+                /*
+                *
+                * Set of Direction -Ghost1
+                *
+                */
+
+                var keynameG1 = Ghost1Storage.getItem("keynameG1");
+
+                if(Ghost1Left < PacManLeft){
+
+                    Ghost1Storage.setItem("keynmeG1", "ArrowRight");
+                    keynameG1 = "ArrowRight"
+
+                }else {
+
+                    Ghost1Storage.setItem("keynameG1", "ArrowLeft");
+                    keynameG1 = "ArrowRight"
+
+                }
+
+                if((keynameG1 == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed_G1)){
+
+                    Ghost1Storage.setItem("DirectionG1", "Right");
+
+                }else if((keynameG1 == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed_G1)) {
+
+                    Ghost1Storage.setItem("DirectionG1", "Left");
+
+                }
+
+                // Publish the current direction
+
+                // document.getElementById("DirectionG1").innerHTML = Ghost1Storage.getItem("DirectionG1");
+
+                /*
+                *
+                * Motion Calculator
+                *
+                */
+
+                if(Ghost1Storage.getItem("DirectionG1") == "Right"){
+
+                    if(Ghost1Left > 205  && Ghost1Top == 108){
+
+                        Ghost1Storage.setItem("Ghost1Left", "-25")
+                        Ghost1Storage.setItem("DirectionG1", "Right")
+
+                    } else {
+
+                        var Ghost1Left = Ghost1Storage.getItem("Ghost1Left");
+                        var Ghost1Step = PacManStorage.getItem("Step");
+
+                        Ghost1Left = parseFloat(Ghost1Left) + parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Left", Ghost1Left);
+
+                    }
+
+                }else if(Ghost1Storage.getItem("DirectionG1") == "Left"){
+
+                    if(Ghost1Left < 5  && Ghost1Top == 108){
+
+                        Ghost1Storage.setItem("Ghost1Left", "235")
+                        Ghost1Storage.setItem("DirectionG1", "Left")
+
+                    } else {
+
+                        var Ghost1Left = Ghost1Storage.getItem("Ghost1Left");
+                        var Ghost1Step = PacManStorage.getItem("Step");
+
+                        Ghost1Left = parseFloat(Ghost1Left) - parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Left", Ghost1Left);
+
+                    }
+
+                }else if(Ghost1Storage.getItem("DirectionG1") == "Top"){
+
+                        var Ghost1Top = Ghost1Storage.getItem("Ghost1Top");
+                        var Ghost1Step = PacManStorage.getItem("Step");
+
+                        Ghost1Top = parseFloat(Ghost1Top) + parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Top", Ghost1Top);
+
+                }else if(Ghost1Storage.getItem("DirectionG1") == "Down"){
+
+                        var Ghost1Top = Ghost1Storage.getItem("Ghost1Top");
+                        var Ghost1Step = PacManStorage.getItem("Step");
+
+                        Ghost1Top = parseFloat(Ghost1Top) - parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Top", Ghost1Top);
+
+                }
+
+                /*
+                *
+                * Ghost1 Animation
+                *
+                */
+
+                var cosDelay = 80 //controls the time between switching the costumes
+
+                    if(costumeG1 == 1){
+
+                        if(Ghost1Storage.getItem("DirectionG1") == "Right"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -64px;`; // -Auf_1-Gerade_Rechts
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Left"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -507px -64px;`; // -Auf_1-Gerade_Links
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Up"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -541px -64px;`; // -Auf_1-Senkrecht_Oben
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Down"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -575px -64px;`; // -Auf_1-Senkrecht_Unten
+
+                        }
+
+                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+
+                        setTimeout(costumeDelay, cosDelay)
+
+                        function costumeDelay() {
+
+                            costumeG1 = 2;
+
+                        }
+
+                    }else{
+
+                        if(Ghost1Storage.getItem("DirectionG1") == "Right"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -64px;`; // -Auf_2-Gerade_Recht
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Left"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -490px -64px;`; // -Auf_2-Gerade_Links
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Up"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -524px -64px;`; // -Auf_2-Senkrecht_Oben
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Down"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -558px -64px;`; // -Auf_2-Senkrecht_Unten
+                        }
+
+                        setTimeout(costumeDelay, cosDelay)
+
+                        function costumeDelay() {
+
+                            costumeG1 = 1;
+
+                        }
+                    }
+
+                }, interval); //end of setInterval
+            } //end of function animateScript()
+
+            /*
+             *
+             * Toggle Button Auto-Return
+             *
+             */
+
+            function ToggleAutoReturn() {
+
+                AutoReturn = PacManStorage.getItem("AutoReturn");
+
+                if (AutoReturn == "ON"){
+
+                    PacManStorage.setItem("AutoReturn", "OFF");
+
+                    document.getElementById("button_auto_return").innerHTML = "Auto Return OFF";
+
+                }else{
+
+                    PacManStorage.setItem("AutoReturn", "ON");
+
+                    document.getElementById("button_auto_return").innerHTML = "Auto Return ON";
+
+                }
+
+            };
+
+            /*
+             *
+             * Keyboard
+             *
+             *
+             *   Introduction to Keyboard Events in JavaScript
+             *
+             *     https://www.section.io/engineering-education/keyboard-events-in-javascript/
+             *
+             *     https://www.w3schools.com/jsref/met_element_addeventlistener.asp
+             *
+             */
+
+            // Add event listener on keydown
+            document.addEventListener('keydown', (event) => {
+
+                // PacManStorage = window.localStorage;
+                var keyname = event.key;
+
+                PacManStorage.setItem("keyname", keyname)
+
+                document.getElementById("keyname").innerHTML = PacManStorage.getItem("keyname");
+
+                // var keycode = event.code;
+
+            }, false);
+
+        </script>
+
+        <style>
+            body {background-color: black;}
+            /*
+             *
+             * Positioning of Elements in HTML
+             *
+             * https://www.mediaevent.de/javascript/window-browserfenster.html
+             *
+             * https://www.w3schools.com/css/css_positioning.asp
+             */
+        </style>
+    </head>
+
+    <body onload="OpeningSound(); animateScript(); ">
+
+        <!--
+        PacMan Right #1
+        -->
+        <!-- div style="height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px; "></div -->
+        <!--
+        PacMan Right #1
+        -->
+        <!-- div style="height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px; "></div -->
+
+        <div style="position: relative; ">
+
+            <div style="position: absolute; top: 0; left: 0; z-index: 10; " id="labyrinth">
+            <div style="position: absolute; top: 0; left: 0; z-index: 11; " id="packman"></div>
+
+        </div>
+        <div style="height: 275px;"></div>
+        <div style="color: white;"> x: <span id="outputX"></span> y: <span id="outputY"></span> key name: <span id="keyname"></span> Direction: <span id="Direction"></span> Direction Logic: <span id="Direction_Logic"></span></div>
+        <button id="button_auto_return" onclick=ToggleAutoReturn()>Auto Return ON</button>
+        <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
+
+            <div style="position: absolute; top: 0; left: 0; z-index: 11; background-color: burlywood;"               >asdfafasdfasfas</div>
+            <div style="position: absolute;  top: 0; left: 55; z-index: 12; background-color: chartreuse;" >adsf<br>adfads</div>
+
+        </div -->
+
+    </body>
+
+</html>

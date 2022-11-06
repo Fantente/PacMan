@@ -1,0 +1,133 @@
+<html>
+    <body>
+        <script>
+                    /*
+                     *
+                     * Motion Calculator
+                     *
+                     */
+
+                    if(PacManStorage.getItem("Direction") == "Right"){
+
+                        var PacManLeft = PacManStorage.getItem("PacManLeft");
+                        var PacManStep = PacManStorage.getItem("Step");
+
+                        PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
+
+                        PacManStorage.setItem("PacManLeft", PacManLeft);
+
+
+                    }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                        var PacManLeft = PacManStorage.getItem("PacManLeft");
+                        var PacManStep = PacManStorage.getItem("Step");
+
+                        PacManLeft = parseFloat(PacManLeft) - parseFloat(PacManStep);
+
+                        PacManStorage.setItem("PacManLeft", PacManLeft);
+
+                    }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                        var PacManTop = PacManStorage.getItem("PacManTop");
+                        var PacManStep = PacManStorage.getItem("Step");
+
+                        PacManTop = parseFloat(PacManTop) - parseFloat(PacManStep);
+
+                        PacManStorage.setItem("PacManTop", PacManTop);
+
+                    }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                        var PacManTop = PacManStorage.getItem("PacManTop");
+                        var PacManStep = PacManStorage.getItem("Step");
+
+                        PacManTop = parseFloat(PacManTop) + parseFloat(PacManStep);
+
+                        PacManStorage.setItem("PacManTop", PacManTop);
+
+                    };
+
+                    /*
+                     *
+                     * Mouth Animation and movement control
+                     *
+                     */
+
+                    var cosDelay = 80 //controls the time between switching the costumes
+
+                    if(costume == 1){
+
+                        if(PacManStorage.getItem("Direction") == "Right"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px 0-64x;`; // -Auf_1-Gerade_Rechts
+
+                        }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -439px -64px;`; // -Auf_1-Gerade_Links
+
+                        }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -405px -64px;`; // -Auf_1-Senkrecht_Oben
+
+                        }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -371px -64px;`; // -Auf_1-Senkrecht_Unten
+
+                        }
+
+                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+
+                        setTimeout(costumeDelay, cosDelay)
+
+                        function costumeDelay() {
+
+                            costume = 2;
+
+                        }
+
+                    }else{
+
+                        if(PacManStorage.getItem("Direction") == "Right"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -64px;`; // -Auf_2-Gerade_Recht
+
+                        }else if(PacManStorage.getItem("Direction") == "Left"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -422px -64px;`; // -Auf_2-Gerade_Links
+
+                        }else if(PacManStorage.getItem("Direction") == "Up"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -388px -64px;`; // -Auf_2-Senkrecht_Oben
+
+                        }else if(PacManStorage.getItem("Direction") == "Down"){
+
+                            document.getElementById("packman").style =
+
+                                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -354spx -64px;`; // -Auf_2-Senkrecht_Unten
+                        }
+
+                        setTimeout(costumeDelay, cosDelay)
+
+                        function costumeDelay() {
+
+                            costume = 1;
+
+                        }
+                    }
+                        
+        </script>
+    </body>
+</html>

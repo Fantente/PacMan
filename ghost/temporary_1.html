@@ -1,0 +1,441 @@
+<html>
+    <body>
+        <script>
+
+            function change_of_direction_is_allowed(element){
+
+                var Ghost1Left = Ghost1Storage.getItem("Ghost1Left");
+                var Ghost1Top  = Ghost1Storage.getItem("Ghost1Top");
+                var keynameG1    = Ghost1Storage.getItem("keynameG1");
+                var DirectionG1  = Ghost1Storage.getItem("DirectionG1");
+
+                if (element){
+
+                    // element[1] contains the allwed directions in which Ghost1 can turn on this crossing
+                    var allowed_directions = element[1];
+
+                    if ((element[0][0] == Ghost1Left) &&
+                        (element[0][1] == Ghost1Top)){
+
+                        if (allowed_directions.includes(keynameG1)){
+
+                            return true;
+
+                        }else {
+
+                            Ghost1Storage.setItem("DirectionG1","Break");
+
+                        }
+
+                    }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
+
+                        if ((DirectionG1 == "Right") && (keynameG1 == "ArrowLeft")){
+
+                            return true;
+
+                        }else if ((DirectionG1 == "Left") && (keynameG1 == "ArrowRight")){
+
+                            return true;
+
+                        }else if ((DirectionG1 == "Up") && (keynameG1 == "ArrowDown")){
+
+                            return true;
+
+                        }else if ((DirectionG1 == "Down") && (keynameG1 == "ArrowUp")){
+
+                            return true;
+
+                        }
+
+                    }
+
+                }else{
+
+                    alert("PROGRAM ERROR: Last time we got this error, the const change_of_direction was missing a , in the middle of the array.");
+
+                }
+
+            }
+
+            /*
+            *
+            * This is our Ghost1 Engine
+            *
+            */
+            function animateScript() {
+
+            /**
+             *
+             * Activate the Labyrinth
+             *
+             */
+            document.getElementById("labyrinth").style =
+
+            `position: absolute; left: 5; top: 5; height: 248px; width: 225px; background: url(spritesheets/1.png) 0px 0px;`; // Labyrinth w/ Dots
+
+            /*
+            *
+            * Why in localStorage?
+            *
+            *     Perhaps because it was difficult to address the Ghost1 position via CSS.
+            *
+            */
+            Ghost1Storage = window.localStorage;
+
+            var   costumeG1  = 1;
+            const interval = 50; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
+
+            /*
+            *
+            * Initial Coordinates
+            *
+            */
+            Ghost1Storage.setItem("Ghost1Left", "105");
+            Ghost1Storage.setItem("Ghost1Top",  "180");
+            // If the step is not 1 some logic may stop working as control points may be skipped.
+            Ghost1Storage.setItem("Step", "1");
+            Ghost1Storage.setItem("DirectionG1", "Right");
+
+                /*
+                *
+                * change_of_direction [[x,y],[allowed_directions]]
+                *
+                * TODO
+                *
+                *     These are point definitions.
+                *
+                *     We need also line definition which allows up/down or left/right along the full length of a vertical or horizontal corridor.
+                *
+                *
+                */
+                const change_of_direction = [
+                                                [  [  5,   4] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [ 45,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                [  [ 93,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                [  [117,   4] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [165,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                [  [205,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
+
+                                                [  [  5,  36] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                [  [ 45,  36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [ 70,  36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                [  [ 93,  36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [117,  36] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [142,  36] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                [  [165,  36] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [205,  36] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+
+                                                [  [  5,  60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                [  [ 45,  60] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                [  [ 70,  60] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                [  [ 93,  60] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                [  [117,  60] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [142,  60] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                [  [165,  60] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                [  [205,  60] , [                         "ArrowLeft","ArrowUp"]  ],
+
+                                                [  [ 70,  84] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [142,  84] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+
+                                                [  [ 45, 108] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                [  [ 70, 108] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [142, 108] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                [  [165, 108] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+
+                                                [  [ 70, 132] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                [  [142, 132] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+
+                                                [  [  5, 156] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [ 45, 156] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [ 70, 156] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [ 93, 156] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                [  [117, 156] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [142, 156] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [165, 156] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [205, 156] , ["ArrowDown",             "ArrowLeft"          ]  ],
+
+                                                [  [  5, 180] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                [  [ 21, 180] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                [  [ 45, 180] , ["ArrowDown","ArrowRight",            "ArrowUp"]  ],
+                                                [  [ 69, 180] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                [  [ 93, 180] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [117, 180] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [141, 180] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
+                                                [  [165, 180] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
+                                                [  [189, 180] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [205, 180] , [                         "ArrowLeft","ArrowUp"]  ],
+
+                                                [  [  5, 204] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [ 21, 204] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [ 45, 204] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                [  [ 69, 204] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                [  [ 93, 204] , ["ArrowDown",             "ArrowLeft"          ]  ],
+                                                [  [117, 204] , ["ArrowDown","ArrowRight"                      ]  ],
+                                                [  [141, 204] , [                         "ArrowLeft","ArrowUp"]  ],
+                                                [  [165, 204] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                [  [189, 204] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [205, 204] , ["ArrowDown",             "ArrowLeft"          ]  ],
+
+                                                [  [  5, 228] , [            "ArrowRight",            "ArrowUp"]  ],
+                                                [  [ 93, 228] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [117, 228] , [            "ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                [  [205, 228] , [                         "ArrowLeft","ArrowUp"]  ],
+                                            ];
+
+            /*
+            *
+            * This is the global cycle of the game
+            *
+            */
+            tID = setInterval(() => {
+
+                /*
+                *
+                * Update the variables that might have changed below
+                *
+                */
+
+                // Are these the start coordinates?
+                var Ghost1Left = Ghost1Storage.getItem("Ghost1Left");
+                var Ghost1Top  = Ghost1Storage.getItem("Ghost1Top");
+                var DirectionG1  = Ghost1Storage.getItem("DirectionG1");
+
+                // document.getElementById("image").style.backgroundPosition =
+                // `-${position}px 0px`;
+                // We use the ES6 template literal to insert the variable "position".
+
+                //set of keynameG1
+
+                if(Ghost1Left < PacManLeft) {
+
+                    Ghost1Storage.setItem("keynameG1", "Right");
+
+                }else {
+
+                    Ghost1Storage.setItem("kenameG1","Left");
+                }
+
+                /*
+                *
+                * Set of DirectionG1
+                *
+                */
+
+                var keynameG1 = Ghost1Storage.getItem("keynameG1");
+
+                if((keynameG1 == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                    Ghost1Storage.setItem("DirectionG1", "Right");
+
+                }else if((keynameG1 == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                    Ghost1Storage.setItem("DirectionG1", "Left");
+
+                }else if((keynameG1 == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                    Ghost1Storage.setItem("DirectionG1", "Down");
+
+                }else if((keynameG1 == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
+
+                    Ghost1Storage.setItem("DirectionG1", "Up");
+
+                }
+
+                // Publish the current direction
+
+                document.getElementById("DirectionG1").innerHTML = Ghost1Storage.getItem("DirectionG1");
+
+                /*
+                *
+                * Motion Calculator
+                *
+                * AutoReturn is implemented here.
+                *
+                */
+
+                if(Ghost1Storage.getItem("DirectionG1") == "Right"){
+
+                    if(Ghost1Left < 205){
+
+                        var Ghost1Left = Ghost1Storage.getItem("Ghost1Left");
+                        var Ghost1Step = Ghost1Storage.getItem("Step");
+
+                        Ghost1Left = parseFloat(Ghost1Left) + parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Left", Ghost1Left);
+
+                    }else {
+
+                        if(Ghost1Top == 108){
+
+                            Ghost1Storage.setItem("Ghost1Left", "-25")
+                            Ghost1Storage.setItem("keynameG1", "ArrowRight")
+
+                        }else if(AutoReturn == "ON"){
+
+                            Ghost1Storage.setItem("keynameG1", "ArrowLeft")
+
+                        }
+
+                    }
+
+                }else if(Ghost1Storage.getItem("DirectionG1") == "Left"){
+
+                    if(Ghost1Left > 5){
+
+                        var Ghost1Left = Ghost1Storage.getItem("Ghost1Left");
+                        var Ghost1Step = Ghost1Storage.getItem("Step");
+
+                        Ghost1Left = parseFloat(Ghost1Left) - parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Left", Ghost1Left);
+
+                    }else{
+
+                        if(Ghost1Top == 108){
+
+                            Ghost1Storage.setItem("Ghost1Left", "235")
+                            Ghost1Storage.setItem("keynameG1", "ArrowLeft")
+
+                        }else if(AutoReturn == "ON"){
+
+                            Ghost1Storage.setItem("keynameG1", "ArrowRight")
+
+                        }
+
+                    }
+
+                }else if(Ghost1Storage.getItem("DirectionG1") == "Up"){
+
+                    if(Ghost1Top > 4){
+
+                        var Ghost1Top = Ghost1Storage.getItem("Ghost1Top");
+                        var Ghost1Step = Ghost1Storage.getItem("Step");
+
+                        Ghost1Top = parseFloat(Ghost1Top) - parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Top", Ghost1Top);
+
+                    }else if(AutoReturn == "ON"){
+
+                        Ghost1Storage.setItem("keynameG1", "ArrowDown")
+
+                    }
+
+                }else if(Ghost1Storage.getItem("DirectionG1") == "Down"){
+
+                    if(Ghost1Top < 228){
+
+                        var Ghost1Top = Ghost1Storage.getItem("Ghost1Top");
+                        var Ghost1Step = Ghost1Storage.getItem("Step");
+
+                        Ghost1Top = parseFloat(Ghost1Top) + parseFloat(Ghost1Step);
+
+                        Ghost1Storage.setItem("Ghost1Top", Ghost1Top);
+
+                    }else if(AutoReturn == "ON"){
+
+                        Ghost1Storage.setItem("keynameG1", "ArrowUp")
+
+                    }
+
+                }
+
+                /*
+                *
+                * Eye Animation
+                *
+                */
+
+                var cosDelay = 80 //controls the time between switching the DirectionG1s
+
+                // HOMEWORK
+                // Sometimes works, sometimes does not :)                                   -not really makes no difference
+                /*if(((Ghost1DirectionG1 = "Right" || "Left") && (Ghost1Left % 2 == 0)) ||
+                ((Ghost1DirectionG1 = "Up" || "Down") && (Ghost1Top % 2 == 0)))
+                */
+
+                    if(costumeG1 == 1){
+
+                        // var Ghost1Left = Ghost1Storage.getItem("Left");
+
+                        if(Ghost1Storage.getItem("DirectionG1") == "Right"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -64px;`; // -Auf_1-Gerade_Rechts
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Left"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -439px -64px;`; // -Auf_1-Gerade_Links
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Up"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -405px -64px;`; // -Auf_1-Senkrecht_Oben
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Down"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -371px -64px;`; // -Auf_1-Senkrecht_Unten
+
+                        }
+
+                        //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
+
+                        setTimeout(DirectionG1Delay, cosDelay)
+
+                        function DirectionG1Delay() {
+
+                            costumeG1 = 2;
+
+                        }
+
+                    }else{
+
+                        // var Ghost1Left = Ghost1Storage.getItem("Left");
+
+                        if(Ghost1Storage.getItem("DirectionG1") == "Right"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -64px;`; // -Auf_2-Gerade_Recht
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Left"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -422px -64px;`; // -Auf_2-Gerade_Links
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Up"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -388px -64px;`; // -Auf_2-Senkrecht_Oben
+
+                        }else if(Ghost1Storage.getItem("DirectionG1") == "Down"){
+
+                            document.getElementById("Ghost1").style =
+
+                                `position: absolute; left: ` + Ghost1Left + `; top: ` + Ghost1Top + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -354px -64px;`; // -Auf_2-Senkrecht_Unten
+                        }
+
+                        setTimeout(DirectionG1Delay, cosDelay)
+
+                        function DirectionG1Delay() {
+
+                            costumeG1 = 1;
+
+                        }
+                    }
+
+            }, interval); //end of setInterval
+            } //end of function animateScript()
+
+        </script>
+    </body>
+</html>
