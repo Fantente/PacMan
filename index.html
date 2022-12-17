@@ -3,6 +3,7 @@
         <title>
             PacMan - the yellow ball
         </title>
+        <script src="move_actor.js"></script>
         <script>
 
             // OpeningSound = function () {
@@ -124,7 +125,7 @@
                  */
                 PacManStorage = window.localStorage;
 
-                var   costume  = 1;
+                PacManStorage.setItem("PacManConstume", "1");
                 const interval = 50; // ms of interval for the setInterval() This can reduce the speed, good for debugging.
 
                 /*
@@ -177,7 +178,8 @@
                                                     [  [205,  60] , [                         "ArrowLeft","ArrowUp"]  ],
 
                                                     [  [ 70,  84] , ["ArrowDown","ArrowRight"                      ]  ],
-                                                    [  [142,  84] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [117,  84] , [           ,"ArrowRight","ArrowLeft","ArrowUp"]  ],
+                                                    [  [142,  84] , ["ArrowDown",            ,"ArrowLeft",         ]  ],
 
                                                     [  [ 45, 108] , ["ArrowDown",             "ArrowLeft","ArrowUp"]  ],
                                                     [  [ 70, 108] , ["ArrowDown","ArrowRight","ArrowLeft","ArrowUp"]  ],
@@ -426,100 +428,9 @@
 
                     }
 
-                    /*
-                     *
-                     * Mouth Animation
-                     *
-                     */
+                    // HERE WE MUST CALL A FUNCTION TO ANIMATE THE PACMAN
 
-                    var cosDelay = 80 //controls the time between switching the costumes
-
-                    // HOMEWORK
-                    // Sometimes works, sometimes does not :)                                   -not really makes no difference
-                    /*if(((PacManDirection = "Right" || "Left") && (PacManLeft % 2 == 0)) ||
-                      ((PacManDirection = "Up" || "Down") && (PacManTop % 2 == 0)))
-                    */
-
-                        if(costume == 1){
-
-                            // var PacManLeft = PacManStorage.getItem("Left");
-
-                            if(PacManStorage.getItem("Direction") == "Right"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
-
-                            }else if(PacManStorage.getItem("Direction") == "Left"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
-
-                            }else if(PacManStorage.getItem("Direction") == "Up"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
-
-                            }else if(PacManStorage.getItem("Direction") == "Down"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
-
-                            }
-
-                            //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
-
-                            setTimeout(costumeDelay, cosDelay)
-
-                            function costumeDelay() {
-
-                                costume = 2;
-
-                            }
-
-                        }else{
-
-                            // var PacManLeft = PacManStorage.getItem("Left");
-
-                            if(PacManStorage.getItem("Direction") == "Right"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
-
-                            }else if(PacManStorage.getItem("Direction") == "Left"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
-
-                            }else if(PacManStorage.getItem("Direction") == "Up"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
-
-                            }else if(PacManStorage.getItem("Direction") == "Down"){
-
-                                document.getElementById("packman").style =
-
-                                    `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
-                            }
-
-                            setTimeout(costumeDelay, cosDelay)
-
-                            function costumeDelay() {
-
-                                costume = 1;
-
-                            }
-                        }
-
-                    document.getElementById("outputX").innerHTML = PacManLeft;
-                    document.getElementById("outputY").innerHTML = PacManTop;
+                    move_actor();
 
                 }, interval); //end of setInterval
             } //end of function animateScript()
@@ -605,8 +516,10 @@
 
         <div style="position: relative; ">
 
+            <!-- TODO a </div> is missing but when we add it the corrdinates move a bit -->
             <div style="position: absolute; top: 0; left: 0; z-index: 10; " id="labyrinth">
             <div style="position: absolute; top: 0; left: 0; z-index: 11; " id="packman"></div>
+            <div style="position: absolute; top: 0; left: 0; z-index: 11; " id="blinky"></div>
 
         </div>
         <div style="height: 275px;"></div>

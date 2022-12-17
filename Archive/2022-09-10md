@@ -45,16 +45,7 @@ Store Data:
 https://www.w3schools.com/jsref/jsref_obj_json.asp
 
 
-## 17 December
-
-12:00 w/ Kian, ff, dahoum
-
-* Show ff the model of the labyrinth `done`
-* Add one crossing `done`
-* How do we stop when we face a wall `HOMEWORK`
-* Check all crossings and add the missing `HOMEWORK`
-* We moved the move_actor logic into a separate function and into a separate file `done`
-* Generalise the move_actor() function so that it can move both pacman and blinky `HOMEWORK` `NEXT TIME`
+## 10 September
 ## 31 July
 
 ### Homework From Last Time
