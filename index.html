@@ -53,6 +53,7 @@
                     // element[1] contains the allwed directions in which PacMan can turn on this crossing
                     var allowed_directions = element[1];
 
+                    // ?
                     if ((element[0][0] == PacManLeft) &&
                         (element[0][1] == PacManTop)){
 
@@ -64,7 +65,7 @@
 
                         //    return false;
 
-                        }else {
+                        }else{
 
                             PacManStorage.setItem("Direction","Break");
 
@@ -333,31 +334,48 @@
 
                     }
 
+                    // TODO
+                    // What is this doing?
+                    // It seems this protects the ends of the labyrinth, but the crossing logic must do this.
+                    // Check and remove if true.
                     if(PacManStorage.getItem("Direction") == "Right"){
 
-                        if(PacManLeft < 205){
+                        // This creates the motion.
+                        // It is extracted from the logic below, which we think we do not need.
+                        var PacManLeft = PacManStorage.getItem("PacManLeft");
+                        var PacManStep = PacManStorage.getItem("Step");
 
-                            var PacManLeft = PacManStorage.getItem("PacManLeft");
-                            var PacManStep = PacManStorage.getItem("Step");
+                        PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
 
-                            PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
+                        PacManStorage.setItem("PacManLeft", PacManLeft);
 
-                            PacManStorage.setItem("PacManLeft", PacManLeft);
+                        // TODO
+                        // It seems we do not need these checks anymore, because they are handled by the
+                        // crossings array.
+                        // We will leave it for a bit and then delete it.
+                        // if(PacManLeft < 205){
 
-                        }else {
+                        //     var PacManLeft = PacManStorage.getItem("PacManLeft");
+                        //     var PacManStep = PacManStorage.getItem("Step");
 
-                            if(PacManTop == 108){
+                        //     PacManLeft = parseFloat(PacManLeft) + parseFloat(PacManStep);
 
-                                PacManStorage.setItem("PacManLeft", "-25")
-                                PacManStorage.setItem("keyname", "ArrowRight")
+                        //     PacManStorage.setItem("PacManLeft", PacManLeft);
 
-                            }else if(AutoReturn == "ON"){
+                        // }else {
 
-                                PacManStorage.setItem("keyname", "ArrowLeft")
+                        //     if(PacManTop == 108){
 
-                            }
+                        //         PacManStorage.setItem("PacManLeft", "-25")
+                        //         PacManStorage.setItem("keyname", "ArrowRight")
 
-                        }
+                        //     }else if(AutoReturn == "ON"){
+
+                        //         PacManStorage.setItem("keyname", "ArrowLeft")
+
+                        //     }
+
+                        // }
 
                     }else if(PacManStorage.getItem("Direction") == "Left"){
 
