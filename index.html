@@ -379,7 +379,7 @@
 
                     }else if(PacManStorage.getItem("Direction") == "Left"){
 
-                        if(PacManLeft > 5){
+                        //if(PacManLeft > 5){
 
                             var PacManLeft = PacManStorage.getItem("PacManLeft");
                             var PacManStep = PacManStorage.getItem("Step");
@@ -388,7 +388,7 @@
 
                             PacManStorage.setItem("PacManLeft", PacManLeft);
 
-                        }else{
+                        /* }else{
 
                             if(PacManTop == 108){
 
@@ -399,13 +399,13 @@
 
                                 PacManStorage.setItem("keyname", "ArrowRight")
 
+                                }
+                            
                             }
-
-                        }
-
+                        */
                     }else if(PacManStorage.getItem("Direction") == "Up"){
 
-                        if(PacManTop > 4){
+                        //if(PacManTop > 4){
 
                             var PacManTop = PacManStorage.getItem("PacManTop");
                             var PacManStep = PacManStorage.getItem("Step");
@@ -414,15 +414,15 @@
 
                             PacManStorage.setItem("PacManTop", PacManTop);
 
-                        }else if(AutoReturn == "ON"){
+                        /*}else if(AutoReturn == "ON"){
 
                             PacManStorage.setItem("keyname", "ArrowDown")
 
                         }
-
+                        */
                     }else if(PacManStorage.getItem("Direction") == "Down"){
 
-                        if(PacManTop < 228){
+                        //if(PacManTop < 228){
 
                             var PacManTop = PacManStorage.getItem("PacManTop");
                             var PacManStep = PacManStorage.getItem("Step");
@@ -431,12 +431,12 @@
 
                             PacManStorage.setItem("PacManTop", PacManTop);
 
-                        }else if(AutoReturn == "ON"){
+                        /*}else if(AutoReturn == "ON"){
 
                             PacManStorage.setItem("keyname", "ArrowUp")
 
                         }
-
+                        */
                     }else if(PacManStorage.getItem("Direction") == "Break"){
 
                         // TODO

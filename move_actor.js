@@ -14,38 +14,38 @@ function move_actor(){
     */
 
     var cosDelay   = 80; //controls the time between switching the costumes
-    var costume    = PacManStorage.getItem("PacManConstume");
-    var PacManLeft = PacManStorage.getItem("PacManLeft");
-    var PacManTop  = PacManStorage.getItem("PacManTop");
-    var Direction  = PacManStorage.getItem("Direction");
+    var costume    = ActorStorage.getItem("ActorConstume");
+    var ActorLeft  = ActorStorage.getItem("ActorLeft");
+    var ActorTop   = ActorStorage.getItem("ActorTop");
+    var Direction  = ActorStorage.getItem("Direction");
 
     if(costume == 1){
 
-        // var PacManLeft = PacManStorage.getItem("Left");
+        // var ActorLeft = ActorStorage.getItem("Left");
 
-        if(PacManStorage.getItem("Direction") == "Right"){
-
-            document.getElementById("packman").style =
-
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
-
-        }else if(PacManStorage.getItem("Direction") == "Left"){
+        if(ActorStorage.getItem("Direction") == "Right"){
 
             document.getElementById("packman").style =
 
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
 
-        }else if(PacManStorage.getItem("Direction") == "Up"){
-
-            document.getElementById("packman").style =
-
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
-
-        }else if(PacManStorage.getItem("Direction") == "Down"){
+        }else if(ActorStorage.getItem("Direction") == "Left"){
 
             document.getElementById("packman").style =
 
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
+
+        }else if(ActorStorage.getItem("Direction") == "Up"){
+
+            document.getElementById("packman").style =
+
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
+
+        }else if(ActorStorage.getItem("Direction") == "Down"){
+
+            document.getElementById("packman").style =
+
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -48px;`; // -Auf_1-Senkrecht_Unten
 
         }
 
@@ -55,49 +55,49 @@ function move_actor(){
 
         function costumeDelay() {
 
-            PacManStorage.setItem("PacManConstume", "2");
+            ActorStorage.setItem("ActorConstume", "2");
 
         }
 
     }else{
 
-        // var PacManLeft = PacManStorage.getItem("Left");
+        // var ActorLeft = ActorStorage.getItem("Left");
 
-        if(PacManStorage.getItem("Direction") == "Right"){
-
-            document.getElementById("packman").style =
-
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
-
-        }else if(PacManStorage.getItem("Direction") == "Left"){
+        if(ActorStorage.getItem("Direction") == "Right"){
 
             document.getElementById("packman").style =
 
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
 
-        }else if(PacManStorage.getItem("Direction") == "Up"){
-
-            document.getElementById("packman").style =
-
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
-
-        }else if(PacManStorage.getItem("Direction") == "Down"){
+        }else if(ActorStorage.getItem("Direction") == "Left"){
 
             document.getElementById("packman").style =
 
-                `position: absolute; left: ` + PacManLeft + `; top: ` + PacManTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
+
+        }else if(ActorStorage.getItem("Direction") == "Up"){
+
+            document.getElementById("packman").style =
+
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
+
+        }else if(ActorStorage.getItem("Direction") == "Down"){
+
+            document.getElementById("packman").style =
+
+                `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
         }
 
         setTimeout(costumeDelay, cosDelay)
 
         function costumeDelay() {
 
-            PacManStorage.setItem("PacManConstume", "1");
+            ActorStorage.setItem("ActorConstume", "1");
 
         }
     }
 
-    document.getElementById("outputX").innerHTML = PacManLeft;
-    document.getElementById("outputY").innerHTML = PacManTop;
+    document.getElementById("outputX").innerHTML = ActorLeft;
+    document.getElementById("outputY").innerHTML = ActorTop;
 
 }
