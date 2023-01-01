@@ -9,8 +9,24 @@
 * Infrastructure
   * GitHub
     * Switch to own GitHub `done`
+      * https://github.com/Fantente/PacMan
   * Netelify
     * https://pacman-dahoum.netlify.app
+* Mantra
+  * When something does not look you should check the console log `Kian`
+  * The better you understand the subject matter/ Fachbereich, the better you can help with software `Kian`
+* Today
+  * Moved to Fantente GitHub `done`
+  * Discovered that the sound does not work in Chrome and placed a TODO in the code `done`
+  * Added Mantra w/ "* When something does not look you should check the console log" `done`
+  * We are working on the abstracted moving logic `in progress`
+    * Renamed PacManStorage to GameStorage to be more precise `done`
+    * Completed the work. Kian had done everything right, just not until the end. It was a bit too much ;) `done`
+  * We named the Ghosts and studied a bit their characters `in progress`
+    * Mantra/ The better you understand the subject matter/ Fachbereich, the better you can help with software `done`
+ * Homework
+   * Check my last commit and see what we did `Kian`
+   * See why the chewing speed is so high `Kian`
 
 ## Project Plan
 

@@ -3,45 +3,55 @@
 // function move_actor(actor);
 // move_actor("pacman");
 // move_actor("blinky");
-function move_actor(){
+function move_actor(actor){
 
-// Everything which is PacManSomething must become ActorSomething.
+    // Prepare the variables to load the values from the GameStorage
+    GameStorageActorCostume    = actor + "Costume";
+    GameStorageActorLeft       = actor + "Left";
+    GameStorageActorTop        = actor + "Top";
+    GameStorageActorDirection  = actor + "Direction";
 
     /*
-    *
-    * Animation
-    *
-    */
+     *
+     * Animation
+     *
+     */
 
-    var cosDelay   = 80; //controls the time between switching the costumes
-    var costume    = ActorStorage.getItem("ActorConstume");
-    var ActorLeft  = ActorStorage.getItem("ActorLeft");
-    var ActorTop   = ActorStorage.getItem("ActorTop");
-    var Direction  = ActorStorage.getItem("Direction");
+    // The abstraction happens here
+    var cosDelay       = 80; //controls the time between switching the costumes
+    var ActorCostume   = GameStorage.getItem(GameStorageActorCostume);
+    var ActorLeft      = GameStorage.getItem(GameStorageActorLeft);
+    var ActorTop       = GameStorage.getItem(GameStorageActorTop);
+    var ActorDirection = GameStorage.getItem(GameStorageActorDirection);
 
-    if(costume == 1){
+    if(ActorCostume == 1){
 
-        // var ActorLeft = ActorStorage.getItem("Left");
+        // TODO
+        // We come twice here, before going to else
+        // Can it be because of the cosDelay?
+        // Try await
 
-        if(ActorStorage.getItem("Direction") == "Right"){
+        // var ActorLeft = GameStorage.getItem("Left");
+
+        if(ActorDirection == "Right"){
 
             document.getElementById("packman").style =
 
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -472px 0px;`; // -Auf_1-Gerade_Rechts
 
-        }else if(ActorStorage.getItem("Direction") == "Left"){
+        }else if(ActorDirection == "Left"){
 
             document.getElementById("packman").style =
 
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -16px;`; // -Auf_1-Gerade_Links
 
-        }else if(ActorStorage.getItem("Direction") == "Up"){
+        }else if(ActorDirection == "Up"){
 
             document.getElementById("packman").style =
 
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -473px -32px;`; // -Auf_1-Senkrecht_Oben
 
-        }else if(ActorStorage.getItem("Direction") == "Down"){
+        }else if(ActorDirection == "Down"){
 
             document.getElementById("packman").style =
 
@@ -51,48 +61,57 @@ function move_actor(){
 
         //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
 
-        setTimeout(costumeDelay, cosDelay)
+        setTimeout(costumeDelay(actor), cosDelay);
 
-        function costumeDelay() {
+        function costumeDelay(actor) {
 
-            ActorStorage.setItem("ActorConstume", "2");
+            GameStorageActorCostume = actor + "Costume";
+
+            GameStorage.setItem(GameStorageActorCostume, "2");
 
         }
 
     }else{
 
-        // var ActorLeft = ActorStorage.getItem("Left");
+        // TODO
+        // We come twice here, before going to 1
+        // Can it be because of the cosDelay?
+        // Try await
 
-        if(ActorStorage.getItem("Direction") == "Right"){
+        // var ActorLeft = GameStorage.getItem("Left");
+
+        if(ActorDirection == "Right"){
 
             document.getElementById("packman").style =
 
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -455px 0px;`; // -Auf_2-Gerade_Recht
 
-        }else if(ActorStorage.getItem("Direction") == "Left"){
+        }else if(ActorDirection == "Left"){
 
             document.getElementById("packman").style =
 
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -16px;`; // -Auf_2-Gerade_Links
 
-        }else if(ActorStorage.getItem("Direction") == "Up"){
+        }else if(ActorDirection == "Up"){
 
             document.getElementById("packman").style =
 
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -32px;`; // -Auf_2-Senkrecht_Oben
 
-        }else if(ActorStorage.getItem("Direction") == "Down"){
+        }else if(ActorDirection == "Down"){
 
             document.getElementById("packman").style =
 
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
         }
 
-        setTimeout(costumeDelay, cosDelay)
+        setTimeout(costumeDelay(actor), cosDelay);
 
-        function costumeDelay() {
+        function costumeDelay(actor) {
 
-            ActorStorage.setItem("ActorConstume", "1");
+            GameStorageActorCostume = actor + "Costume";
+
+            GameStorage.setItem(GameStorageActorCostume, "1");
 
         }
     }
