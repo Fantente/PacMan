@@ -8,7 +8,7 @@
   * We discovered, that the audio issues have been from the headphones `done`
 * Infrastructure
   * GitHub
-    * Switch to own GitHub
+    * Switch to own GitHub `done`
   * Netelify
     * https://pacman-dahoum.netlify.app
 
