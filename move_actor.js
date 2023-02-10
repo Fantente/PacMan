@@ -61,7 +61,8 @@ function move_actor(actor){
 
         //`height: 16px; width: 14px; background: url(spritesheets/1.png) -489px 0px;`; // -Zu
 
-        setTimeout(costumeDelay(actor), cosDelay);
+        // https://stackoverflow.com/questions/9184702/settimeout-not-delaying-a-function-call
+        setTimeout(function() { costumeDelay(actor); }, cosDelay);
 
         function costumeDelay(actor) {
 
@@ -105,7 +106,8 @@ function move_actor(actor){
                 `position: absolute; left: ` + ActorLeft + `; top: ` + ActorTop + `; height: 16px; width: 14px; background: url(spritesheets/1.png) -456px -48px;`; // -Auf_2-Senkrecht_Unten
         }
 
-        setTimeout(costumeDelay(actor), cosDelay);
+        // https://stackoverflow.com/questions/9184702/settimeout-not-delaying-a-function-call
+        setTimeout(function() { costumeDelay(actor); }, cosDelay);
 
         function costumeDelay(actor) {
 
