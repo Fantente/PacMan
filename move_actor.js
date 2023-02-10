@@ -118,7 +118,4 @@ function move_actor(actor){
         }
     }
 
-    document.getElementById("outputX").innerHTML = ActorLeft;
-    document.getElementById("outputY").innerHTML = ActorTop;
-
 }
