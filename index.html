@@ -52,7 +52,8 @@
                 var PacManTop  = GameStorage.getItem("PacManTop");
                 var keyname    = GameStorage.getItem("keyname");
                 var Direction  = GameStorage.getItem("PacManDirection");
-
+                var PreKeyname = GameStorage.getItem("PreKeyname");
+ 
                 if (element){
 
                     // element[1] contains the allwed directions in which PacMan can turn on this crossing
@@ -72,7 +73,19 @@
 
                         }else{
 
-                            GameStorage.setItem("PacManDirection","Break");
+                            //Only Direction Break when Previous Direction is not included in allowed_directions
+
+                            
+                            if (allowed_directions.includes(PreKeyname)){
+
+                                GameStorage.setItem("keyname",PreKeyname);
+                                GameStorage.setItem("keyname",keyname);
+
+                            }else{
+
+                                GameStorage.setItem("PacManDirection","Break");
+
+                            }
 
                         }
 
@@ -351,6 +364,14 @@
                         if(GameStorage.getItem("PacManDirection") != "Break"){
 
                             PreviousDirection = GameStorage.getItem("PacManDirection")
+
+                        }
+
+                        //saves last direction-allowed keyname
+                        if(change_of_direction.some(change_of_direction_is_allowed)){
+
+                            PreKeyname = GameStorage.getItem("keyname")
+                            GameStorage.setItem("PreKeyname",PreKeyname)
 
                         }
 
