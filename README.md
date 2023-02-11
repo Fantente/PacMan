@@ -10,6 +10,7 @@
     * See why the x and y are empty and try to fix them `Kian` `done`
 * Homework
   * When we press a direction that will not be allowed on the next crossing, PacMan stops on the next crossing `Kian`
+    * We will discuss it, but only you will code `Reminder`
 
 ## 1 January 2023
 
