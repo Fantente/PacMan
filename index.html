@@ -48,12 +48,13 @@
                  *
                  */
 
-                var PacManLeft = GameStorage.getItem("PacManLeft");
-                var PacManTop  = GameStorage.getItem("PacManTop");
-                var keyname    = GameStorage.getItem("keyname");
-                var Direction  = GameStorage.getItem("PacManDirection");
-                var PreKeyname = GameStorage.getItem("PreKeyname");
- 
+                var PacManLeft     = GameStorage.getItem("PacManLeft");
+                var PacManTop      = GameStorage.getItem("PacManTop");
+                var lastPressedKey = GameStorage.getItem("lastPressedKey");
+                var Direction      = GameStorage.getItem("PacManDirection");
+                // This is the key pressed before the lastPressedKey
+                var PreKeyname     = GameStorage.getItem("PreKeyname");
+
                 if (element){
 
                     // element[1] contains the allwed directions in which PacMan can turn on this crossing
@@ -63,7 +64,7 @@
                     if ((element[0][0] == PacManLeft) &&
                         (element[0][1] == PacManTop)){
 
-                        if (allowed_directions.includes(keyname)){
+                        if (allowed_directions.includes(lastPressedKey)){
 
                             return true;
 
@@ -75,11 +76,11 @@
 
                             //Only Direction Break when Previous Direction is not included in allowed_directions
 
-                            
+
                             if (allowed_directions.includes(PreKeyname)){
 
-                                GameStorage.setItem("keyname",PreKeyname);
-                                GameStorage.setItem("keyname",keyname);
+                                GameStorage.setItem("PreKeyname",PreKeyname);
+                                GameStorage.setItem("lastPressedKey",lastPressedKey);
 
                             }else{
 
@@ -91,19 +92,19 @@
 
                     }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
 
-                        if ((Direction == "Right") && (keyname == "ArrowLeft")){
+                        if ((Direction == "Right") && (lastPressedKey == "ArrowLeft")){
 
                             return true;
 
-                        }else if ((Direction == "Left") && (keyname == "ArrowRight")){
+                        }else if ((Direction == "Left") && (lastPressedKey == "ArrowRight")){
 
                             return true;
 
-                        }else if ((Direction == "Up") && (keyname == "ArrowDown")){
+                        }else if ((Direction == "Up") && (lastPressedKey == "ArrowDown")){
 
                             return true;
 
-                        }else if ((Direction == "Down") && (keyname == "ArrowUp")){
+                        }else if ((Direction == "Down") && (lastPressedKey == "ArrowUp")){
 
                             return true;
 
@@ -113,7 +114,7 @@
 
                 }else{
 
-                    alert("PROGRAM ERROR: Last time we got this error, the const change_of_direction was missing a , in the middle of the array.");
+                    alert("PROGRAM ERROR: Last time we got this error, the const crossings_and_possible_directions was missing a , in the middle of the array.");
 
                 }
 
@@ -157,11 +158,11 @@
                 // If the step is not 1 some logic may stop working as control points may be skipped.
                 GameStorage.setItem("Step", "1");
                 GameStorage.setItem("PacManDirection", "Right");
-                GameStorage.setItem("keyname", "ArrowRight");
+                GameStorage.setItem("lastPressedKey", "ArrowRight");
 
                     /*
                      *
-                     * change_of_direction [[x,y],[allowed_directions]]
+                     * crossings_and_possible_directions [[x,y],[allowed_directions]]
                      *
                      * TODO
                      *
@@ -171,7 +172,7 @@
                      *
                      *
                      */
-                    const change_of_direction = [
+                    const crossings_and_possible_directions = [
                                                     [  [  5,   4] , ["ArrowDown","ArrowRight"                      ]  ],
                                                     [  [ 45,   4] , ["ArrowDown","ArrowRight","ArrowLeft"          ]  ],
                                                     [  [ 93,   4] , ["ArrowDown",             "ArrowLeft"          ]  ],
@@ -295,39 +296,45 @@
                         // We use the ES6 template literal to insert the variable "position".
 
                         /*
-                        *
-                        * Set of Direction
-                        *
-                        */
+                         * Brain
+                         *
+                         * Set of Direction
+                         *
+                         *    Here we transion from lastPressedKey to Direction, if allowed.
+                         *
+                         */
 
-                        var keyname = GameStorage.getItem("keyname");
+                        var lastPressedKey = GameStorage.getItem("lastPressedKey");
 
-                        if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
+                        if((lastPressedKey == "ArrowRight") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
 
                             GameStorage.setItem("PacManDirection", "Right");
 
-                        }else if((keyname == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
+                        }else if((lastPressedKey == "ArrowLeft") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
 
                             GameStorage.setItem("PacManDirection", "Left");
 
-                        }else if((keyname == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
+                        }else if((lastPressedKey == "ArrowDown") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
 
                             GameStorage.setItem("PacManDirection", "Down");
 
-                        }else if((keyname == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
+                        }else if((lastPressedKey == "ArrowUp") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
 
                             GameStorage.setItem("PacManDirection", "Up");
 
-                        }else if(keyname == " "){
+                        }else if(lastPressedKey == " "){
 
                             // GameStorage.setItem("Previous_Direction", Direction);
                             // GameStorage.setItem("PacManDirection", "Break");
 
                             // TODO
                             // start and stop PacMan
+                            // THIS CANNOT BE HERE, HERE WE ONLY SET THE DIRECTION, DON OT EXECUTE IT
                             if(BreakCounter == 0){
 
-                                GameStorage.setItem("keyname","Paused");
+                                // TODO
+                                // This is not correct use of this variable
+                                GameStorage.setItem("lastPressedKey","Paused");
 
                                 GameStorage.setItem("PacManDirection","Break");
 
@@ -338,26 +345,25 @@
 
                                 GameStorage.setItem("PacManDirection",PreviousDirection);
 
-                                GameStorage.setItem("keyname","Arrow" + "PacManDirection");
+                                // TODO
+                                // This is a dangerous coupling
+                                GameStorage.setItem("lastPressedKey","Arrow" + "PacManDirection");
 
                                 BreakCounter = 0;
                             }
 
                         }
 
-                        // Publish the current direction and coordinates of PacMan
-
+                        // Publish the current direction
                         document.getElementById("PacManDirection").innerHTML = GameStorage.getItem("PacManDirection");
-                        document.getElementById("outputX").innerHTML = GameStorage.getItem("PacManLeft");
-                        document.getElementById("outputY").innerHTML = GameStorage.getItem("PacManTop");
 
                         /*
-                        *
-                        * Motion Calculator
-                        *
-                        * AutoReturn is implemented here.
-                        *
-                        */
+                         *
+                         * Motion Calculator
+                         *
+                         * AutoReturn is implemented here.
+                         *
+                         */
 
                         // TODO
                         // saves PacMan´s current diretion
@@ -368,15 +374,17 @@
                         }
 
                         //saves last direction-allowed keyname
-                        if(change_of_direction.some(change_of_direction_is_allowed)){
+                        if(crossings_and_possible_directions.some(change_of_direction_is_allowed)){
 
-                            PreKeyname = GameStorage.getItem("keyname")
+                            PreKeyname = GameStorage.getItem("lastPressedKey")
                             GameStorage.setItem("PreKeyname",PreKeyname)
 
                         }
 
+                        // Here happens the actual motion.
+                        //
                         // TODO
-                        // What is this doing?
+                        // What else is this doing?
                         // It seems this protects the ends of the labyrinth, but the crossing logic must do this.
                         // Check and remove if true.
                         if(GameStorage.getItem("PacManDirection") == "Right"){
@@ -408,11 +416,11 @@
                             //     if(PacManTop == 108){
 
                             //         GameStorage.setItem("PacManLeft", "-25")
-                            //         GameStorage.setItem("keyname", "ArrowRight")
+                            //         GameStorage.setItem("lastPressedKey", "ArrowRight")
 
                             //     }else if(AutoReturn == "ON"){
 
-                            //         GameStorage.setItem("keyname", "ArrowLeft")
+                            //         GameStorage.setItem("lastPressedKey", "ArrowLeft")
 
                             //     }
 
@@ -434,11 +442,11 @@
                                 if(PacManTop == 108){
 
                                     GameStorage.setItem("PacManLeft", "235")
-                                    GameStorage.setItem("keyname", "ArrowLeft")
+                                    GameStorage.setItem("lastPressedKey", "ArrowLeft")
 
                                 }else if(AutoReturn == "ON"){
 
-                                    GameStorage.setItem("keyname", "ArrowRight")
+                                    GameStorage.setItem("lastPressedKey", "ArrowRight")
 
                                     }
 
@@ -457,7 +465,7 @@
 
                             /*}else if(AutoReturn == "ON"){
 
-                                GameStorage.setItem("keyname", "ArrowDown")
+                                GameStorage.setItem("lastPressedKey", "ArrowDown")
 
                             }
                             */
@@ -474,7 +482,7 @@
 
                             /*}else if(AutoReturn == "ON"){
 
-                                GameStorage.setItem("keyname", "ArrowUp")
+                                GameStorage.setItem("lastPressedKey", "ArrowUp")
 
                             }
                             */
@@ -489,6 +497,9 @@
                         }
 
                         // HERE WE MUST CALL A FUNCTION TO ANIMATE THE PACMAN
+
+                        document.getElementById("outputX").innerHTML = GameStorage.getItem("PacManLeft");
+                        document.getElementById("outputY").innerHTML = GameStorage.getItem("PacManTop");
 
                         move_actor("PacMan");
 
@@ -580,13 +591,11 @@
             document.addEventListener('keydown', (event) => {
 
                 // GameStorage = window.localStorage;
-                var keyname = event.key;
+                var lastPressedKey = event.key;
 
-                GameStorage.setItem("keyname", keyname)
+                GameStorage.setItem("lastPressedKey", lastPressedKey)
 
-                document.getElementById("keyname").innerHTML = GameStorage.getItem("keyname");
-
-                // var keycode = event.code;
+                document.getElementById("lastPressedKey").innerHTML = lastPressedKey;
 
             }, false);
 
@@ -627,9 +636,8 @@
         <div style="height: 275px;"></div>
         <div style="color: white;">
             x:                  <span id="outputX"></span> y:<span id="outputY"></span> <br>
-            key name:           <span id="keyname"></span>                              <br>
+            lastPressedKey:     <span id="lastPressedKey"></span>                              <br>
             Direction:          <span id="PacManDirection"></span>                      <br>
-            Direction Logic:    <span id="Direction_Logic"></span>                      </div>
         <button id="button_auto_return" onclick=ToggleAutoReturn()>Auto Return ON</button>
         <!-- div style="position: relative; background-color: brown;">aasdfasdfasdfads<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd<br>afasfasd
 
