@@ -79,13 +79,13 @@
                             if (allowed_directions.includes(PreKeyname)){
 
                                 GameStorage.setItem("lastPressedKey",PreKeyname);
-
+                                return false;
                             }else{
 
                                 GameStorage.setItem("PacManDirection","Break");
 
                             }
-                            GameStorage.setItem("lastPressedKey",Keyname);
+                            //GameStorage.setItem("lastPressedKey",Keyname);
 
                         }
 
