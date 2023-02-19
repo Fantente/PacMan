@@ -75,11 +75,22 @@
                         }else{
 
                             //Only Direction Break when Previous Direction is not included in allowed_directions
-                            var Keyname = lastPressedKey
-                            if (allowed_directions.includes(PreKeyname)){
+                            var lastPressedKeyOpposite = "ArrowLeft"
+                            if(lastPressedKey == "ArrowRight"){
+                                lastPressedKeyOpposite = "ArrowLeft"
+                            }else if(lastPressedKey == "ArrowLeft"){
+                                lastPressedKeyOpposite = "ArrowRight"
+                            }else if(lastPressedKey == "ArrowUp"){
+                                lastPressedKeyOpposite = "ArrowDown"
+                            }else if(lastPressedKey == "ArrowDown"){
+                                lastPressedKeyOpposite = "ArrowUp"
+                            }
 
-                                GameStorage.setItem("lastPressedKey",PreKeyname);
+                            if (allowed_directions.includes(PreKeyname) && (PreKeyname != lastPressedKeyOpposite)){
+
+                                //GameStorage.setItem("lastPressedKey",PreKeyname);
                                 return false;
+                                    //do that except its PreKeyname is in relation to lastPressedKey ArrowLeft/ArrowRight or ArrowUp/ArrowDown
                             }else{
 
                                 GameStorage.setItem("PacManDirection","Break");
@@ -373,12 +384,12 @@
                         }
 
                         //saves last direction-allowed keyname
-                        if(crossings_and_possible_directions.some(change_of_direction_is_allowed)){
-
-                            PreKeyname = GameStorage.getItem("lastPressedKey")
-                            GameStorage.setItem("PreKeyname",PreKeyname)
-
-                        }
+                        //if(crossings_and_possible_directions.some(change_of_direction_is_allowed)){
+                        //    
+                        //    PreKeyname = GameStorage.getItem("lastPressedKey")
+                        //    GameStorage.setItem("PreKeyname",PreKeyname)
+                        //    
+                        //}
 
                         // Here happens the actual motion.
                         //
@@ -591,20 +602,16 @@
 
                 GameStorage = window.localStorage;
                 
-                lastPressedKey = GameStorage.getItem("lastPressedKey");
-                PreKeyname = GameStorage.getItem("PreKeyname");
-                if(event.key != PreKeyname){
+                if(event.key != GameStorage.getItem("PreKeyname")){
 
-                    GameStorage.setItem("PreKeyname",lastPressedKey);
+                    GameStorage.setItem("PreKeyname",GameStorage.getItem("lastPressedKey"));
 
                 };              
-                
-                var lastPressedKey = event.key;               
-          
-                GameStorage.setItem("lastPressedKey", lastPressedKey)
+                          
+                GameStorage.setItem("lastPressedKey",event.key)
 
-                document.getElementById("lastPressedKey").innerHTML = lastPressedKey;
-                document.getElementById("PreKeyname").innerHTML = PreKeyname;
+                document.getElementById("lastPressedKey").innerHTML = GameStorage.getItem("lastPressedKey");
+                document.getElementById("PreKeyname").innerHTML = GameStorage.getItem("PreKeyname");
             }, false);
 
         </script>
