@@ -22,7 +22,7 @@ function stopAnimate() {
 
 } //end of stopAnimate()
 
-function change_of_direction_is_allowed(element){
+function is_change_of_direction_allowed(element){
 
     // AT CROSSINGS
 
@@ -308,19 +308,19 @@ function animateScript() {
 
             var lastPressedKey = GameStorage.getItem("lastPressedKey");
 
-            if((lastPressedKey == "ArrowRight") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
+            if((lastPressedKey == "ArrowRight") && crossings_and_possible_directions.some(is_change_of_direction_allowed)){
 
                 GameStorage.setItem("PacManDirection", "Right");
 
-            }else if((lastPressedKey == "ArrowLeft") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
+            }else if((lastPressedKey == "ArrowLeft") && crossings_and_possible_directions.some(is_change_of_direction_allowed)){
 
                 GameStorage.setItem("PacManDirection", "Left");
 
-            }else if((lastPressedKey == "ArrowDown") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
+            }else if((lastPressedKey == "ArrowDown") && crossings_and_possible_directions.some(is_change_of_direction_allowed)){
 
                 GameStorage.setItem("PacManDirection", "Down");
 
-            }else if((lastPressedKey == "ArrowUp") && crossings_and_possible_directions.some(change_of_direction_is_allowed)){
+            }else if((lastPressedKey == "ArrowUp") && crossings_and_possible_directions.some(is_change_of_direction_allowed)){
 
                 GameStorage.setItem("PacManDirection", "Up");
 
@@ -376,7 +376,7 @@ function animateScript() {
             }
 
             //saves last direction-allowed keyname
-            //if(crossings_and_possible_directions.some(change_of_direction_is_allowed)){
+            //if(crossings_and_possible_directions.some(is_change_of_direction_allowed)){
             //
             //    PreKeyname = GameStorage.getItem("lastPressedKey")
             //    GameStorage.setItem("PreKeyname",PreKeyname)
