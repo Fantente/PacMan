@@ -17,7 +17,6 @@ var tID; //we will use this variable to clear the setInterval()
 
 function stopAnimate() {
 
-    // alert(a);
     clearInterval(tID);
 
 } //end of stopAnimate()
@@ -366,11 +365,46 @@ function animateScript() {
              * Can I continue in the same direction?
              *
              */
-            if (crossings_and_possible_directions.some(is_change_of_direction_allowed))
-            {
-                // We can continue.
-            }else{
-                GameStorage.setItem("PacManDirection","Break");
+            let i = 0;
+
+            var PacManLeft      = GameStorage.getItem("PacManLeft");
+            var PacManTop       = GameStorage.getItem("PacManTop");
+            var PacManDirection = GameStorage.getItem("PacManDirection");
+
+            while (i < crossings_and_possible_directions.length) {
+
+                element = crossings_and_possible_directions[i];
+
+                if (element){
+
+                    var allowed_directions = element[1];
+
+                    if ((element[0][0] == PacManLeft) &&
+                        (element[0][1] == PacManTop)){
+
+                        var possibleDirection = "Arrow" + PacManDirection;
+
+                        if (allowed_directions.includes(possibleDirection)){
+
+                        //}else if(AutoReturn == 1 ){
+
+                        //    return false;
+
+                        }else{
+
+                            GameStorage.setItem("PacManDirection","Break");
+                        }
+                    }else{
+
+                    }
+
+                }else{
+
+                    alert("PROGRAM ERROR: Last time we got this error, the const crossings_and_possible_directions was missing a , in the middle of the array.");
+
+                }
+
+                i++;
             }
 
             /*
