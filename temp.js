@@ -53,7 +53,7 @@ function is_change_of_direction_allowed(element){
         // ?
         if ((element[0][0] == PacManLeft) &&
             (element[0][1] == PacManTop)){
-alert ("We are on a crossing!")
+
             if (allowed_directions.includes(lastPressedKey)){
 
                 return true;
@@ -160,10 +160,10 @@ function animateScript() {
      * Initial Coordinates
      *
      */
-    GameStorage.setItem("PacManLeft", "105");
-    GameStorage.setItem("PacManTop",  "180");
+    GameStorage.setItem("PacManLeft"     , "105");
+    GameStorage.setItem("PacManTop"      ,  "180");
     // If the step is not 1 some logic may stop working as control points may be skipped.
-    GameStorage.setItem("Step", "1");
+    GameStorage.setItem("Step"           , "1");
     GameStorage.setItem("PacManDirection", "Right");
     GameStorage.setItem("lastPressedKey" , "ArrowRight");
 

@@ -64,6 +64,8 @@ function is_change_of_direction_allowed(element){
 
             }else{
 
+                return false;
+/*
                 //Only Direction Break when Previous Direction is not included in allowed_directions
                 var lastPressedKeyOpposite = "ArrowLeft"
                 if(lastPressedKey == "ArrowRight"){
@@ -87,7 +89,7 @@ function is_change_of_direction_allowed(element){
 
                 }
                 //GameStorage.setItem("lastPressedKey",Keyname);
-
+*/
             }
 
         }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
@@ -105,6 +107,11 @@ function is_change_of_direction_allowed(element){
                 return true;
 
             }else if ((Direction == "Down") && (lastPressedKey == "ArrowUp")){
+
+                return true;
+
+            // Below is continuing the movmement
+            }else if ((Direction == "Right") && (lastPressedKey == "ArrowRight")){
 
                 return true;
 
@@ -153,12 +160,12 @@ function animateScript() {
      * Initial Coordinates
      *
      */
-    GameStorage.setItem("PacManLeft", "105");
-    GameStorage.setItem("PacManTop",  "180");
+    GameStorage.setItem("PacManLeft"     , "105");
+    GameStorage.setItem("PacManTop"      ,  "180");
     // If the step is not 1 some logic may stop working as control points may be skipped.
-    GameStorage.setItem("Step", "1");
+    GameStorage.setItem("Step"           , "1");
     GameStorage.setItem("PacManDirection", "Right");
-    GameStorage.setItem("lastPressedKey", "ArrowRight");
+    GameStorage.setItem("lastPressedKey" , "ArrowRight");
 
         /*
          *
@@ -284,12 +291,10 @@ function animateScript() {
              * Update the variables that might have changed below
              *
              */
-            var AutoReturn = GameStorage.getItem("AutoReturn");
-
-            // Are these the start coordinates?
-            var PacManLeft = GameStorage.getItem("PacManLeft");
-            var PacManTop  = GameStorage.getItem("PacManTop");
-            var Direction  = GameStorage.getItem("PacManDirection");
+            var PacManLeft     = GameStorage.getItem("PacManLeft");
+            var PacManTop      = GameStorage.getItem("PacManTop");
+            var Direction      = GameStorage.getItem("PacManDirection");
+            var lastPressedKey = GameStorage.getItem("lastPressedKey");
 
             // document.getElementById("image").style.backgroundPosition =
             // `-${position}px 0px`;
@@ -304,7 +309,7 @@ function animateScript() {
              *
              */
 
-            var lastPressedKey = GameStorage.getItem("lastPressedKey");
+
 
             if((lastPressedKey == "ArrowRight") && crossings_and_possible_directions.some(is_change_of_direction_allowed)){
 
@@ -347,7 +352,7 @@ function animateScript() {
 
                     // TODO
                     // This is a dangerous coupling
-                    GameStorage.setItem("lastPressedKey","Arrow" + "PacManDirection");
+                    GameStorage.setItem("lastPressedKey","Arrow" + Direction);
 
                     BreakCounter = 0;
                 }
@@ -356,6 +361,20 @@ function animateScript() {
 
             // Publish the current direction
             document.getElementById("PacManDirection").innerHTML = GameStorage.getItem("PacManDirection");
+
+            /*
+             *
+             * Brain
+             *
+             * Can I continue in the same direction?
+             *
+             */
+            if (crossings_and_possible_directions.some(is_change_of_direction_allowed))
+            {
+                // We can continue.
+            }else{
+                GameStorage.setItem("PacManDirection","Break");
+            }
 
             /*
              *
