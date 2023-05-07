@@ -40,10 +40,10 @@ function is_change_of_direction_allowed(element){
      *
      */
 
-    var PacManLeft     = GameStorage.getItem("PacManLeft");
-    var PacManTop      = GameStorage.getItem("PacManTop");
-    var lastPressedKey = GameStorage.getItem("lastPressedKey");
-    var Direction      = GameStorage.getItem("PacManDirection");
+    var PacManLeft      = GameStorage.getItem("PacManLeft");
+    var PacManTop       = GameStorage.getItem("PacManTop");
+    var lastPressedKey  = GameStorage.getItem("lastPressedKey");
+    var PacManDirection = GameStorage.getItem("PacManDirection");
 
     if (element){
 
@@ -94,24 +94,24 @@ function is_change_of_direction_allowed(element){
 
         }else{ // WE ARE NOT AT A CROSSING SO WE MUST EXECUTE THE "BETWEEN CROSSINGS LOGIC"
 
-            if ((Direction == "Right") && (lastPressedKey == "ArrowLeft")){
+            if ((PacManDirection == "Right") && (lastPressedKey == "ArrowLeft")){
 
                 return true;
 
-            }else if ((Direction == "Left") && (lastPressedKey == "ArrowRight")){
+            }else if ((PacManDirection == "Left") && (lastPressedKey == "ArrowRight")){
 
                 return true;
 
-            }else if ((Direction == "Up") && (lastPressedKey == "ArrowDown")){
+            }else if ((PacManDirection == "Up") && (lastPressedKey == "ArrowDown")){
 
                 return true;
 
-            }else if ((Direction == "Down") && (lastPressedKey == "ArrowUp")){
+            }else if ((PacManDirection == "Down") && (lastPressedKey == "ArrowUp")){
 
                 return true;
 
             // Below is continuing the movmement
-            }else if ((Direction == "Right") && (lastPressedKey == "ArrowRight")){
+            }else if ((PacManDirection == "Right") && (lastPressedKey == "ArrowRight")){
 
                 return true;
 
@@ -291,10 +291,10 @@ function animateScript() {
              * Update the variables that might have changed below
              *
              */
-            var PacManLeft     = GameStorage.getItem("PacManLeft");
-            var PacManTop      = GameStorage.getItem("PacManTop");
-            var Direction      = GameStorage.getItem("PacManDirection");
-            var lastPressedKey = GameStorage.getItem("lastPressedKey");
+            var PacManLeft      = GameStorage.getItem("PacManLeft");
+            var PacManTop       = GameStorage.getItem("PacManTop");
+            var PacManDirection = GameStorage.getItem("PacManDirection");
+            var lastPressedKey  = GameStorage.getItem("lastPressedKey");
 
             // document.getElementById("image").style.backgroundPosition =
             // `-${position}px 0px`;
@@ -303,14 +303,11 @@ function animateScript() {
             /*
              * Brain
              *
-             * Set of Direction
+             * Change of Direction
              *
-             *    Here we transion from lastPressedKey to Direction, if allowed.
+             *    Here we take the lastPressedKey and put it into Direction, if allowed.
              *
              */
-
-
-
             if((lastPressedKey == "ArrowRight") && crossings_and_possible_directions.some(is_change_of_direction_allowed)){
 
                 GameStorage.setItem("PacManDirection", "Right");
@@ -329,7 +326,7 @@ function animateScript() {
 
             }else if(lastPressedKey == " "){
 
-                // GameStorage.setItem("Previous_Direction", Direction);
+                // GameStorage.setItem("Previous_Direction", PacManDirection);
                 // GameStorage.setItem("PacManDirection", "Break");
 
                 // TODO
@@ -348,11 +345,11 @@ function animateScript() {
 
                 else{
 
-                    GameStorage.setItem("PacManDirection",PreviousDirection);
+                    GameStorage.setItem("PacManDirection", PreviousDirection);
 
                     // TODO
                     // This is a dangerous coupling
-                    GameStorage.setItem("lastPressedKey","Arrow" + Direction);
+                    GameStorage.setItem("lastPressedKey","Arrow" + PacManDirection);
 
                     BreakCounter = 0;
                 }
