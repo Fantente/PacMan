@@ -2,7 +2,7 @@
     <body>
         <script>
 
-            function change_of_direction_is_allowed(element){
+            function is_change_of_direction_allowed(element){
 
                 var Ghost1Left = Ghost1Storage.getItem("Ghost1Left");
                 var Ghost1Top  = Ghost1Storage.getItem("Ghost1Top");
@@ -223,19 +223,19 @@
 
                 var keynameG1 = Ghost1Storage.getItem("keynameG1");
 
-                if((keynameG1 == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
+                if((keynameG1 == "ArrowRight") && change_of_direction.some(is_change_of_direction_allowed)){
 
                     Ghost1Storage.setItem("DirectionG1", "Right");
 
-                }else if((keynameG1 == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
+                }else if((keynameG1 == "ArrowLeft") && change_of_direction.some(is_change_of_direction_allowed)){
 
                     Ghost1Storage.setItem("DirectionG1", "Left");
 
-                }else if((keynameG1 == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
+                }else if((keynameG1 == "ArrowDown") && change_of_direction.some(is_change_of_direction_allowed)){
 
                     Ghost1Storage.setItem("DirectionG1", "Down");
 
-                }else if((keynameG1 == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
+                }else if((keynameG1 == "ArrowUp") && change_of_direction.some(is_change_of_direction_allowed)){
 
                     Ghost1Storage.setItem("DirectionG1", "Up");
 

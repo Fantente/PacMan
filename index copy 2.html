@@ -24,7 +24,7 @@
 
             } //end of stopAnimate()
 
-            function change_of_direction_is_allowed(element){
+            function is_change_of_direction_allowed(element){
 
                 // AT CROSSINGS
 
@@ -102,7 +102,7 @@
 
             // Ghost1
 
-            function change_of_direction_is_allowed_G1(element){
+            function is_change_of_direction_allowed_G1(element){
 
                 var Ghost1Left  = Ghost1Storage.getItem("Ghost1Left");
                 var Ghost1Top   = Ghost1Storage.getItem("Ghost1Top");
@@ -338,19 +338,19 @@
 
                     var keyname = PacManStorage.getItem("keyname");
 
-                    if((keyname == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed)){
+                    if((keyname == "ArrowRight") && change_of_direction.some(is_change_of_direction_allowed)){
 
                         PacManStorage.setItem("Direction", "Right");
 
-                    }else if((keyname == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed)){
+                    }else if((keyname == "ArrowLeft") && change_of_direction.some(is_change_of_direction_allowed)){
 
                         PacManStorage.setItem("Direction", "Left");
 
-                    }else if((keyname == "ArrowDown") && change_of_direction.some(change_of_direction_is_allowed)){
+                    }else if((keyname == "ArrowDown") && change_of_direction.some(is_change_of_direction_allowed)){
 
                         PacManStorage.setItem("Direction", "Down");
 
-                    }else if((keyname == "ArrowUp") && change_of_direction.some(change_of_direction_is_allowed)){
+                    }else if((keyname == "ArrowUp") && change_of_direction.some(is_change_of_direction_allowed)){
 
                         PacManStorage.setItem("Direction", "Up");
 
@@ -629,11 +629,11 @@
 
                 }
 
-                if((keynameG1 == "ArrowRight") && change_of_direction.some(change_of_direction_is_allowed_G1)){
+                if((keynameG1 == "ArrowRight") && change_of_direction.some(is_change_of_direction_allowed_G1)){
 
                     Ghost1Storage.setItem("DirectionG1", "Right");
 
-                }else if((keynameG1 == "ArrowLeft") && change_of_direction.some(change_of_direction_is_allowed_G1)) {
+                }else if((keynameG1 == "ArrowLeft") && change_of_direction.some(is_change_of_direction_allowed_G1)) {
 
                     Ghost1Storage.setItem("DirectionG1", "Left");
 
