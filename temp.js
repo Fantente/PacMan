@@ -393,7 +393,7 @@ function animateScript() {
             }
 
             //saves last direction-allowed keyname
-            //if(crossings_and_possible_directions.some(change_of_direction_is_allowed)){
+            //if(crossings_and_possible_directions.some(is_change_of_direction_allowed)){
             //
             //    PreKeyname = GameStorage.getItem("lastPressedKey")
             //    GameStorage.setItem("PreKeyname",PreKeyname)

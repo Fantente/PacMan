@@ -44,8 +44,6 @@ function is_change_of_direction_allowed(element){
     var PacManTop      = GameStorage.getItem("PacManTop");
     var lastPressedKey = GameStorage.getItem("lastPressedKey");
     var Direction      = GameStorage.getItem("PacManDirection");
-    // This is the key pressed before the lastPressedKey
-    var PreKeyname     = GameStorage.getItem("PreKeyname");
 
     if (element){
 
