@@ -1,8 +1,8 @@
 // TODO
 // We must pass a parameter who is the actor.
 // function move_actor(actor);
-// move_actor("pacman");
-// move_actor("blinky");
+// move_actor("PacMan");
+// move_actor("Blinky");
 function move_actor(actor){
 
     // Prepare the variables to load the values from the GameStorage
