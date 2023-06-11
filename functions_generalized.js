@@ -35,7 +35,25 @@ document.addEventListener('keydown', (event) => {
     document.getElementById("PreKeyname").innerHTML = GameStorage.getItem("PreKeyname");
 }, false);
 
+function convertKeyDirection(lastPressedKey) {
+    if (lastPressedKey == ArrowRight) {
 
+        return "TurnRight"
+
+    } else if(lastPressedKey == ArrowLeft) {
+
+        return "TurnLeft"
+
+    } else if( lastPressedKey == ArrowTop) {
+
+        return "TurnUp"
+
+    } else if(lastPressedKey == ArrowDown) {
+
+        return "TurnDown"
+
+    }
+}
 
 //Needed to be generalized in order to work with other characters
 
@@ -145,10 +163,14 @@ function is_change_of_direction_allowed(element){
      * If all these are OK, then we return true and allow the change of direction.
      *
      */
-
-    var ActorLeft      = GameStorage.getItem("PacManLeft"); //introduce a system to use the actor it's been requested from
-    var ActorTop       = GameStorage.getItem("PacManTop");
-    var lastAction     = GameStorage.getItem("lastPressedKey".convertKeyDirection); //need a function convertKeyDirection to convert the KeyInpout by th user to a neutral direction; if it's an other actor we could use the neutral system straight - wouldn't need to convert
+    //introduce a system to use the actor it's been requested from: var RequestingActor = 
+    var ActorLeft      = GameStorage.getItem(RequestingActor + "Left");
+    var ActorTop       = GameStorage.getItem(RequestingActor + "Top");
+    if(RequestingActor == "PacMan") {
+        var lastAction = convertKeyDirection(GameStorage.getItem("lastPressedKey")); //need a function convertKeyDirection to convert the KeyInpout by th user to a neutral direction; if it's an other actor we could use the neutral system straight - wouldn't need to convert
+    } else {
+        var lastAction = GameStorage.getItem(RequestingActor + "lastAction");
+    }
     var ActorDirection = GameStorage.getItem("ActorDirection");
 
     if (element){
